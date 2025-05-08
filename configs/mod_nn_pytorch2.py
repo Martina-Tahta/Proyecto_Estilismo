@@ -14,6 +14,7 @@ model_params = {
 
 dataset_params = {
     'dataset_name' : 'SeasonsModel',
-    'data_train_path' : os.path.join(GENERAL_PATH, 'data/processed/train_SeasonsModel.csv'),
-    'data_test_path' : os.path.join(GENERAL_PATH, 'data/processed/test_SeasonsModel.csv'),
+    'type_features' : 'enhancedSeasonal',
+    'data_train_path' : os.path.join(GENERAL_PATH, 'data/processed/train_SeasonsModel_enhancedSeasonal.csv'),
+    'data_test_path' : os.path.join(GENERAL_PATH, 'data/processed/test_SeasonsModel_enhancedSeasonal.csv'),
 } 

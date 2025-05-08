@@ -1,0 +1,18 @@
+               precision    recall  f1-score   support
+
+  dark_autumn       0.29      0.33      0.31        21
+  true_autumn       0.36      0.22      0.28        18
+  soft_autumn       0.23      0.33      0.27        15
+  dark_winter       0.41      0.47      0.44        15
+ light_summer       0.29      0.18      0.22        11
+  true_spring       0.33      0.27      0.30        11
+  soft_summer       0.27      0.36      0.31        11
+  true_winter       0.00      0.00      0.00        11
+bright_spring       0.33      0.30      0.32        10
+ light_spring       0.11      0.10      0.11        10
+bright_winter       0.09      0.12      0.11         8
+  true_summer       0.00      0.00      0.00         5
+
+     accuracy                           0.25       146
+    macro avg       0.23      0.22      0.22       146
+ weighted avg       0.25      0.25      0.25       146

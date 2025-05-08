@@ -3,6 +3,8 @@ import argparse
 from src.utils.files import read_configs
 from src.pipeline import run_model, test_model
 
+# Como correrlo:
+#   python main.py --configs configs/mod_nn_pytorch4.py --path_test data/processed/test_Ours_alexNet.csv --path_model runs/model_NNpytorch_mod_nn_pytorch4.pt
 
 def main(args):
     check_args = read_configs(args)

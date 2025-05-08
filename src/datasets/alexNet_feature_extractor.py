@@ -1,0 +1,93 @@
+import torch
+import torchvision
+import torchvision.models as models
+from torchvision import transforms
+from PIL import Image
+import pandas as pd
+import numpy as np
+
+
+#NO ESTA DETECTANDO CARASSS
+
+class AlexNetFeatureExtractor:
+    def __init__(self, image_directory):
+        self.image_directory = image_directory
+
+        alexnet = models.alexnet(pretrained=True)
+        self.feature_extractor = alexnet.features
+        self.feature_extractor.eval()
+
+        self.transform_img = transforms.Compose([
+            transforms.Resize((224, 224)),  # Tamaño estándar para AlexNet
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],  # Imagenes RGB normalizadas
+                                std=[0.229, 0.224, 0.225])
+        ])
+
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.deeplab = models.segmentation.deeplabv3_resnet101(pretrained=True)
+        self.deeplab = self.deeplab.to(self.device)
+        self.deeplab.eval()
+        self.transform_deeplab = transforms.Compose([
+            transforms.Resize((520, 520)),  
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+        ])
+
+    
+    def extract_features(self, image_path):
+        img = Image.open(image_path).convert('RGB')
+        input_tensor = self.transform_img(img).unsqueeze(0) 
+        with torch.no_grad():
+            features = self.feature_extractor(input_tensor)
+
+        flattened_features = features.view(features.size(0), -1)
+        features_np = flattened_features.numpy()
+        df = pd.DataFrame(features_np)
+        return df
+    
+
+    def extract_compact_features(self, image_path):
+        img = Image.open(image_path).convert('RGB')
+        input_tensor = self.transform_img(img).unsqueeze(0) 
+        with torch.no_grad():
+            features = self.feature_extractor(input_tensor)
+            pooled = features.mean(dim=(2, 3))  
+
+        feature_vector = pooled.numpy().flatten()
+        df = pd.DataFrame([feature_vector], columns=[f'feat_{i}' for i in range(len(feature_vector))])
+        return df
+    
+    def extract_only_face_compact_features(self, image_path):
+        img = Image.open(image_path).convert('RGB')
+        input_dl = self.transform_deeplab(img).unsqueeze(0).to(self.device)
+
+        with torch.no_grad():
+            output = self.deeplab(input_dl)['out'][0]
+            seg = output.argmax(0).cpu().numpy()  # shape: (520, 520)
+
+        # 3. Crear máscara de cara y pelo
+        face_hair_mask = np.logical_or(seg == 1, seg == 13).astype(np.uint8)  # 1 = face, 13 = hair
+        if face_hair_mask.sum() == 0:
+            print(f"Advertencia: no se detectó cara ni pelo en {image_path}")
+            return None
+
+        # 4. Aplicar máscara sobre imagen original (sin normalizar)
+        img_resized = img.resize((520, 520))
+        img_np = np.array(img_resized)
+        masked_img_np = img_np * face_hair_mask[:, :, None]  # aplicar en RGB
+
+        # 5. Convertir a PIL y transformarlo para AlexNet
+        masked_img = Image.fromarray(masked_img_np)
+        input_tensor = self.transform_img(masked_img).unsqueeze(0)
+
+        # 6. Pasar por AlexNet y hacer global average pooling
+        with torch.no_grad():
+            features = self.feature_extractor(input_tensor)
+            pooled = features.mean(dim=(2, 3))  
+
+        feature_vector = pooled.numpy().flatten()
+        df = pd.DataFrame([feature_vector], columns=[f'feat_{i}' for i in range(len(feature_vector))])
+        return df
+

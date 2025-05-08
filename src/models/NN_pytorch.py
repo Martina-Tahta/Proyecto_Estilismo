@@ -15,8 +15,6 @@ from torch.utils.data import Dataset, DataLoader
 from sklearn.utils import resample
 
 
-#python main.py --configs configs/mod_nn_pytorch1.py --path_test data/processed/test_Ours.csv --path_model runs/model_NNpytorch_mod_nn_pytorch1.pt
-
 # Dataset para PyTorch
 class TabularDataset(Dataset):
     def __init__(self, X, y):
