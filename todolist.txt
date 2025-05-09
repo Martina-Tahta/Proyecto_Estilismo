@@ -4,3 +4,8 @@
 3. Sacar las funciones de rebalanceo de los preprocess. Repensar concepto de preprocess
 4. Dividir en carpetas los processed data. 
 5. Agregar el device para que este la opcion de cuda.
+
+
+nueva todo:
+1. que y ano exista feature_cols y sacarselo al modelo de la nn tambien
+2. combinar features de alexNet con el enhanced
