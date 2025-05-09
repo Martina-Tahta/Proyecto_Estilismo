@@ -93,7 +93,8 @@ class AlexNetFeatureExtractor:
         img_pil = Image.open(image_path).convert("RGB")
         img_np  = np.array(img_pil)
         # facer expects CHW, scale [0–1]
-        img_t   = facer.hwc2bchw(img_np).to(self.device)
+        img_tensor = torch.from_numpy(img_np)  # convertir a tensor
+        img_t   = facer.hwc2bchw(img_tensor).to(self.device)  # ahora sí
 
         # 2) detect faces
         with torch.inference_mode():
@@ -111,7 +112,11 @@ class AlexNetFeatureExtractor:
         # 4) get H×W mask of (skin=1) ∪ (hair=17)
         seg_probs = seg_logits.softmax(dim=1)
         seg_map   = seg_probs.argmax(dim=1)[0].cpu().numpy()
-        mask      = np.logical_or(seg_map == 1, seg_map == 17).astype(np.uint8)
+        keep_ids  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+        # máscara final (uint8 de 0-1)
+        mask = np.isin(seg_map, keep_ids).astype(np.uint8)
+        #mask      = np.logical_or(seg_map == 1, seg_map == 13).astype(np.uint8)
 
         # 5) apply mask & (optional) plot
         masked = img_np * mask[:, :, None]
