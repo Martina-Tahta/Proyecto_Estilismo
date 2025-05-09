@@ -7,8 +7,9 @@ import pandas as pd
 import numpy as np
 import os
 import re
+import matplotlib.pyplot as plt
+from insightface.app import FaceAnalysis
 
-#NO ESTA DETECTANDO CARASSS
 
 class AlexNetFeatureExtractor:
     def __init__(self):
@@ -24,15 +25,13 @@ class AlexNetFeatureExtractor:
         ])
 
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.deeplab = models.segmentation.deeplabv3_resnet101(pretrained=True)
-        self.deeplab = self.deeplab.to(self.device)
-        self.deeplab.eval()
-        self.transform_deeplab = transforms.Compose([
-            transforms.Resize((520, 520)),  
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
-        ])
+        
+        self.face_app = FaceAnalysis(
+            name="antelopev2",                 # ← different model pack
+            allowed_modules=['detection', 'parsing']
+        )
+        ctx_id = 0 if self.device.type == 'cuda' else -1
+        self.face_app.prepare(ctx_id=ctx_id, det_size=(320, 320))
 
     def extract_imgs_features(self, images_directory, compact=False, face_seg=False):
         # Create database imgs existing model
@@ -89,34 +88,42 @@ class AlexNetFeatureExtractor:
         return df
     
     def extract_only_face_compact_features(self, image_path):
-        img = Image.open(image_path).convert('RGB')
-        input_dl = self.transform_deeplab(img).unsqueeze(0).to(self.device)
+        # 1) load & numpy
+        pil = Image.open(image_path).convert('RGB')
+        img = np.array(pil)
 
-        with torch.no_grad():
-            output = self.deeplab(input_dl)['out'][0]
-            seg = output.argmax(0).cpu().numpy()  # shape: (520, 520)
-
-        # 3. Crear máscara de cara y pelo
-        face_hair_mask = np.logical_or(seg == 1, seg == 13).astype(np.uint8)  # 1 = face, 13 = hair
-        if face_hair_mask.sum() == 0:
-            print(f"Advertencia: no se detectó cara ni pelo en {image_path}")
+        # 2) detect & parsing
+        faces = self.face_app.get(img)
+        if not faces:
+            print(f"No face detected in {image_path}")
             return None
 
-        # 4. Aplicar máscara sobre imagen original (sin normalizar)
-        img_resized = img.resize((520, 520))
-        img_np = np.array(img_resized)
-        masked_img_np = img_np * face_hair_mask[:, :, None]  # aplicar en RGB
+        parsing = faces[0].parsing
+        if parsing is None:
+            print(f"No parsing map available for {image_path}")
+            return None
 
-        # 5. Convertir a PIL y transformarlo para AlexNet
-        masked_img = Image.fromarray(masked_img_np)
-        input_tensor = self.transform_img(masked_img).unsqueeze(0)
+        # 3) build mask for face (1) or hair (13)
+        parsing = np.asarray(parsing)
+        mask = np.logical_or(parsing == 1, parsing == 13).astype(np.uint8)
 
-        # 6. Pasar por AlexNet y hacer global average pooling
+        # 3) apply mask & (optional) plot
+        masked = img * mask[:, :, None]
+        plt.imshow(masked); plt.axis('off'); plt.title("Face+Hair Mask"); plt.show()
+
+        plt.figure(figsize=(6, 6))
+        plt.imshow(masked)
+        plt.axis('off')
+        plt.title(f"Face+Hair mask for {os.path.basename(image_path)}")
+        plt.show()
+
+        # 4) back to PIL → AlexNet
+        masked_pil = Image.fromarray(masked).resize((224, 224))
+        inp        = self.transform_img(masked_pil).unsqueeze(0)
         with torch.no_grad():
-            features = self.feature_extractor(input_tensor)
-            pooled = features.mean(dim=(2, 3))  
+            feats  = self.feature_extractor(inp)
+            pooled = feats.mean(dim=(2, 3)).cpu().numpy().flatten()
 
-        feature_vector = pooled.numpy().flatten()
-        df = pd.DataFrame([feature_vector], columns=[f'feat_{i}' for i in range(len(feature_vector))])
-        return df
+        cols = [f'feat_{i}' for i in range(len(pooled))]
+        return pd.DataFrame([pooled], columns=cols)
 

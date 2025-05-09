@@ -57,10 +57,11 @@ def main():
     dataset = 'SeasonsModel'
     raw_dataset_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
     processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/processed/{dataset}')
-    # process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
-    #                       processed_dataset_save_path, dataset, type_features=2)
+    type_features = 3
+    process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
+                          processed_dataset_save_path, dataset, type_features=type_features)
     
-    combine_features(processed_dataset_save_path, dataset, 'enhancedSeasonal', 'alexNet_compact')
+    # combine_features(processed_dataset_save_path, dataset, 'enhancedSeasonal', 'alexNet_compact')
 
 
     # dataset = 'Ours'
