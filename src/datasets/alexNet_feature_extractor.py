@@ -8,7 +8,7 @@ import numpy as np
 import os
 import re
 import matplotlib.pyplot as plt
-from insightface.app import FaceAnalysis
+import facer
 
 
 class AlexNetFeatureExtractor:
@@ -26,12 +26,13 @@ class AlexNetFeatureExtractor:
 
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         
-        self.face_app = FaceAnalysis(
-            name="antelopev2",                 # ← different model pack
-            allowed_modules=['detection', 'parsing']
-        )
-        ctx_id = 0 if self.device.type == 'cuda' else -1
-        self.face_app.prepare(ctx_id=ctx_id, det_size=(320, 320))
+        # — FaRL detector + parser from pyfacer —
+        #    'retinaface/mobilenet' is a fast face detector  
+        #    'farl/celebm/448' is the BiSeNet-V1 model on CelebAMask-HQ
+        self.detector = facer.face_detector("retinaface/mobilenet",
+                                           device=self.device)
+        self.parser   = facer.face_parser("farl/celebm/448",
+                                         device=self.device)
 
     def extract_imgs_features(self, images_directory, compact=False, face_seg=False):
         # Create database imgs existing model
@@ -88,42 +89,46 @@ class AlexNetFeatureExtractor:
         return df
     
     def extract_only_face_compact_features(self, image_path):
-        # 1) load & numpy
-        pil = Image.open(image_path).convert('RGB')
-        img = np.array(pil)
+        # 1) load & to B×3×H×W tensor
+        img_pil = Image.open(image_path).convert("RGB")
+        img_np  = np.array(img_pil)
+        # facer expects CHW, scale [0–1]
+        img_t   = facer.hwc2bchw(img_np).to(self.device)
 
-        # 2) detect & parsing
-        faces = self.face_app.get(img)
-        if not faces:
-            print(f"No face detected in {image_path}")
+        # 2) detect faces
+        with torch.inference_mode():
+            dets = self.detector(img_t)
+
+            # 3) parse the first face
+            #    returns a dict with 'seg'→{'logits': Tensor[N×19×h×w], ...}
+            faces = self.parser(img_t, dets)
+            seg_logits = faces["seg"]["logits"]  # N×19×H×W
+
+        if seg_logits.numel() == 0:
+            print(f"No face parsed in {image_path}")
             return None
 
-        parsing = faces[0].parsing
-        if parsing is None:
-            print(f"No parsing map available for {image_path}")
-            return None
+        # 4) get H×W mask of (skin=1) ∪ (hair=17)
+        seg_probs = seg_logits.softmax(dim=1)
+        seg_map   = seg_probs.argmax(dim=1)[0].cpu().numpy()
+        mask      = np.logical_or(seg_map == 1, seg_map == 17).astype(np.uint8)
 
-        # 3) build mask for face (1) or hair (13)
-        parsing = np.asarray(parsing)
-        mask = np.logical_or(parsing == 1, parsing == 13).astype(np.uint8)
-
-        # 3) apply mask & (optional) plot
-        masked = img * mask[:, :, None]
-        plt.imshow(masked); plt.axis('off'); plt.title("Face+Hair Mask"); plt.show()
-
-        plt.figure(figsize=(6, 6))
+        # 5) apply mask & (optional) plot
+        masked = img_np * mask[:, :, None]
+        
+        plt.figure(figsize=(5,5))
         plt.imshow(masked)
-        plt.axis('off')
-        plt.title(f"Face+Hair mask for {os.path.basename(image_path)}")
+        plt.axis("off")
+        plt.title(os.path.basename(image_path))
         plt.show()
 
-        # 4) back to PIL → AlexNet
+        # 6) back to PIL → AlexNet pooling
         masked_pil = Image.fromarray(masked).resize((224, 224))
-        inp        = self.transform_img(masked_pil).unsqueeze(0)
+        inp        = self.transform_img(masked_pil).unsqueeze(0).to(self.device)
         with torch.no_grad():
             feats  = self.feature_extractor(inp)
-            pooled = feats.mean(dim=(2, 3)).cpu().numpy().flatten()
+            pooled = feats.mean(dim=(2,3)).cpu().numpy().flatten()
 
-        cols = [f'feat_{i}' for i in range(len(pooled))]
+        cols = [f"feat_{i}" for i in range(len(pooled))]
         return pd.DataFrame([pooled], columns=cols)
 
