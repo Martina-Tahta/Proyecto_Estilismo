@@ -56,8 +56,8 @@ def run_model(model_params, data_params):
     save_path = create_result_folder(model_params, data_params)
     
     model = load_model(model_params['model_name'])
-    model.train_model(data_params['data_train_path'], model_params=model_params, save_name=model_params['configs_file_name'])
-    model.eval_model(data_params['data_test_path'], save_path)
+    model.train_model(data_params['data_train_path'], data_params['data_val_path'], model_params=model_params, save_name=model_params['configs_file_name'])
+    model.eval_model(data_params['data_val_path'], save_path)
     
     return save_path
 

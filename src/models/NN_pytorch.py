@@ -55,46 +55,46 @@ class NNSeasonalColorModel:
         self.batch_size = None
         self.feature_cols = None
 
-    def preprocess_data(self, csv_path):
-        """Enhanced preprocessing with feature selection and robust scaling"""
-        # Separate majority and minority classes with SMOTE-like approach
-        df = pd.read_csv(csv_path)
-        classes = df['season'].value_counts()
-        majority_class = classes.index[0]
-        n_samples = int(classes[majority_class] * 1.5)  # Increase samples
+    # def preprocess_data(self, csv_path):
+    #     """Enhanced preprocessing with feature selection and robust scaling"""
+    #     # Separate majority and minority classes with SMOTE-like approach
+    #     df = pd.read_csv(csv_path)
+    #     classes = df['season'].value_counts()
+    #     majority_class = classes.index[0]
+    #     n_samples = int(classes[majority_class] * 1.5)  # Increase samples
         
-        balanced_dfs = []
-        for season in classes.index:
-            season_df = df[df['season'] == season]
-            if len(season_df) < n_samples:
-                upsampled_df = resample(
-                    season_df,
-                    replace=True,
-                    n_samples=n_samples,
-                    random_state=42
-                )
-                balanced_dfs.append(upsampled_df)
-            else:
-                balanced_dfs.append(season_df)
+    #     balanced_dfs = []
+    #     for season in classes.index:
+    #         season_df = df[df['season'] == season]
+    #         if len(season_df) < n_samples:
+    #             upsampled_df = resample(
+    #                 season_df,
+    #                 replace=True,
+    #                 n_samples=n_samples,
+    #                 random_state=42
+    #             )
+    #             balanced_dfs.append(upsampled_df)
+    #         else:
+    #             balanced_dfs.append(season_df)
         
-        df = pd.concat(balanced_dfs)
+    #     df = pd.concat(balanced_dfs)
         
-        # Remove highly correlated features
-        feature_cols = [col for col in df.columns 
-                       if col not in ['image_file', 'season']]
-        correlation_matrix = df[feature_cols].corr().abs()
-        upper = correlation_matrix.where(
-            np.triu(np.ones(correlation_matrix.shape), k=1).astype(bool)
-        )
-        to_drop = [column for column in upper.columns 
-                   if any(upper[column] > 0.95)]
-        df = df.drop(to_drop, axis=1)
-        self.feature_cols = [col for col in df.columns 
-                       if col not in ['image_file', 'season']]
-        return df
+    #     # Remove highly correlated features
+    #     feature_cols = [col for col in df.columns 
+    #                    if col not in ['image_file', 'season']]
+    #     correlation_matrix = df[feature_cols].corr().abs()
+    #     upper = correlation_matrix.where(
+    #         np.triu(np.ones(correlation_matrix.shape), k=1).astype(bool)
+    #     )
+    #     to_drop = [column for column in upper.columns 
+    #                if any(upper[column] > 0.95)]
+    #     df = df.drop(to_drop, axis=1)
+    #     self.feature_cols = [col for col in df.columns 
+    #                    if col not in ['image_file', 'season']]
+    #     return df
 
 
-    def train_model(self, train_path, model_params=None, hidden_dims=[128, 64, 32], 
+    def train_model(self, train_path, val_path, model_params=None, hidden_dims=[128, 64, 32], 
                     epochs=50, batch_size=32, lr=1e-3, save_name=None):
 
         if model_params:
@@ -104,24 +104,25 @@ class NNSeasonalColorModel:
             lr = model_params.get("lr", lr)
 
         # Preprocess data
-        df = self.preprocess_data(train_path)
-
-        X_train = df[self.feature_cols]
-        y_train = df['season']
+        #df = self.preprocess_data(train_path)
+        df_train = pd.read_csv(train_path)
+        X_train = df_train[self.feature_cols]
+        y_train = df_train['season']
 
         y_encoded, classes = pd.factorize(y_train)
         self.classes = classes
 
         self.scaler = RobustScaler()
         X_scaled = self.scaler.fit_transform(X_train)
-
-        X_train_final, X_val, y_train_final, y_val = train_test_split(
-            X_scaled, y_encoded, test_size=0.15, random_state=42, stratify=y_encoded
-        )
-
-        train_ds = TabularDataset(X_train_final, pd.Series(y_train_final))
-        val_ds = TabularDataset(X_val, pd.Series(y_val))
+        train_ds = TabularDataset(X_scaled, pd.Series(y_train))
         train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+
+
+        df_val = pd.read_csv(val_path)
+        X_val = df_val[self.feature_cols]
+        X_val_scaled = self.scaler.transform(X_val)
+        y_val = df_val['season']
+        val_ds = TabularDataset(X_val_scaled, pd.Series(y_val))
         val_loader = DataLoader(val_ds, batch_size=batch_size)
 
 
@@ -189,6 +190,7 @@ class NNSeasonalColorModel:
             }, os.path.join(f'runs/model_NNpytorch_{save_name}.pt'))
         
         return best_val_loss
+    
 
     def eval_model(self, test_path, results_folder=None):
         df = pd.read_csv(test_path)

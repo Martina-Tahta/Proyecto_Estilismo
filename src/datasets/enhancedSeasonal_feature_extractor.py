@@ -2,13 +2,42 @@ import numpy as np
 import cv2
 import face_recognition
 from sklearn.preprocessing import StandardScaler
+import os
+import re
+import pandas as pd
 
 from skin_undertone import skin_tone_detection
 
 class EnhancedSeasonalColorDatabase:
-    def __init__(self, image_directory):
-        self.image_directory = image_directory
+    def __init__(self):
+        return
         
+    def extract_imgs_features(self, images_directory):  
+        # Create database imgs existing model
+        print("Creating enhanced database...")
+        # Process images and create features
+        data = []
+        print(f"Looking for images in: {images_directory}")
+
+        df = pd.read_csv(images_directory)
+        
+        for _, row in df.iterrows():
+            image_path = row['image_path']
+            img_season = row['season']
+
+            features = self.extract_enhanced_features(image_path)
+            
+            if features:
+                features['image_file'] = image_path
+                features['season'] = img_season
+                data.append(features)
+                print(f"Processed {image_path}")
+
+        df = pd.DataFrame(data)
+        
+        return df
+
+
     def extract_enhanced_features(self, image_path):
         """
         Extract enhanced color features from an image
@@ -25,7 +54,7 @@ class EnhancedSeasonalColorDatabase:
             image_cv = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             image_lab = cv2.cvtColor(image_cv, cv2.COLOR_BGR2LAB)
             image_hsv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2HSV)
-            
+
             features = {}
             
             # Get face landmarks

@@ -5,14 +5,13 @@ from torchvision import transforms
 from PIL import Image
 import pandas as pd
 import numpy as np
-
+import os
+import re
 
 #NO ESTA DETECTANDO CARASSS
 
 class AlexNetFeatureExtractor:
-    def __init__(self, image_directory):
-        self.image_directory = image_directory
-
+    def __init__(self):
         alexnet = models.alexnet(pretrained=True)
         self.feature_extractor = alexnet.features
         self.feature_extractor.eval()
@@ -35,6 +34,34 @@ class AlexNetFeatureExtractor:
                                  std=[0.229, 0.224, 0.225])
         ])
 
+    def extract_imgs_features(self, images_directory, compact=False, face_seg=False):
+        # Create database imgs existing model
+        print("Creating alexNet database...")
+        # Process images and create features
+        data = []
+        print(f"Looking for images in: {images_directory}")
+
+        for _, row in df.iterrows():
+            image_path = row['image_path']
+            img_season = row['season']
+            if not face_seg:
+                if compact:
+                    features = self.extract_compact_features(image_path)
+                else:
+                    features = self.extract_features(image_path)
+            else:
+                if compact:
+                    features = self.extract_only_face_compact_features(image_path)
+                # else:
+                #     features = self.extract_only_face_features(image_path)
+            
+            features['image_file'] = image_path
+            features['season'] = img_season
+            data.append(features)
+            print(f"Processed {image_path}")
+
+        df = pd.concat(data, ignore_index=True)
+        return df
     
     def extract_features(self, image_path):
         img = Image.open(image_path).convert('RGB')

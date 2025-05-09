@@ -1,10 +1,10 @@
-import numpy as np
 import os
 
 GENERAL_PATH = os.getcwd()
+current_filename = os.path.splitext(os.path.basename(__file__))[0]
 
 model_params = {
-    'configs_file_name' : 'mod_ensamble1',
+    'configs_file_name' : current_filename,
     'model_name' : 'ensamble',
     'rf': {'n_estimators':10,
             'max_depth': 5,
@@ -26,10 +26,15 @@ model_params = {
     'model_weights': [2, 1, 2, 1]
 }
 
+DATASET = 'SeasonsModel'
+TYPE_FEATURES = 'enhancedSeasonal'
+
 dataset_params = {
-    'dataset_name' : 'SeasonsModel',
-    'type_features' : 'enhancedSeasonal',
-    'data_train_path' : os.path.join(GENERAL_PATH, 'data/processed/train_SeasonsModel_enhancedSeasonal.csv'),
-    'data_test_path' : os.path.join(GENERAL_PATH, 'data/processed/test_SeasonsModel_enhancedSeasonal.csv'),
+    'dataset_name' : DATASET,
+    'type_features' : TYPE_FEATURES,
+    
+    'data_train_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/train_{DATASET}_{TYPE_FEATURES}.csv'),
+    'data_val_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/val_{DATASET}_{TYPE_FEATURES}.csv'),
+    'data_test_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/test_{DATASET}_{TYPE_FEATURES}.csv'),
 } 
 
