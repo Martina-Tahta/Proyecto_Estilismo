@@ -9,7 +9,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 from torch.utils.data import Dataset, DataLoader
 from sklearn.utils import resample
@@ -30,13 +30,14 @@ class TabularDataset(Dataset):
 
 # Red neuronal flexible
 class FlexibleNN(nn.Module):
-    def __init__(self, input_dim, hidden_dims, output_dim):
+    def __init__(self, input_dim, hidden_dims, output_dim, dropout=0):
         super().__init__()
         layers = []
         dims = [input_dim] + hidden_dims
         for in_dim, out_dim in zip(dims[:-1], dims[1:]):
             layers.append(nn.Linear(in_dim, out_dim))
             layers.append(nn.ReLU())
+            layers.append(nn.Dropout(p=dropout))
         layers.append(nn.Linear(dims[-1], output_dim))
         self.model = nn.Sequential(*layers)
 
@@ -95,26 +96,30 @@ class NNSeasonalColorModel:
 
 
     def train_model(self, train_path, val_path, model_params=None, hidden_dims=[128, 64, 32], 
-                    epochs=50, batch_size=32, lr=1e-3, save_name=None):
+                    epochs=50, batch_size=32, lr=1e-3, weight_decay=1e-5, dropout=0, save_name=None):
 
         if model_params:
             hidden_dims = model_params.get("hidden_dims", hidden_dims)
             epochs = model_params.get("epochs", epochs)
             batch_size = model_params.get("batch_size", batch_size)
             lr = model_params.get("lr", lr)
+            weight_decay = model_params.get("weight_decay", weight_decay)
+            dropout = model_params.get("dropout", dropout)
 
         # Preprocess data
         #df = self.preprocess_data(train_path)
         df_train = pd.read_csv(train_path)
+        #print(df_train.columns.tolist())
+        self.feature_cols = df_train.drop(['image_file', 'season'], axis=1).columns.tolist()
         X_train = df_train[self.feature_cols]
         y_train = df_train['season']
 
         y_encoded, classes = pd.factorize(y_train)
         self.classes = classes
 
-        self.scaler = RobustScaler()
+        self.scaler = RobustScaler() #StandardScaler()
         X_scaled = self.scaler.fit_transform(X_train)
-        train_ds = TabularDataset(X_scaled, pd.Series(y_train))
+        train_ds = TabularDataset(X_scaled, pd.Series(y_encoded))
         train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
 
 
@@ -122,7 +127,8 @@ class NNSeasonalColorModel:
         X_val = df_val[self.feature_cols]
         X_val_scaled = self.scaler.transform(X_val)
         y_val = df_val['season']
-        val_ds = TabularDataset(X_val_scaled, pd.Series(y_val))
+        y_val_encoded = self.classes.get_indexer(y_val)
+        val_ds = TabularDataset(X_val_scaled, pd.Series(y_val_encoded))
         val_loader = DataLoader(val_ds, batch_size=batch_size)
 
 
@@ -132,12 +138,12 @@ class NNSeasonalColorModel:
         self.lr = lr
         self.batch_size = batch_size
 
-        self.model = FlexibleNN(input_dim, hidden_dims, output_dim)
+        self.model = FlexibleNN(input_dim, hidden_dims, output_dim, dropout=dropout)
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.Adam(self.model.parameters(), lr=lr)
+        optimizer = optim.Adam(self.model.parameters(), lr=lr, weight_decay=weight_decay)
 
         best_val_loss = float('inf')
-        patience = 5
+        patience = 10
         counter = 0
         best_model_state = None
 
@@ -199,7 +205,8 @@ class NNSeasonalColorModel:
 
         X_test_scaled = self.scaler.transform(X_test)
 
-        y_encoded = [self.classes.tolist().index(label) for label in y_test]
+        #y_encoded = [self.classes.tolist().index(label) for label in y_test]
+        y_encoded = self.classes.get_indexer(y_test)
 
         test_ds = TabularDataset(X_test_scaled, pd.Series(y_encoded))
         test_loader = DataLoader(test_ds, batch_size=self.batch_size)

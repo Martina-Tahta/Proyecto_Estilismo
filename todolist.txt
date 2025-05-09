@@ -7,5 +7,5 @@
 
 
 nueva todo:
-1. que y ano exista feature_cols y sacarselo al modelo de la nn tambien
+1. que ya no exista feature_cols y sacarselo al modelo de la nn tambien (preguntarle a Gaston antes de hacerlo)
 2. combinar features de alexNet con el enhanced

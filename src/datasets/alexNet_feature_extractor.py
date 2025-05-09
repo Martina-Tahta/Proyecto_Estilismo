@@ -41,6 +41,8 @@ class AlexNetFeatureExtractor:
         data = []
         print(f"Looking for images in: {images_directory}")
 
+        df = pd.read_csv(images_directory)
+
         for _, row in df.iterrows():
             image_path = row['image_path']
             img_season = row['season']

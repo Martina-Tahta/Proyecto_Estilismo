@@ -33,8 +33,8 @@ dataset_params = {
     'dataset_name' : DATASET,
     'type_features' : TYPE_FEATURES,
     
-    'data_train_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/train_{DATASET}_{TYPE_FEATURES}.csv'),
-    'data_val_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/val_{DATASET}_{TYPE_FEATURES}.csv'),
-    'data_test_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/test_{DATASET}_{TYPE_FEATURES}.csv'),
+    'data_train_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/{TYPE_FEATURES}/train_{DATASET}_{TYPE_FEATURES}.csv'),
+    'data_val_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/{TYPE_FEATURES}/val_{DATASET}_{TYPE_FEATURES}.csv'),
+    'data_test_path' : os.path.join(GENERAL_PATH, f'data/processed/{DATASET}/{TYPE_FEATURES}/test_{DATASET}_{TYPE_FEATURES}.csv'),
 } 
 
