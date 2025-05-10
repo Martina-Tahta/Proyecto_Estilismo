@@ -1,6 +1,7 @@
 from src.utils.files import create_result_folder
 from src.models import ensamble
 from src.models import NN_pytorch
+from src.models import resNeXt_ft
 import pandas as pd
 
 # from src.train_test.train import train
@@ -21,7 +22,7 @@ import pandas as pd
 #     return device
 
 
-def load_model(model_name):
+def load_model(model_params):
     """
     Load a machine learning model based on the specified model name in model_params.
 
@@ -31,6 +32,7 @@ def load_model(model_name):
     Returns:
     object: Loaded machine learning model instance corresponding to the specified model_name.
     """
+    model_name = model_params['model_name']
     model = None
     
     if model_name == 'ensamble':
@@ -38,6 +40,9 @@ def load_model(model_name):
 
     elif model_name == 'nn_pytorch':
         model = NN_pytorch.NNSeasonalColorModel()
+    
+    elif model_name == 'resNeXt_ft':
+        model = resNeXt_ft.ResNeXt_FT(model_params['variant'])
 
     return model
 
@@ -55,7 +60,7 @@ def run_model(model_params, data_params):
     """
     save_path = create_result_folder(model_params, data_params)
     
-    model = load_model(model_params['model_name'])
+    model = load_model(model_params)
     model.train_model(data_params['data_train_path'], data_params['data_val_path'], model_params=model_params, save_name=model_params['configs_file_name'])
     model.eval_model(data_params['data_val_path'], save_path)
     
