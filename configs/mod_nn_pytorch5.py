@@ -9,9 +9,10 @@ model_params = {
     'configs_file_name' : current_filename,
     'model_name' : 'nn_pytorch',
     'hidden_dims': [256, 128, 64, 32],
-    'epochs': 50,
+    'epochs': 500,
     'batch_size': 64,
-    'lr': 0.001
+    'lr': 0.01,
+    'verbose': True
 }
 
 DATASET = 'SeasonsModel'

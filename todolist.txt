@@ -12,3 +12,7 @@ nueva todo:
 
 cosas raras:
 en split dataset estamos guardando el path relativo, yo pense que guardabamos el nombre el archivo.
+
+notas gaston:
+fine tunear una resnext agregando capas para predecir las seasons
+hacer transfer learning, es decir, darle como input a nuestro modelo de arboles las features de resnext.

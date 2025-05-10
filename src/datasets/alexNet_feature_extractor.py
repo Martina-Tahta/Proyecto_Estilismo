@@ -9,7 +9,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 import facer
-
+from segmentation import load_parser, segment_face_hair
 
 class AlexNetFeatureExtractor:
     def __init__(self):
@@ -89,51 +89,37 @@ class AlexNetFeatureExtractor:
         return df
     
     def extract_only_face_compact_features(self, image_path):
-        # 1) load & to B×3×H×W tensor
-        img_pil = Image.open(image_path).convert("RGB")
-        img_np  = np.array(img_pil)
-        # facer expects CHW, scale [0–1]
-        img_tensor = torch.from_numpy(img_np)  # convertir a tensor
-        img_t   = facer.hwc2bchw(img_tensor).to(self.device)  # ahora sí
+        """
+        Returns a 1 × 256-dim DataFrame with pooled AlexNet features from the
+        pixels belonging to face + hair. If no face pixels are found, returns None.
+        """
+        
+        # ── 1.  run BiSeNet to mask everything except face + hair ─────────────
+        masked_img = segment_face_hair(
+            img_path=image_path,
+            net=load_parser(self.device),        # ← assume you ran `self.bisenet = load_parser()`
+            device=str(self.device),
+        )
 
-        # 2) detect faces
-        with torch.inference_mode():
-            dets = self.detector(img_t)
+        # plt.figure(figsize=(5,5))
+        # plt.imshow(masked_img)
+        # plt.axis("off")
+        # plt.show()
 
-            # 3) parse the first face
-            #    returns a dict with 'seg'→{'logits': Tensor[N×19×h×w], ...}
-            faces = self.parser(img_t, dets)
-            seg_logits = faces["seg"]["logits"]  # N×19×H×W
-
-        if seg_logits.numel() == 0:
-            print(f"No face parsed in {image_path}")
+        # if BiSeNet failed, every pixel is 0 → sum == 0
+        if np.array(masked_img).sum() == 0:
+            print(f"[WARN] no face detected in {image_path}")
             return None
 
-        # 4) get H×W mask of (skin=1) ∪ (hair=17)
-        seg_probs = seg_logits.softmax(dim=1)
-        seg_map   = seg_probs.argmax(dim=1)[0].cpu().numpy()
-        keep_ids  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        # ── 2.  feed the masked region through AlexNet features → pool → flat ─
+        masked_pil = masked_img.resize((224, 224))          # AlexNet expects 224
+        inp = self.transform_img(masked_pil).unsqueeze(0).to(self.device)
 
-        # máscara final (uint8 de 0-1)
-        mask = np.isin(seg_map, keep_ids).astype(np.uint8)
-        #mask      = np.logical_or(seg_map == 1, seg_map == 13).astype(np.uint8)
-
-        # 5) apply mask & (optional) plot
-        masked = img_np * mask[:, :, None]
-        
-        plt.figure(figsize=(5,5))
-        plt.imshow(masked)
-        plt.axis("off")
-        plt.title(os.path.basename(image_path))
-        plt.show()
-
-        # 6) back to PIL → AlexNet pooling
-        masked_pil = Image.fromarray(masked).resize((224, 224))
-        inp        = self.transform_img(masked_pil).unsqueeze(0).to(self.device)
         with torch.no_grad():
-            feats  = self.feature_extractor(inp)
-            pooled = feats.mean(dim=(2,3)).cpu().numpy().flatten()
+            feats = self.feature_extractor(inp)
+            pooled = feats.mean(dim=(2, 3)).cpu().numpy().flatten()
 
+        # ── 3.  1×256 DataFrame, same schema as before ────────────────────────
         cols = [f"feat_{i}" for i in range(len(pooled))]
         return pd.DataFrame([pooled], columns=cols)
 
