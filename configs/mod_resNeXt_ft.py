@@ -16,7 +16,8 @@ model_params = {
     'lr_fc': 1e-6,
     'weight_decay': 1e-4,
     'early_stopping_patience': 15,
-    'dropout': 0.6
+    'dropout': 0.6,
+    'verbose': True,
 }
 
 DATASET = 'SeasonsModel'

@@ -10,8 +10,6 @@ try:
 except ImportError:
     gdown = None
     
-    
-
 sys.path.insert(0, "face-parsing.PyTorch")       # relative path to the clone
 from model import BiSeNet                         # now import works
 
@@ -53,13 +51,16 @@ _transform = transforms.Compose([
     transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 ])
 
-def segment_face_hair(img_path, net, device="cpu"):
+def segment_face_hair(img_path, device="cpu"):
     """
     img_path : str
         Path to an RGB image.
     net      : BiSeNet model loaded by `load_parser`.
     Returns  : PIL.Image.Image  (same size as the input file)
     """
+    # Load the BiSeNet model
+    net = load_parser(device)
+    
     # 1) Load original
     orig = Image.open(img_path).convert("RGB")
     w, h = orig.size
@@ -93,3 +94,37 @@ def segment_face_hair(img_path, net, device="cpu"):
     # 5) Apply it
     result_np = np.array(orig) * mask[:, :, None]             # broadcast RGB
     return Image.fromarray(result_np)
+
+def segment_images_in_directory(input_dir, output_dir, device="cpu"):
+    """
+    Segments all images in a directory using `segment_face_hair` and saves the results to a new directory.
+
+    input_dir : str
+        Path to the directory containing input images.
+    output_dir : str
+        Path to the directory where segmented images will be saved.
+    device : str
+        Device to run the segmentation on ("cpu" or "cuda").
+    """
+
+    # Ensure the output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Iterate through all files in the input directory
+    for filename in os.listdir(input_dir):
+        input_path = os.path.join(input_dir, filename)
+
+        # Check if the file is an image
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+            try:
+                # Segment the image
+                segmented_image = segment_face_hair(input_path, device)
+
+                # Save the segmented image to the output directory
+                output_path = os.path.join(output_dir, filename)
+                segmented_image.save(output_path)
+                print(f"Segmented and saved: {output_path}")
+            except Exception as e:
+                print(f"Error processing {input_path}: {e}")
+        else:
+            print(f"Skipping non-image file: {filename}")
