@@ -77,9 +77,6 @@ class ResNeXt_FT:
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
 
-        
-
-
 
     def create_dataloader(self, csv_path, img_dir=None, batch_size=32, num_workers=4, test=False):
         """Crea DataLoader a partir de CSV ."""
@@ -97,54 +94,61 @@ class ResNeXt_FT:
 
     
     def train_model(self, train_path, val_path, model_params=None, verbose=True, save_name=None):
-        
+        # --- Extracción de parámetros de configuración ---
         if model_params:
             train_blocks = model_params.get("train_blocks", ['layer4'])
-            epochs = model_params.get("epochs", 50)
-            batch_size = model_params.get("batch_size", 32)
-            lr_backbone = model_params.get("lr_backbone", 1e-4)
-            lr_fc = model_params.get("lr_fc", 1e-3)
+            blocks       = model_params.get("blocks", {'layer4':[0,1,2]})   # índices de los sub-bloques
+            epochs       = model_params.get("epochs", 50)
+            batch_size   = model_params.get("batch_size", 32)
+            lr_backbone  = model_params.get("lr_backbone", 1e-4)
+            lr_fc        = model_params.get("lr_fc", 1e-3)
             weight_decay = model_params.get("weight_decay", 1e-5)
             early_stopping_patience = model_params.get("early_stopping_patience", 10)
-            dropout = model_params.get("dropout", 0.2)
+            dropout      = model_params.get("dropout", 0.2)
 
-        # Preparar capas del modelo:
         # --- 1. Congelar todo el modelo de golpe ---
-        self.model.requires_grad_(False)                     
+        self.model.requires_grad_(False)
 
-        # --- 2. Descongelar solo los bloques deseados ---
-        for name in train_blocks:
-            getattr(self.model, name).requires_grad_(True)
+        # --- 2. Descongelar solo los sub-bloques deseados de cada layer ---
+        # Por cada layer en train_blocks, sacamos sus children (los bottleneck blocks)
+        # y descongelamos solo aquellos cuyos índices aparecen en `blocks`.
+        unfrozen_params = []  # para el optimizador
+        for layer_name in train_blocks:
+            layer_module = getattr(self.model, layer_name)
+            children = list(layer_module.children())
+            for idx in blocks[layer_name]:
+                # permite índices negativos
+                real_idx = idx if idx >= 0 else len(children) + idx
+                block = children[real_idx]
+                # marcar todos sus parámetros como entrenables
+                for p in block.parameters():
+                    p.requires_grad = True
+                unfrozen_params.append(block.parameters())
 
-        # --- 3. Reemplazar y habilitar la capa fc ---
-        # self.model.fc = nn.Linear(self.model.fc.in_features, self.num_classes)
-        # nn.init.xavier_uniform_(self.model.fc.weight)
-        # self.model.fc.bias.data.zero_()
-        # self.model.fc.requires_grad_(True)                  
-        # self.model.fc.to(self.device)
-
+        # --- 3. Reemplazar y habilitar la capa fc (con dropout) ---
         self.model.fc = nn.Sequential(
             nn.Dropout(dropout),
             nn.Linear(self.model.fc.in_features, self.num_classes)
         )
-
-        # inicialización explícita (opcional)
         nn.init.xavier_uniform_(self.model.fc[1].weight)
         self.model.fc[1].bias.data.zero_()
-
-        # aseguramos que gradúe y viva en el dispositivo correcto
-        self.model.fc.requires_grad_(True)
+        # aseguramos que gradúe
+        for p in self.model.fc.parameters():
+            p.requires_grad = True
+        unfrozen_params.append(self.model.fc.parameters())
         self.model.fc.to(self.device)
 
-        # --- 4. Optimizador con grupos de LR ---
-        opt_groups = (
-            [{"params": getattr(self.model, n).parameters(), "lr": lr_backbone}
-            for n in train_blocks]
-            + [{"params": self.model.fc.parameters(), "lr": lr_fc}]
-        )
+        # --- 4. Construir optimizador con grupos de LR discriminativos ---
+        opt_groups = []
+        # lr_backbone para cada bloque
+        for params in unfrozen_params[:-1]:
+            opt_groups.append({"params": params, "lr": lr_backbone})
+        # lr_fc para la cabeza
+        opt_groups.append({"params": self.model.fc.parameters(), "lr": lr_fc})
+
         self.optimizer = torch.optim.AdamW(opt_groups, weight_decay=weight_decay)
         self.criterion  = nn.CrossEntropyLoss(label_smoothing=0.1)
-        self.scheduler  = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, T_max=epochs) #puede ser un parametro T_max
+        self.scheduler  = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, T_max=epochs)
 
         train_loader = self.create_dataloader(train_path, batch_size=batch_size, test=False)
         val_loader = self.create_dataloader(val_path, batch_size=batch_size, test=True)

@@ -221,7 +221,7 @@ class NNSeasonalColorModel:
                 all_preds.extend(preds.tolist())
                 all_targets.extend(batch_y.tolist())
 
-        report = classification_report(all_targets, all_preds, target_names=self.classes)
+        report = classification_report(all_targets, all_preds, target_names=self.classes, zero_division=0)
         print("\nClassification Report:\n", report)
     
         if results_folder is not None:

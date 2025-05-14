@@ -12,7 +12,7 @@ model_params = {
     'train_blocks': ["layer4"],
     'epochs': 50,
     'batch_size': 32,
-    'lr_backone': 1e-6,
+    'lr_backbone': 1e-6,
     'lr_fc': 1e-6,
     'weight_decay': 1e-4,
     'early_stopping_patience': 15,

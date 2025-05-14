@@ -79,7 +79,8 @@ def segment_images_from_csv(csv_path, output_dir, device="cpu"):
             print(f"Segmented and saved: {output_path}")
         except Exception as e:
             print(f"Error processing {image_path}: {e}")
-            
+
+
 def update_image_paths(csv_path, new_directory, output_csv_path):
     """
     Reads a CSV file with an 'image_path' column, updates each image path to reflect
@@ -98,6 +99,7 @@ def update_image_paths(csv_path, new_directory, output_csv_path):
     df.to_csv(output_csv_path, index=False)
     print(f"Updated CSV saved to: {output_csv_path}")
 
+
 def main():
     GENERAL_PATH = os.getcwd()
     dataset = 'SeasonsModel'
@@ -106,25 +108,23 @@ def main():
     type_features = 3
     
     segmented_dataset_path = os.path.join(GENERAL_PATH, f'data/segmented_dataset/{dataset}')
-    train_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}/train_{dataset}.csv')
-    val_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}/val_{dataset}.csv')
-    test_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}/test_{dataset}.csv')
+    train_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/train_{dataset}.csv')
+    val_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/val_{dataset}.csv')
+    test_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/test_{dataset}.csv')
     
-    segment_images_from_csv(train_csv_path, segmented_dataset_path, device="cuda")
-    segment_images_from_csv(val_csv_path, segmented_dataset_path, device="cuda")
-    segment_images_from_csv(test_csv_path, segmented_dataset_path, device="cuda")
+    # segment_images_from_csv(train_csv_path, segmented_dataset_path, device="cuda")
+    # segment_images_from_csv(val_csv_path, segmented_dataset_path, device="cuda")
+    # segment_images_from_csv(test_csv_path, segmented_dataset_path, device="cuda")
     
     update_image_paths(train_csv_path, segmented_dataset_path, train_csv_path)
-    update_image_paths(test_csv_path, segmented_dataset_path, train_csv_path)
-    update_image_paths(val_csv_path, segmented_dataset_path, train_csv_path)
+    update_image_paths(test_csv_path, segmented_dataset_path, test_csv_path)
+    update_image_paths(val_csv_path, segmented_dataset_path, val_csv_path)
         
-    process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
-                          processed_dataset_save_path, dataset, type_features=type_features)
+    # process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
+    #                       processed_dataset_save_path, dataset, type_features=type_features)
 
     
     # combine_features(processed_dataset_save_path, dataset, 'enhancedSeasonal', 'alexNet_compact')
-
-
     # dataset = 'Ours'
     # raw_dataset_path = os.path.join(GENERAL_PATH, f'data/raw/{dataset}')
     # processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/processed')

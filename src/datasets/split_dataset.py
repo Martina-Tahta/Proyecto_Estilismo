@@ -3,6 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
 import os
 import re
+import random
+import shutil
 
 def raw_dataset_split(raw_dataset_path, output_dir, name_dataset, test_size=0.2, random_state=42):
     #split train, test, val
@@ -44,6 +46,122 @@ def raw_dataset_split(raw_dataset_path, output_dir, name_dataset, test_size=0.2,
     val_df.to_csv(os.path.join(output_dir, f"val_{name_dataset}.csv"), index=False)
     
 
+def count_images_per_category(train_path):
+    """
+    Recorre cada season dentro de 'train_path' y cuenta las imágenes PNG en cada categoría.
+    
+    Args:
+        train_path (str): Ruta al directorio 'train' de tu dataset.
+    """
+    for season in os.listdir(train_path):
+        season_path = os.path.join(train_path, season)
+        if not os.path.isdir(season_path):
+            continue
+        
+        print(f"Season: {season}")
+        for category in os.listdir(season_path):
+            category_path = os.path.join(season_path, category)
+            if not os.path.isdir(category_path):
+                continue
+            
+            png_count = sum(
+                1 for fname in os.listdir(category_path)
+                if fname.lower().endswith('.png')
+            )
+            print(f"  Category '{category}': {png_count} samples")
+        print()
+
+
+def DeepArmocromia_train_val_split(dataset_path, val_ratio=0.2, seed=42):
+    random.seed(seed)
+
+    train_src = os.path.join(dataset_path, 'their_train')
+    # Nombres finales: dataset_path/train y dataset_path/val
+    final_train = os.path.join(dataset_path, 'train')
+    final_val   = os.path.join(dataset_path, 'val')
+
+    # Crea directorios finales si no existen (vacíos para limpiar)
+    os.makedirs(final_train, exist_ok=True)
+    os.makedirs(final_val, exist_ok=True)
+
+    for season in os.listdir(train_src):
+        season_path = os.path.join(train_src, season)
+        if not os.path.isdir(season_path):
+            continue
+
+        for category in os.listdir(season_path):
+            cat_path = os.path.join(season_path, category)
+            if not os.path.isdir(cat_path):
+                continue
+
+            files = [f for f in os.listdir(cat_path) if f.lower().endswith('.png')]
+            random.shuffle(files)
+
+            val_count = int(len(files) * val_ratio)
+            val_files, train_files = files[:val_count], files[val_count:]
+
+            # Crear en final_train/season/category y final_val/season/category
+            train_cat_dst = os.path.join(final_train, season, category)
+            val_cat_dst   = os.path.join(final_val,   season, category)
+            os.makedirs(train_cat_dst, exist_ok=True)
+            os.makedirs(val_cat_dst,   exist_ok=True)
+
+            for f in train_files:
+                shutil.copy2(os.path.join(cat_path, f), os.path.join(train_cat_dst, f))
+            for f in val_files:
+                shutil.copy2(os.path.join(cat_path, f), os.path.join(val_cat_dst, f))
+
+            print(f"{season}/{category}: train={len(train_files)}, val={len(val_files)}")
+        
+
+def DeepArmocromia_generate_image_csv(dataset_root, output_csv_path, name_dataset):
+    """
+    Recorre las carpetas train, val y test y genera un CSV para cada una con columnas:
+    - image_path: ruta relativa comenzando con 'data/raw/DeepArmocromia/...'
+    - season: combinación 'categoria_estacion' (por ejemplo, 'true_winter')
+
+    Args:
+        dataset_root (str): Ruta al directorio que contiene las carpetas train, val y test.
+        output_dir (str): Ruta donde se guardarán los archivos CSV.
+    """
+    subsets = ['train', 'val', 'test']
+    os.makedirs(output_csv_path, exist_ok=True)
+
+    for subset in subsets:
+        records = []
+        subset_dir = os.path.join(dataset_root, subset)
+        if not os.path.isdir(subset_dir):
+            print(f"Aviso: '{subset}' no existe en {dataset_root}, se omite.")
+            continue
+
+        for season in os.listdir(subset_dir):
+            season_dir = os.path.join(subset_dir, season)
+            if not os.path.isdir(season_dir):
+                continue
+
+            for category in os.listdir(season_dir):
+                category_dir = os.path.join(season_dir, category)
+                if not os.path.isdir(category_dir):
+                    continue
+
+                for fname in os.listdir(category_dir):
+                    if fname.lower().endswith('.png'):
+                        rel_path = os.path.join(
+                            'data/raw/DeepArmocromia', 
+                            subset, season, category, fname
+                        )
+                        season_label = f"{category}_{season}"
+                        records.append({
+                            'image_path': rel_path,
+                            'season': season_label
+                        })
+
+        df = pd.DataFrame(records)
+        csv_path = os.path.join(output_csv_path, f"{subset}_{name_dataset}.csv")
+        df.to_csv(csv_path, index=False)
+        print(f"CSV para '{subset}' generado en: {csv_path} (registros: {len(df)})")
+
+
 def rebalanace_train_set(train_set_path):
     # Separate majority and minority classes with SMOTE-like approach
     df = pd.read_csv(train_set_path)
@@ -71,11 +189,19 @@ def rebalanace_train_set(train_set_path):
     
 def main():
     GENERAL_PATH = os.getcwd()
-    dataset = 'SeasonsModel'
-    raw_dataset_path = os.path.join(GENERAL_PATH, f'data/raw/{dataset}')
-    processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
-    raw_dataset_split(raw_dataset_path, processed_dataset_save_path, dataset)
-    rebalanace_train_set(processed_dataset_save_path+f'/train_{dataset}.csv')
+    # dataset = 'SeasonsModel'
+    # raw_dataset_path = os.path.join(GENERAL_PATH, f'data/raw/{dataset}')
+    # processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
+    # raw_dataset_split(raw_dataset_path, processed_dataset_save_path, dataset)
+    # rebalanace_train_set(processed_dataset_save_path+f'/train_{dataset}.csv')
+
+    dataset = 'DeepArmocromia'
+    dataset_path = os.path.join(GENERAL_PATH, f'data/raw/{dataset}')
+    DeepArmocromia_train_val_split(dataset_path)
+    output_csv_path=os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
+    DeepArmocromia_generate_image_csv(dataset_path, output_csv_path, dataset)
+    rebalanace_train_set(os.path.join(output_csv_path, f'train_{dataset}.csv'))
+
 
 
 if __name__ == "__main__":
