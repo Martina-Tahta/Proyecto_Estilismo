@@ -2,6 +2,7 @@ from src.utils.files import create_result_folder
 from src.models import ensamble
 from src.models import NN_pytorch
 from src.models import resNeXt_ft
+from src.models import resNeXt_weighted_avg
 import pandas as pd
 
 # from src.train_test.train import train
@@ -43,6 +44,9 @@ def load_model(model_params):
     
     elif model_name == 'resNeXt_ft':
         model = resNeXt_ft.ResNeXt_FT(model_params['variant'])
+
+    elif model_name == 'resNeXt_weighted_avg':
+        model = resNeXt_weighted_avg.ResNeXtWeightedClassifier()
 
     return model
 

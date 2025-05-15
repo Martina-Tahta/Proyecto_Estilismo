@@ -1,6 +1,7 @@
 import os
 from enhancedSeasonal_feature_extractor import EnhancedSeasonalColorDatabase
 from alexNet_feature_extractor import AlexNetFeatureExtractor
+from resNeXt_feature_extractor import ResNeXtFeatureExtractor
 import pandas as pd
 from segmentation import segment_images_in_directory, segment_face_hair
 
@@ -27,6 +28,16 @@ def process_split_dataset(raw_datasets_paths, processed_dataset_save_path, name_
         extractor = AlexNetFeatureExtractor()
         features_name = 'alexNet_face_only_compact'
         extractor_kwargs = {'compact': True, 'face_seg': True}
+
+    elif type_features == 4:
+        extractor = ResNeXtFeatureExtractor()
+        features_name = 'resNeXt_avg'
+        extractor_kwargs = {'compact': False}
+    
+    elif type_features == 5:
+        extractor = ResNeXtFeatureExtractor()
+        features_name = 'resNeXt_avg'
+        extractor_kwargs = {'compact': True}
     
     train_features_df = extractor.extract_imgs_features(train_path, **extractor_kwargs)
     val_features_df = extractor.extract_imgs_features(val_path, **extractor_kwargs)
@@ -102,26 +113,26 @@ def update_image_paths(csv_path, new_directory, output_csv_path):
 
 def main():
     GENERAL_PATH = os.getcwd()
-    dataset = 'SeasonsModel'
+    dataset = 'DeepArmocromia'
     raw_dataset_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
     processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/processed/{dataset}')
-    type_features = 3
+    type_features = 4
     
-    segmented_dataset_path = os.path.join(GENERAL_PATH, f'data/segmented_dataset/{dataset}')
-    train_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/train_{dataset}.csv')
-    val_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/val_{dataset}.csv')
-    test_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/test_{dataset}.csv')
+    # segmented_dataset_path = os.path.join(GENERAL_PATH, f'data/segmented_dataset/{dataset}')
+    # train_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/train_{dataset}.csv')
+    # val_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/val_{dataset}.csv')
+    # test_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/test_{dataset}.csv')
     
     # segment_images_from_csv(train_csv_path, segmented_dataset_path, device="cuda")
     # segment_images_from_csv(val_csv_path, segmented_dataset_path, device="cuda")
     # segment_images_from_csv(test_csv_path, segmented_dataset_path, device="cuda")
     
-    update_image_paths(train_csv_path, segmented_dataset_path, train_csv_path)
-    update_image_paths(test_csv_path, segmented_dataset_path, test_csv_path)
-    update_image_paths(val_csv_path, segmented_dataset_path, val_csv_path)
+    # update_image_paths(train_csv_path, segmented_dataset_path, train_csv_path)
+    # update_image_paths(test_csv_path, segmented_dataset_path, test_csv_path)
+    # update_image_paths(val_csv_path, segmented_dataset_path, val_csv_path)
         
-    # process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
-    #                       processed_dataset_save_path, dataset, type_features=type_features)
+    process_split_dataset([raw_dataset_path+f'/train_{dataset}.csv', raw_dataset_path+f'/val_{dataset}.csv', raw_dataset_path+f'/test_{dataset}.csv'],
+                          processed_dataset_save_path, dataset, type_features=type_features)
 
     
     # combine_features(processed_dataset_save_path, dataset, 'enhancedSeasonal', 'alexNet_compact')
