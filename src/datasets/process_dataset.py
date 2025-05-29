@@ -31,12 +31,12 @@ def process_split_dataset(raw_datasets_paths, processed_dataset_save_path, name_
 
     elif type_features == 4:
         extractor = ResNeXtFeatureExtractor()
-        features_name = 'resNeXt_avg'
+        features_name = 'resNeXt'
         extractor_kwargs = {'compact': False}
     
     elif type_features == 5:
         extractor = ResNeXtFeatureExtractor()
-        features_name = 'resNeXt_avg'
+        features_name = 'resNeXt_compact'
         extractor_kwargs = {'compact': True}
     
     train_features_df = extractor.extract_imgs_features(train_path, **extractor_kwargs)
@@ -116,7 +116,7 @@ def main():
     dataset = 'DeepArmocromia'
     raw_dataset_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}')
     processed_dataset_save_path = os.path.join(GENERAL_PATH, f'data/processed/{dataset}')
-    type_features = 4
+    type_features = 2
     
     # segmented_dataset_path = os.path.join(GENERAL_PATH, f'data/segmented_dataset/{dataset}')
     # train_csv_path = os.path.join(GENERAL_PATH, f'data/split_dataset/{dataset}_segmented/train_{dataset}.csv')

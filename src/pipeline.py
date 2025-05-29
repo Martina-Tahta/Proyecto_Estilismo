@@ -3,6 +3,7 @@ from src.models import ensamble
 from src.models import NN_pytorch
 from src.models import resNeXt_ft
 from src.models import resNeXt_weighted_avg
+from src.models import mcf_features_nn
 import pandas as pd
 
 # from src.train_test.train import train
@@ -33,6 +34,16 @@ def load_model(model_params):
     Returns:
     object: Loaded machine learning model instance corresponding to the specified model_name.
     """
+    if 'num_classes' in model_params:
+        classes = model_params['num_classes']
+    else:
+        classes = 12
+
+    if classes == 12:
+        names_classes = ['bright_spring', 'bright_winter', 'cool_summer', 'cool_winter', 'deep_autumn', 'deep_winter', 'light_spring', 'light_summer', 'soft_autumn', 'soft_summer', 'warm_autumn', 'warm_spring']
+    elif classes == 4:
+        names_classes = ['autumn', 'spring', 'summer', 'winter']
+
     model_name = model_params['model_name']
     model = None
     
@@ -46,9 +57,15 @@ def load_model(model_params):
         model = resNeXt_ft.ResNeXt_FT(model_params['variant'])
 
     elif model_name == 'resNeXt_weighted_avg':
-        model = resNeXt_weighted_avg.ResNeXtWeightedClassifier()
+        if 'variant' in model_params:
+            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(variant=model_params['variant'], num_classes=classes)
+        else:
+            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(num_classes=classes)
+    
+    elif model_name == 'mcf': #NO FUNCIONA TODAVIA
+        model = mcf_features_nn.ColorimetryClassifier()
 
-    return model
+    return model, names_classes
 
 
 def run_model(model_params, data_params):
@@ -64,7 +81,7 @@ def run_model(model_params, data_params):
     """
     save_path = create_result_folder(model_params, data_params)
     
-    model = load_model(model_params)
+    model, _ = load_model(model_params)
     model.train_model(data_params['data_train_path'], data_params['data_val_path'], model_params=model_params, save_name=model_params['configs_file_name'])
     model.eval_model(data_params['data_val_path'], save_path)
     
@@ -72,26 +89,28 @@ def run_model(model_params, data_params):
 
 
 
-def test_model(model_name, model_path, test_dataset_path):
-    model = load_model(model_name)
-    model.load_params_model(model_path)
+def test_model(model_params, model_path, test_dataset_path):
+    model, names = load_model(model_params)
+    model.load_params_model(model_path,names)
 
-    df = pd.read_csv(test_dataset_path)
-    counter_correct_pred = 0
-    for i, img in df.iterrows():
-        result = model.predict_season(img.to_frame().T)
-        if 'error' in result:
-            print(f"Error: {result['error']}")
-        else:
-            print(f"Real Season: {img['season']}")
-            print(f"Predicted Season: {result['predicted_season']}")
-            print("\nConfidence Scores:")
-            for season, prob in result['confidence_scores'].items():
-                print(f"{season}: {prob:.2%}")
+    model.test_model(test_dataset_path)
 
-            if result['predicted_season'] == img['season']:
-                counter_correct_pred += 1
+    # df = pd.read_csv(test_dataset_path)
+    # counter_correct_pred = 0
+    # for i, img in df.iterrows():
+    #     result = model.predict_season(img.to_frame().T)
+    #     if 'error' in result:
+    #         print(f"Error: {result['error']}")
+    #     else:
+    #         print(f"Real Season: {img['season']}")
+    #         print(f"Predicted Season: {result['predicted_season']}")
+    #         print("\nConfidence Scores:")
+    #         for season, prob in result['confidence_scores'].items():
+    #             print(f"{season}: {prob:.2%}")
 
-            print('\n------------------------- \n')
+    #         if result['predicted_season'] == img['season']:
+    #             counter_correct_pred += 1
+
+    #         print('\n------------------------- \n')
     
-    print(f"\n\nCantidad de predicciones correctas: {counter_correct_pred}")
+    # print(f"\n\nCantidad de predicciones correctas: {counter_correct_pred}")

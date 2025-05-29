@@ -10,10 +10,10 @@ model_params = {
     'model_name' : 'resNeXt_weighted_avg',
     'variant': "resnext101_32x8d",  # "resnext50_32x4d" or "resnext101_32x8d", ...
     'epochs': 50,
-    'batch_size': 16,
+    'batch_size': 128,
     'lr': 1e-4,
     'weight_decay': 1e-2,
-    'early_stopping_patience': 5,
+    'early_stopping_patience': 20,
     'dropout': 0.5
 }
 

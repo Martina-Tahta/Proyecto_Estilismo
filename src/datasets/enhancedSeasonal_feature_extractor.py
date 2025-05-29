@@ -12,7 +12,7 @@ class EnhancedSeasonalColorDatabase:
     def __init__(self):
         return
         
-    def extract_imgs_features(self, images_directory):  
+    def extract_imgs_features(self, images_directory, full_path=''):  
         # Create database imgs existing model
         print("Creating enhanced database...")
         # Process images and create features
@@ -25,7 +25,7 @@ class EnhancedSeasonalColorDatabase:
             image_path = row['image_path']
             img_season = row['season']
 
-            features = self.extract_enhanced_features(image_path)
+            features = self.extract_enhanced_features(full_path + image_path)
             
             if features:
                 features['image_file'] = image_path

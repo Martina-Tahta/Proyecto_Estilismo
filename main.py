@@ -4,7 +4,9 @@ from src.utils.files import read_configs
 from src.pipeline import run_model, test_model
 
 # Como correrlo:
-#   python main.py --configs configs/mod_ensamble1.py --path_test data/processed/test_Ours_alexNet.csv --path_model runs/model_NNpytorch_mod_nn_pytorch4.pt
+#   python main.py --configs configs/mod_ensamble1.py 
+#python main.py --configs configs/mod_resNeXt_weighted_avg_DeepArmocromia_only_season.py --path_test data/split_dataset/DeepArmocromia_season_only/test_DeepArmocromia_season_only.csv --path_model runs/model_mod_resNeXt_weighted_avg_DeepArmocromia_only_season.pt
+#python main.py --configs configs/mod_resNeXt_weighted_avg_DeepArmocromia2.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_mod_resNeXt_weighted_avg_DeepArmocromia2.pt
 
 def main(args):
     check_args = read_configs(args)

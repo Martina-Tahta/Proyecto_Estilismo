@@ -143,7 +143,7 @@ class NNSeasonalColorModel:
         optimizer = optim.Adam(self.model.parameters(), lr=lr, weight_decay=weight_decay)
 
         best_val_loss = float('inf')
-        patience = 10
+        patience = 20
         counter = 0
         best_model_state = None
 

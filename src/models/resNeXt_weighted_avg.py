@@ -42,9 +42,9 @@ class SoftmaxWeightedPool2d(nn.Module):
         return (x * attn).sum(dim=(2,3))  # [B, C]
 
 class ResNeXtWeightedClassifier(nn.Module):
-    def __init__(self, variant: str = "resnext50_32x4d", device=None):
+    def __init__(self, variant: str = "resnext50_32x4d", num_classes=12, device=None):
         super().__init__()
-        self.num_classes = 12
+        self.num_classes = num_classes
         # 1) Backbone ResNeXt sin avgpool ni fc
         backbone = getattr(models, variant)(pretrained=True)
         self.feature_extractor = nn.Sequential(*list(backbone.children())[:-2])
@@ -218,3 +218,58 @@ class ResNeXtWeightedClassifier(nn.Module):
             plt.savefig(f'{results_folder}/confusion_matrix.png')
             with open(f'{results_folder}/classification_report.txt', 'w') as f:
                 f.write(report)
+
+    def load_params_model(self, weights_path: str, class_names: list):
+            """
+            Carga pesos guardados y define las clases asociadas.
+
+            Args:
+                weights_path (str): Ruta al archivo .pt o .pth del modelo.
+                class_names (list): Lista de clases (str) en orden correcto.
+            """
+            self.classes = sorted(class_names)
+            self.class2idx = {c: i for i, c in enumerate(self.classes)}
+            self.dropout = nn.Dropout(p=0.2)  # Reasegura que exista para .forward()
+            self.load_state_dict(torch.load(weights_path, map_location=self.device))
+            self.eval()
+            print(f"Modelo cargado desde {weights_path}.")
+
+    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4):
+        """
+        Evalúa el modelo sobre un CSV de test (debe incluir columnas: image_path, season).
+
+        Args:
+            test_csv (str): Ruta al CSV.
+            batch_size (int): Batch size.
+            num_workers (int): Cantidad de workers del DataLoader.
+        """
+        df = pd.read_csv(test_csv)
+        if not hasattr(self, 'class2idx'):
+            self.classes = sorted(df['season'].unique())
+            self.class2idx = {c: i for i, c in enumerate(self.classes)}
+        test_loader = self.create_dataloader(test_csv, batch_size=batch_size, shuffle=False, num_workers=num_workers, train=False)
+
+        self.eval()
+        all_preds, all_labels = [], []
+        with torch.no_grad():
+            for images, labels in tqdm(test_loader, desc="Testing", unit="batch"):
+                images = images.to(self.device)
+                labels = labels.to(self.device)
+                preds = self(images).argmax(dim=1)
+                all_preds.extend(preds.cpu().tolist())
+                all_labels.extend(labels.cpu().tolist())
+
+        report = classification_report(all_labels, all_preds, target_names=self.classes)
+        print("\n--- TEST REPORT ---\n")
+        print(report)
+
+        cm = confusion_matrix(all_labels, all_preds)
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
+                    xticklabels=self.classes, yticklabels=self.classes)
+        plt.title('Confusion Matrix')
+        plt.ylabel('True Label')
+        plt.xlabel('Predicted Label')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()

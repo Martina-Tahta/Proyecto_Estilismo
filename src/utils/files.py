@@ -22,7 +22,7 @@ def read_configs(args):
 
         model_params = config.model_params
         if args.path_test and args.path_model: 
-            return [1, model_params['model_name'], args.path_model, args.path_test]
+            return [1, model_params, args.path_model, args.path_test]
         
         dataset_params = config.dataset_params
         return [0, model_params, dataset_params]

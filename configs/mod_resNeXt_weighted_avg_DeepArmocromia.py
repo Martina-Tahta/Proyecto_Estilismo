@@ -8,7 +8,7 @@ current_filename = os.path.splitext(os.path.basename(__file__))[0]
 model_params = {
     'configs_file_name' : current_filename,
     'model_name' : 'resNeXt_weighted_avg',
-    'variant': "resnext101_32x8d",  # "resnext50_32x4d" or "resnext101_32x8d", ...
+    'variant': "resnext50_32x4d",  # "resnext50_32x4d" or "resnext101_32x8d", ...
     'epochs': 50,
     'batch_size': 16,
     'lr': 1e-4,

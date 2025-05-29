@@ -9,7 +9,7 @@ import os
 import re
 import matplotlib.pyplot as plt
 import facer
-from segmentation import load_parser, segment_face_hair
+#from segmentation import load_parser, segment_face_hair
 
 class AlexNetFeatureExtractor:
     def __init__(self):
@@ -34,7 +34,7 @@ class AlexNetFeatureExtractor:
         self.parser   = facer.face_parser("farl/celebm/448",
                                          device=self.device)
 
-    def extract_imgs_features(self, images_directory, compact=False, face_seg=False):
+    def extract_imgs_features(self, images_directory, compact=False, face_seg=False, full_path=''):
         # Create database imgs existing model
         print("Creating alexNet database...")
         # Process images and create features
@@ -48,12 +48,12 @@ class AlexNetFeatureExtractor:
             img_season = row['season']
             if not face_seg:
                 if compact:
-                    features = self.extract_compact_features(image_path)
+                    features = self.extract_compact_features(full_path+image_path)
                 else:
-                    features = self.extract_features(image_path)
+                    features = self.extract_features(full_path+image_path)
             else:
                 if compact:
-                    features = self.extract_only_face_compact_features(image_path)
+                    features = self.extract_only_face_compact_features(full_path+image_path)
                 # else:
                 #     features = self.extract_only_face_features(image_path)
             
@@ -88,38 +88,38 @@ class AlexNetFeatureExtractor:
         df = pd.DataFrame([feature_vector], columns=[f'feat_{i}' for i in range(len(feature_vector))])
         return df
     
-    def extract_only_face_compact_features(self, image_path):
-        """
-        Returns a 1 × 256-dim DataFrame with pooled AlexNet features from the
-        pixels belonging to face + hair. If no face pixels are found, returns None.
-        """
+    # def extract_only_face_compact_features(self, image_path):
+    #     """
+    #     Returns a 1 × 256-dim DataFrame with pooled AlexNet features from the
+    #     pixels belonging to face + hair. If no face pixels are found, returns None.
+    #     """
         
-        # ── 1.  run BiSeNet to mask everything except face + hair ─────────────
-        masked_img = segment_face_hair(
-            img_path=image_path,
-            net=load_parser(self.device),        # ← assume you ran `self.bisenet = load_parser()`
-            device=str(self.device),
-        )
+    #     # ── 1.  run BiSeNet to mask everything except face + hair ─────────────
+    #     masked_img = segment_face_hair(
+    #         img_path=image_path,
+    #         net=load_parser(self.device),        # ← assume you ran `self.bisenet = load_parser()`
+    #         device=str(self.device),
+    #     )
 
-        # plt.figure(figsize=(5,5))
-        # plt.imshow(masked_img)
-        # plt.axis("off")
-        # plt.show()
+    #     # plt.figure(figsize=(5,5))
+    #     # plt.imshow(masked_img)
+    #     # plt.axis("off")
+    #     # plt.show()
 
-        # if BiSeNet failed, every pixel is 0 → sum == 0
-        if np.array(masked_img).sum() == 0:
-            print(f"[WARN] no face detected in {image_path}")
-            return None
+    #     # if BiSeNet failed, every pixel is 0 → sum == 0
+    #     if np.array(masked_img).sum() == 0:
+    #         print(f"[WARN] no face detected in {image_path}")
+    #         return None
 
-        # ── 2.  feed the masked region through AlexNet features → pool → flat ─
-        masked_pil = masked_img.resize((224, 224))          # AlexNet expects 224
-        inp = self.transform_img(masked_pil).unsqueeze(0).to(self.device)
+    #     # ── 2.  feed the masked region through AlexNet features → pool → flat ─
+    #     masked_pil = masked_img.resize((224, 224))          # AlexNet expects 224
+    #     inp = self.transform_img(masked_pil).unsqueeze(0).to(self.device)
 
-        with torch.no_grad():
-            feats = self.feature_extractor(inp)
-            pooled = feats.mean(dim=(2, 3)).cpu().numpy().flatten()
+    #     with torch.no_grad():
+    #         feats = self.feature_extractor(inp)
+    #         pooled = feats.mean(dim=(2, 3)).cpu().numpy().flatten()
 
-        # ── 3.  1×256 DataFrame, same schema as before ────────────────────────
-        cols = [f"feat_{i}" for i in range(len(pooled))]
-        return pd.DataFrame([pooled], columns=cols)
+    #     # ── 3.  1×256 DataFrame, same schema as before ────────────────────────
+    #     cols = [f"feat_{i}" for i in range(len(pooled))]
+    #     return pd.DataFrame([pooled], columns=cols)
 

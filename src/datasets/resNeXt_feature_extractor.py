@@ -5,7 +5,6 @@ from PIL import Image
 import pandas as pd
 import numpy as np
 import facer
-from segmentation import load_parser, segment_face_hair
 
 class ResNeXtFeatureExtractor:
     def __init__(self, variant="resnext101_32x8d"):
@@ -33,19 +32,19 @@ class ResNeXtFeatureExtractor:
         self.parser   = facer.face_parser("farl/celebm/448",
                                           device=self.device)
 
-    def extract_imgs_features(self, csv_path, compact=False):
+    def extract_imgs_features(self, csv_path, compact=False, full_path=''):
         data = []
         df_input = pd.read_csv(csv_path)
         for _, row in df_input.iterrows():
             img_path, season = row['image_path'], row['season']
-            feats = (self.extract_compact_features(img_path) 
-                        if compact else self.extract_features(img_path))
+            feats = (self.extract_compact_features(full_path+img_path) 
+                        if compact else self.extract_features(full_path+img_path))
             
             if feats is not None:
                 feats['image_file'] = img_path
                 feats['season'] = season
                 data.append(feats)
-            print(f"Processed {img_path}")
+            #print(f"Processed {img_path}")
         return pd.concat(data, ignore_index=True)
 
     def extract_features(self, image_path):
