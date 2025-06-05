@@ -159,3 +159,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 runs/model_resNeXt_ft_mod_resNeXt_ft.pt
+/runs
