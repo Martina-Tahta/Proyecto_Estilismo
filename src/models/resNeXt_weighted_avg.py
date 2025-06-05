@@ -191,7 +191,7 @@ class ResNeXtWeightedClassifier(nn.Module):
 
     def eval_model(self, test_csv, results_folder=None, batch_size=32, num_workers=4):
         test_loader = self.create_dataloader(test_csv, batch_size=batch_size,
-                                             num_workers=num_workers, shuffle=False, train=False)
+                                            num_workers=num_workers, shuffle=False, train=False)
 
         self.eval()
         all_preds, all_targets = [], []

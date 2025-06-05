@@ -10,6 +10,7 @@ from src.pipeline import run_model, test_model
 
 def main(args):
     check_args = read_configs(args)
+    
     if check_args == -1:
         print("Some parameters were missing.")
         return -1
@@ -21,8 +22,8 @@ def main(args):
     else:
         _, model, model_path, test_dataset_path = check_args
         test_model(model, model_path, test_dataset_path)
-
-
+        
+        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

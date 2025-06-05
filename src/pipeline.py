@@ -3,7 +3,7 @@ from src.models import ensamble
 from src.models import NN_pytorch
 from src.models import resNeXt_ft
 from src.models import resNeXt_weighted_avg
-from src.models import mcf_features_nn
+# from src.models import mcf_features_nn
 import pandas as pd
 
 # from src.train_test.train import train
@@ -23,6 +23,12 @@ import pandas as pd
 #         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     return device
 
+def get_class_names(csv_path, column='season'):
+    """
+    Read the CSV dataset and extract sorted unique class names from the specified column.
+    """
+    df = pd.read_csv(csv_path)
+    return sorted(df[column].unique())
 
 def load_model(model_params):
     """
@@ -34,15 +40,8 @@ def load_model(model_params):
     Returns:
     object: Loaded machine learning model instance corresponding to the specified model_name.
     """
-    if 'num_classes' in model_params:
-        classes = model_params['num_classes']
-    else:
-        classes = 12
 
-    if classes == 12:
-        names_classes = ['bright_spring', 'bright_winter', 'cool_summer', 'cool_winter', 'deep_autumn', 'deep_winter', 'light_spring', 'light_summer', 'soft_autumn', 'soft_summer', 'warm_autumn', 'warm_spring']
-    elif classes == 4:
-        names_classes = ['autumn', 'spring', 'summer', 'winter']
+    names_classes = get_class_names(model_params['classes_csv'], column='season')
 
     model_name = model_params['model_name']
     model = None
@@ -114,3 +113,5 @@ def test_model(model_params, model_path, test_dataset_path):
     #         print('\n------------------------- \n')
     
     # print(f"\n\nCantidad de predicciones correctas: {counter_correct_pred}")
+    
+    
