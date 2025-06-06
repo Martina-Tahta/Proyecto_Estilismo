@@ -250,7 +250,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             self.eval()
             print(f"Modelo cargado desde {weights_path}.")
 
-    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4):
+    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4, seasons_only: bool = False):
         """
         Evalúa el modelo sobre un CSV de test (debe incluir columnas: image_path, season).
 
@@ -258,12 +258,22 @@ class ResNeXtWeightedClassifier(nn.Module):
             test_csv (str): Ruta al CSV.
             batch_size (int): Batch size.
             num_workers (int): Cantidad de workers del DataLoader.
+            aggregate (bool): Si es True, agrupa las 12 categorías en 4 estaciones (spring, summer, autumn, winter).
         """
         df = pd.read_csv(test_csv)
+        # Construir mapping original de clases si no existe
         if not hasattr(self, 'class2idx'):
-            self.classes = sorted(df['season'].unique())
+            self.classes = sorted(df['season'].unique())  # ["bright_spring", "bright_winter", ...]
             self.class2idx = {c: i for i, c in enumerate(self.classes)}
-        test_loader = self.create_dataloader(test_csv, batch_size=batch_size, shuffle=False, num_workers=num_workers, train=False)
+
+        # Preparar DataLoader de test
+        test_loader = self.create_dataloader(
+            test_csv,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            train=False
+        )
 
         self.eval()
         all_preds, all_labels = [], []
@@ -275,17 +285,60 @@ class ResNeXtWeightedClassifier(nn.Module):
                 all_preds.extend(preds.cpu().tolist())
                 all_labels.extend(labels.cpu().tolist())
 
-        report = classification_report(all_labels, all_preds, target_names=self.classes)
-        print("\n--- TEST REPORT ---\n")
+        # Si no se agrupa, imprimir reporte con las 12 categorías originales
+        if not seasons_only:
+            report = classification_report(all_labels, all_preds, target_names=self.classes)
+            print("\n--- TEST REPORT (12 categorías) ---\n")
+            print(report)
+
+            cm = confusion_matrix(all_labels, all_preds)
+            plt.figure(figsize=(10, 8))
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
+                        xticklabels=self.classes, yticklabels=self.classes)
+            plt.title('Matriz de Confusión (12 categorías)')
+            plt.ylabel('Etiqueta Verdadera')
+            plt.xlabel('Predicción')
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            plt.show()
+            return
+
+        # Si aggregate=True, mapear índices originales a 4 estaciones
+        # Construir lista de estaciones agregadas (orden alfabético, pero se puede ajustar)
+        aggregated_classes = ['autumn', 'spring', 'summer', 'winter']
+        aggregated_class2idx = {c: idx for idx, c in enumerate(aggregated_classes)}
+
+        # Invertir class2idx para obtener nombre de categoría original a partir del índice
+        idx2class = {idx: cls_name for cls_name, idx in self.class2idx.items()}
+
+        agg_preds = []
+        agg_labels = []
+        for p in all_preds:
+            orig_name = idx2class[p]
+            agg_name = self.to_aggregated(orig_name)
+            agg_preds.append(aggregated_class2idx[agg_name])
+        for l in all_labels:
+            orig_name = idx2class[l]
+            agg_name = self.to_aggregated(orig_name)
+            agg_labels.append(aggregated_class2idx[agg_name])
+
+        # Reporte con 4 estaciones
+        report = classification_report(agg_labels, agg_preds, target_names=aggregated_classes)
+        print("\n--- TEST REPORT (4 estaciones) ---\n")
         print(report)
 
-        cm = confusion_matrix(all_labels, all_preds)
-        plt.figure(figsize=(10, 8))
+        cm = confusion_matrix(agg_labels, agg_preds)
+        plt.figure(figsize=(8, 6))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
-                    xticklabels=self.classes, yticklabels=self.classes)
-        plt.title('Confusion Matrix')
-        plt.ylabel('True Label')
-        plt.xlabel('Predicted Label')
+                    xticklabels=aggregated_classes, yticklabels=aggregated_classes)
+        plt.title('Matriz de Confusión (4 estaciones)')
+        plt.ylabel('Etiqueta Verdadera')
+        plt.xlabel('Predicción')
         plt.xticks(rotation=45)
         plt.tight_layout()
-        plt.show()
+        plt.show()  
+
+        # Función auxiliar para extraer estación de la categoría original
+    def to_aggregated(self, name: str) -> str:
+        # Todas las categorías originales tienen la forma "<tipo>_<season>"
+        return name.split('_')[1]  # e.g. "bright_spring" -> "spring"
