@@ -4,21 +4,26 @@ import os
 GENERAL_PATH = os.getcwd()
 
 current_filename = os.path.splitext(os.path.basename(__file__))[0]
+CLASSES_CSV = os.path.join(GENERAL_PATH, 'data/classes_csv/DeepArmocromia_classes.csv')
 
 model_params = {
     'configs_file_name' : current_filename,
-    'model_name' : 'resNeXt_weighted_avg',
+    'model_name' : 'resNeXt_ft',
     'variant': "resnext101_32x8d",  # "resnext50_32x4d" or "resnext101_32x8d", ...
+    'train_blocks': [],
     'epochs': 50,
-    'batch_size': 128,
-    'lr': 1e-4,
-    'weight_decay': 1e-2,
-    'early_stopping_patience': 20,
-    'dropout': 0.5
+    'batch_size': 64,
+    'lr_backbone': 1e-3,
+    'lr_fc': 1e-3,
+    'weight_decay': 1e-5,
+    'early_stopping_patience': 5,
+    'dropout': 0.5,
+    'verbose': True,
+    'classes_csv': CLASSES_CSV
 }
 
 DATASET = 'DeepArmocromia'
-TYPE_FEATURES = 'resNeXt_weighted_avg'
+TYPE_FEATURES = 'resNeXt'
 
 dataset_params = {
     'dataset_name' : DATASET,

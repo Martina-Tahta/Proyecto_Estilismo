@@ -4,12 +4,13 @@ import os
 GENERAL_PATH = os.getcwd()
 
 current_filename = os.path.splitext(os.path.basename(__file__))[0]
+CLASSES_CSV = os.path.join(GENERAL_PATH, 'data/classes_csv/DeepArmocromia_classes.csv')
 
 model_params = {
     'configs_file_name' : current_filename,
     'model_name' : 'resNeXt_ft',
     'variant': "resnext101_32x8d",  # "resnext50_32x4d" or "resnext101_32x8d", ...
-    'train_blocks': ["layer4"],
+    'train_blocks': [],
     'epochs': 50,
     'batch_size': 32,
     'lr_backbone': 1e-6,
@@ -18,6 +19,7 @@ model_params = {
     'early_stopping_patience': 5,
     'dropout': 0.5,
     'verbose': True,
+    'classes_csv': CLASSES_CSV
 }
 
 DATASET = 'DeepArmocromia'
