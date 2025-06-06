@@ -250,7 +250,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             self.eval()
             print(f"Modelo cargado desde {weights_path}.")
 
-    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4, seasons_only: bool = False, top3: bool = False):
+    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4, seasons_only: bool = False, topk: int = None):
         """
         Evalúa el modelo sobre un CSV de test (debe incluir columnas: image_path, season).
 
@@ -259,7 +259,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             batch_size (int): Batch size.
             num_workers (int): Cantidad de workers del DataLoader.
             seasons_only (bool): Si es True, agrupa las 12 categorías en 4 estaciones (spring, summer, autumn, winter).
-            top3 (bool): Si es True, considera la predicción correcta si la etiqueta real está en el top 3 de probabilidades.
+            topk (int): Si se especifica, considera la predicción correcta si la etiqueta real está en el top k de probabilidades.
         """
         df = pd.read_csv(test_csv)
         # Construir mapping original de clases si no existe
@@ -283,9 +283,13 @@ class ResNeXtWeightedClassifier(nn.Module):
                 images = images.to(self.device)
                 labels = labels.to(self.device)
                 outputs = self(images)
-                if top3:
-                    top3_preds = torch.topk(outputs, 3, dim=1).indices
-                    all_preds.extend(top3_preds.cpu().tolist())
+                if topk:
+                    topk_preds = torch.topk(outputs, topk, dim=1).indices
+                    for i, label in enumerate(labels):
+                        if label in topk_preds[i]:
+                            all_preds.append(label.item())
+                        else:
+                            all_preds.append(topk_preds[i][0].item())
                 else:
                     preds = outputs.argmax(dim=1)
                     all_preds.extend(preds.cpu().tolist())

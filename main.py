@@ -9,7 +9,7 @@ from src.pipeline import run_model, test_model
 #python main.py --configs configs/mod_resNeXt_weighted_avg_DeepArmocromia2.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_mod_resNeXt_weighted_avg_DeepArmocromia2.pt
 # python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt
 # python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --seasons_only 
-# python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --top3
+# python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --topk 2
 
 
 '''
@@ -30,8 +30,8 @@ def main(args):
     else:
         _, model, model_path, test_dataset_path = check_args
         seasons_only = getattr(args, "seasons_only", False)
-        top3 = getattr(args, "top3", False)
-        test_model(model, model_path, test_dataset_path, seasons_only=seasons_only, top3=top3)
+        topk = getattr(args, "topk", None)
+        test_model(model, model_path, test_dataset_path, seasons_only=seasons_only, topk=topk)
         
         
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
     parser.add_argument("--path_test", type=str, help="Should add path to test dataset", required=False)
     parser.add_argument("--path_model", type=str, help="Should add path to saved model", required=False)
     parser.add_argument("--seasons_only", action="store_true", help="If set, test only on seasons (not subcategories)")
-    parser.add_argument("--top3", action="store_true", help="If set, mark prediction as true if the correct label is in the top 3 predicted probabilities")
+    parser.add_argument("--topk", type=int, help="If set, mark prediction as true if the correct label is in the top k predicted probabilities")
     #parser.add_argument("--device", type=str, help="Should add cuda or cpu", required=False)
     args = parser.parse_args()
     main(args)

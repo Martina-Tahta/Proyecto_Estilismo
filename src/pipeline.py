@@ -85,11 +85,11 @@ def run_model(model_params, data_params):
 
 
 
-def test_model(model_params, model_path, test_dataset_path, seasons_only=False, top3=False):
+def test_model(model_params, model_path, test_dataset_path, seasons_only=False, topk=None):
     model, names = load_model(model_params)
     model.load_params_model(model_path, names)
 
-    model.test_model(test_dataset_path, seasons_only=seasons_only, top3=top3)
+    model.test_model(test_dataset_path, seasons_only=seasons_only, topk=topk)
 
     # df = pd.read_csv(test_dataset_path)
     # counter_correct_pred = 0

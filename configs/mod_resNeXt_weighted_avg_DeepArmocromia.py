@@ -4,6 +4,7 @@ import os
 GENERAL_PATH = os.getcwd()
 
 current_filename = os.path.splitext(os.path.basename(__file__))[0]
+CLASSES_CSV = os.path.join(GENERAL_PATH, 'data/classes_csv/SeasonsModel_classes.csv')
 
 model_params = {
     'configs_file_name' : current_filename,
@@ -14,7 +15,8 @@ model_params = {
     'lr': 1e-4,
     'weight_decay': 1e-4,
     'early_stopping_patience': 5,
-    'dropout': 0
+    'dropout': 0,
+    'classes_csv': CLASSES_CSV
 }
 
 DATASET = 'DeepArmocromia'
