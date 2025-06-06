@@ -54,7 +54,13 @@ class ResNeXtWeightedClassifier(nn.Module):
         self.pool = SoftmaxWeightedPool2d(channels=2048, height=7, width=7)
         
         # 3) Clasificador final
-        self.classifier = nn.Linear(2048, self.num_classes)
+        self.classifier = nn.Sequential(
+            nn.Linear(2048, 512),
+            nn.BatchNorm1d(512),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(512, num_classes)
+        )
 
         mean = [0.485, 0.456, 0.406]
         std  = [0.229, 0.224, 0.225]
@@ -93,7 +99,7 @@ class ResNeXtWeightedClassifier(nn.Module):
                           shuffle=shuffle, num_workers=num_workers)
 
  
-    def train_model(self, train_csv, val_csv, model_params=None, save_name=None):
+    def train_model(self, train_csv, val_csv, name_classes, model_params=None, save_name=None):
         # --- Extract config ---
         if model_params:
             epochs       = model_params.get("epochs", 50)
@@ -106,8 +112,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             epochs, batch_size, lr, weight_decay, patience = 50, 16, 1e-4, 1e-5, 10
 
         # --- Load data and map classes ---
-        train_df = pd.read_csv(train_csv)
-        self.classes = sorted(train_df['season'].unique())
+        self.classes = name_classes
         self.class2idx = {c: i for i, c in enumerate(self.classes)}
 
         train_loader = self.create_dataloader(train_csv, batch_size=batch_size, shuffle=True, train=True)
@@ -227,7 +232,7 @@ class ResNeXtWeightedClassifier(nn.Module):
                 weights_path (str): Ruta al archivo .pt o .pth del modelo.
                 class_names (list): Lista de clases (str) en orden correcto.
             """
-            self.classes = sorted(class_names)
+            self.classes = class_names
             self.class2idx = {c: i for i, c in enumerate(self.classes)}
             self.dropout = nn.Dropout(p=0.2)  # Reasegura que exista para .forward()
             self.load_state_dict(torch.load(weights_path, map_location=self.device))

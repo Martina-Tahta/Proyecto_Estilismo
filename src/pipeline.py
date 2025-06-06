@@ -57,12 +57,9 @@ def load_model(model_params):
 
     elif model_name == 'resNeXt_weighted_avg':
         if 'variant' in model_params:
-            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(variant=model_params['variant'], num_classes=classes)
+            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(variant=model_params['variant'], num_classes=len(names_classes))
         else:
-            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(num_classes=classes)
-    
-    elif model_name == 'mcf': #NO FUNCIONA TODAVIA
-        model = mcf_features_nn.ColorimetryClassifier()
+            model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(num_classes=len(names_classes))
 
     return model, names_classes
 
@@ -80,8 +77,8 @@ def run_model(model_params, data_params):
     """
     save_path = create_result_folder(model_params, data_params)
     
-    model, _ = load_model(model_params)
-    model.train_model(data_params['data_train_path'], data_params['data_val_path'], model_params=model_params, save_name=model_params['configs_file_name'])
+    model, names = load_model(model_params)
+    model.train_model(data_params['data_train_path'], data_params['data_val_path'], names, model_params=model_params, save_name=model_params['configs_file_name'])
     model.eval_model(data_params['data_val_path'], save_path)
     
     return save_path
