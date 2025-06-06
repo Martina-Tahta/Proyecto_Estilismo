@@ -1,2 +1,9 @@
 flux gan para generar imagenes con ya la season
 stylegan es una proyecion, no necesita entrenamiento, usa lora.
+
+cool_summer -> true_summer
+cool_winter -> true_winter
+warm_autumn -> true_autumn
+warm_spring -> true_spring
+deep_autumn -> dark_autumn
+deep_winter -> dark_winter
