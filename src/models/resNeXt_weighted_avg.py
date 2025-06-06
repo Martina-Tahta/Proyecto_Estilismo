@@ -12,6 +12,17 @@ import os
 from tqdm import tqdm
 import gc
 
+'''
+Este modelo es una versión modificada de ResNeXt que reemplaza la parte final original por una alternativa
+más flexible. Tomamos la ResNeXt preentrenada, le quitamos el average pooling y la capa final
+de clasificación. En su lugar, agregamos un tipo de pooling más inteligente, que en vez de promediar todos los
+píxeles por igual, aprende a asignar diferentes pesos a cada uno usando una softmax. De esta forma, el modelo
+puede darle más importancia a las regiones que considere más relevantes.
+
+Después del pooling, se agregan dos capas lineales: la primera incluye dropout y batch normalization para ayudar al
+modelo a generalizar mejor; la segunda es la que produce la predicción final. Lo que se entrena, en definitiva,
+son los pesos del pooling ponderado y los de estas capas lineales de clasificación.
+'''
 
 class CSVDataset(Dataset):
         def __init__(self, df, transform, class2idx):

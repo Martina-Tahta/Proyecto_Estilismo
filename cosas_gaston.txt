@@ -1,0 +1,2 @@
+flux gan para generar imagenes con ya la season
+stylegan es una proyecion, no necesita entrenamiento, usa lora.
