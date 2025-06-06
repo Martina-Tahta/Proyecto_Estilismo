@@ -250,7 +250,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             self.eval()
             print(f"Modelo cargado desde {weights_path}.")
 
-    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4, seasons_only: bool = False):
+    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4, seasons_only: bool = False, top3: bool = False):
         """
         Evalúa el modelo sobre un CSV de test (debe incluir columnas: image_path, season).
 
@@ -258,7 +258,8 @@ class ResNeXtWeightedClassifier(nn.Module):
             test_csv (str): Ruta al CSV.
             batch_size (int): Batch size.
             num_workers (int): Cantidad de workers del DataLoader.
-            aggregate (bool): Si es True, agrupa las 12 categorías en 4 estaciones (spring, summer, autumn, winter).
+            seasons_only (bool): Si es True, agrupa las 12 categorías en 4 estaciones (spring, summer, autumn, winter).
+            top3 (bool): Si es True, considera la predicción correcta si la etiqueta real está en el top 3 de probabilidades.
         """
         df = pd.read_csv(test_csv)
         # Construir mapping original de clases si no existe
@@ -281,8 +282,13 @@ class ResNeXtWeightedClassifier(nn.Module):
             for images, labels in tqdm(test_loader, desc="Testing", unit="batch"):
                 images = images.to(self.device)
                 labels = labels.to(self.device)
-                preds = self(images).argmax(dim=1)
-                all_preds.extend(preds.cpu().tolist())
+                outputs = self(images)
+                if top3:
+                    top3_preds = torch.topk(outputs, 3, dim=1).indices
+                    all_preds.extend(top3_preds.cpu().tolist())
+                else:
+                    preds = outputs.argmax(dim=1)
+                    all_preds.extend(preds.cpu().tolist())
                 all_labels.extend(labels.cpu().tolist())
 
         # Si no se agrupa, imprimir reporte con las 12 categorías originales
