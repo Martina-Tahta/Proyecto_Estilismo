@@ -11,6 +11,11 @@ from src.pipeline import run_model, test_model
 # python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --seasons_only 
 # python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --top3
 
+
+'''
+el argumento de top3 permite tomar una prediccion como correcta si la etiqueta verdadera 
+esta entre las 3 etiquetas con mayor probabilidad predicha por el modelo.
+'''
 def main(args):
     check_args = read_configs(args)
     
