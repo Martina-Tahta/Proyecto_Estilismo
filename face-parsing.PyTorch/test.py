@@ -80,35 +80,65 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
 
 
 
-def segment_faces_in_folder(input_dir, output_dir, checkpoint='79999_iter.pth'):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+def get_voc_palette(n_cls):
+    """
+    Generate a VOC-style palette for n_cls classes.
+    Returns a flat list of length n_cls*3.
+    """
+    palette = []
+    for i in range(n_cls):
+        lab = i
+        r = g = b = 0
+        for j in range(8):
+            r |= ((lab >> 0) & 1) << (7 - j)
+            g |= ((lab >> 1) & 1) << (7 - j)
+            b |= ((lab >> 2) & 1) << (7 - j)
+            lab >>= 3
+        palette.extend([r, g, b])
+    return palette
 
-    n_classes = 19
-    net = BiSeNet(n_classes=n_classes)
-    net.cuda()
+def segment_faces_in_folder(input_dir, output_dir,
+                            checkpoint='79999_iter.pth',
+                            img_size=(512,512),
+                            n_classes=19):
+    # create output folder if needed
+    os.makedirs(output_dir, exist_ok=True)
+
+    # load network
+    net = BiSeNet(n_classes=n_classes).cuda()
     net.load_state_dict(torch.load(checkpoint))
     net.eval()
 
+    # preprocessing
     to_tensor = transforms.Compose([
+        transforms.Resize(img_size, Image.BILINEAR),
         transforms.ToTensor(),
-        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+        transforms.Normalize((0.485, 0.456, 0.406),
+                             (0.229, 0.224, 0.225)),
     ])
 
+    # build palette once
+    palette = get_voc_palette(n_classes)
+
     with torch.no_grad():
-        for image_name in os.listdir(input_dir):
-            image_path = osp.join(input_dir, image_name)
-            img = Image.open(image_path)
-            image = img.resize((512, 512), Image.BILINEAR)
-            img_tensor = to_tensor(image)
-            img_tensor = torch.unsqueeze(img_tensor, 0).cuda()
-            out = net(img_tensor)[0]
+        for fname in os.listdir(input_dir):
+            in_path  = osp.join(input_dir, fname)
+            out_path = osp.join(output_dir, fname)
+
+            # load & preprocess
+            img = Image.open(in_path).convert('RGB')
+            tensor = to_tensor(img).unsqueeze(0).cuda()
+
+            # forward & get class‐ids
+            out = net(tensor)
+            if isinstance(out, (list, tuple)):
+                out = out[-1]            # final head
             parsing = out.squeeze(0).cpu().numpy().argmax(0)
-            # Save the parsing result as an image
-            output_path = osp.join(output_dir, image_name)
-            Image.fromarray(parsing.astype('uint8')).save(output_path)
 
-
+            # create a paletted image and save
+            mask = Image.fromarray(parsing.astype(np.uint8), mode='P')
+            mask.putpalette(palette)
+            mask.save(out_path)
 
 if __name__ == "__main__":
     evaluate(dspth='/home/zll/data/CelebAMask-HQ/test-img', cp='79999_iter.pth')
