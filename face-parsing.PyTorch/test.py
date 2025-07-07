@@ -80,7 +80,33 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
 
 
 
+def segment_faces_in_folder(input_dir, output_dir, checkpoint='79999_iter.pth'):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
+    n_classes = 19
+    net = BiSeNet(n_classes=n_classes)
+    net.cuda()
+    net.load_state_dict(torch.load(checkpoint))
+    net.eval()
+
+    to_tensor = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
+    ])
+
+    with torch.no_grad():
+        for image_name in os.listdir(input_dir):
+            image_path = osp.join(input_dir, image_name)
+            img = Image.open(image_path)
+            image = img.resize((512, 512), Image.BILINEAR)
+            img_tensor = to_tensor(image)
+            img_tensor = torch.unsqueeze(img_tensor, 0).cuda()
+            out = net(img_tensor)[0]
+            parsing = out.squeeze(0).cpu().numpy().argmax(0)
+            # Save the parsing result as an image
+            output_path = osp.join(output_dir, image_name)
+            Image.fromarray(parsing.astype('uint8')).save(output_path)
 
 
 
