@@ -78,30 +78,16 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
 
             vis_parsing_maps(image, parsing, stride=1, save_im=True, save_path=osp.join(respth, image_path))
 
-
-
-def get_voc_palette(n_cls):
-    """
-    Generate a VOC-style palette for n_cls classes.
-    Returns a flat list of length n_cls*3.
-    """
-    palette = []
-    for i in range(n_cls):
-        lab = i
-        r = g = b = 0
-        for j in range(8):
-            r |= ((lab >> 0) & 1) << (7 - j)
-            g |= ((lab >> 1) & 1) << (7 - j)
-            b |= ((lab >> 2) & 1) << (7 - j)
-            lab >>= 3
-        palette.extend([r, g, b])
-    return palette
-
-def segment_faces_in_folder(input_dir, output_dir,
+def segment_faces_in_folder(input_dir,
+                            output_dir,
                             checkpoint='79999_iter.pth',
-                            img_size=(512,512),
-                            n_classes=19):
-    # create output folder if needed
+                            img_size=(512, 512),
+                            n_classes=19,
+                            face_classes=tuple(range(1, 10))):
+    """
+    Runs BiSeNet on every image in input_dir, then keeps only the face
+    (class IDs 1–9) and saves an RGB image with a black background.
+    """
     os.makedirs(output_dir, exist_ok=True)
 
     # load network
@@ -109,36 +95,48 @@ def segment_faces_in_folder(input_dir, output_dir,
     net.load_state_dict(torch.load(checkpoint))
     net.eval()
 
-    # preprocessing
-    to_tensor = transforms.Compose([
+    # preprocessing: resize→tensor→normalize
+    preprocess = transforms.Compose([
         transforms.Resize(img_size, Image.BILINEAR),
         transforms.ToTensor(),
         transforms.Normalize((0.485, 0.456, 0.406),
                              (0.229, 0.224, 0.225)),
     ])
 
-    # build palette once
-    palette = get_voc_palette(n_classes)
-
     with torch.no_grad():
         for fname in os.listdir(input_dir):
-            in_path  = osp.join(input_dir, fname)
+            in_path = osp.join(input_dir, fname)
             out_path = osp.join(output_dir, fname)
 
-            # load & preprocess
-            img = Image.open(in_path).convert('RGB')
-            tensor = to_tensor(img).unsqueeze(0).cuda()
+            # load original
+            orig = Image.open(in_path).convert('RGB')
+            orig_w, orig_h = orig.size
 
-            # forward & get class‐ids
+            # prepare network input
+            resized = orig.resize(img_size, Image.BILINEAR)
+            tensor = preprocess(resized).unsqueeze(0).cuda()
+
+            # forward pass
             out = net(tensor)
+            # if multiple heads, take the last
             if isinstance(out, (list, tuple)):
-                out = out[-1]            # final head
-            parsing = out.squeeze(0).cpu().numpy().argmax(0)
+                out = out[-1]
+            parsing = out.squeeze(0).cpu().numpy().argmax(0)  # H×W class IDs
 
-            # create a paletted image and save
-            mask = Image.fromarray(parsing.astype(np.uint8), mode='P')
-            mask.putpalette(palette)
-            mask.save(out_path)
+            # build binary face mask (512×512)
+            mask512 = np.isin(parsing, face_classes).astype(np.uint8) * 255
+            mask_img = Image.fromarray(mask512, mode='L')
+
+            # resize mask back to original size
+            mask_full = mask_img.resize((orig_w, orig_h), Image.NEAREST)
+            mask_np = np.array(mask_full)[:, :, None]  # H×W×1
+
+            # apply mask: multiply each channel by (mask>0)
+            orig_np = np.array(orig)
+            face_np = (orig_np * (mask_np > 0)).astype(np.uint8)
+
+            # save result
+            Image.fromarray(face_np).save(out_path)
 
 if __name__ == "__main__":
     evaluate(dspth='/home/zll/data/CelebAMask-HQ/test-img', cp='79999_iter.pth')
