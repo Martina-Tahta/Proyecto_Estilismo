@@ -18,6 +18,7 @@ model_params = {
     'early_stopping_patience': 15,
     'dropout': 0.6,
     'verbose': True,
+    'classifier': 1
 }
 
 DATASET = 'SeasonsModel'

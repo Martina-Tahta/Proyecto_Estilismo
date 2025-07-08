@@ -19,7 +19,8 @@ model_params = {
     'early_stopping_patience': 5,
     'dropout': 0.5,
     'verbose': True,
-    'classes_csv': CLASSES_CSV
+    'classes_csv': CLASSES_CSV,
+    'classifier': 1
 }
 
 DATASET = 'DeepArmocromia'
