@@ -1,0 +1,1123 @@
+image_path,season
+data/raw/DeepArmocromia/train/summer/soft/images-17_2.png,summer
+data/raw/DeepArmocromia/test/winter/bright/11591.png,winter
+data/raw/DeepArmocromia/val/autumn/soft/18930.png,autumn
+data/raw/DeepArmocromia/train/summer/light/Kirsten Dunst LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/test/winter/deep/25856.png,winter
+data/raw/DeepArmocromia/train/spring/bright/23604.png,spring
+data/raw/DeepArmocromia/val/winter/bright/liv tyler2.png,winter
+data/raw/DeepArmocromia/test/winter/bright/20875.png,winter
+data/raw/DeepArmocromia/test/spring/light/8691.png,spring
+data/raw/DeepArmocromia/train/spring/bright/bradley cooper9.png,spring
+data/raw/DeepArmocromia/train/winter/deep/27955.png,winter
+data/raw/DeepArmocromia/train/spring/bright/aleza chang-primavera bright.png,spring
+data/raw/DeepArmocromia/train/summer/cool/16827.png,summer
+data/raw/DeepArmocromia/train/spring/light/Scarlett Johansson4.png,spring
+data/raw/DeepArmocromia/train/summer/light/19738.png,summer
+data/raw/DeepArmocromia/train/summer/cool/26418.png,summer
+data/raw/DeepArmocromia/train/spring/bright/clio zammatteo6.png,spring
+data/raw/DeepArmocromia/train/summer/soft/images-27_2.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-166.png,summer
+data/raw/DeepArmocromia/train/summer/cool/16253.png,summer
+data/raw/DeepArmocromia/test/summer/cool/15218.png,summer
+data/raw/DeepArmocromia/train/spring/light/9883.png,spring
+data/raw/DeepArmocromia/test/winter/bright/15933.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Adele3.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_97.jpg,autumn
+data/raw/DeepArmocromia/train/winter/bright/giulia valentina-inverno bright.png,winter
+data/raw/DeepArmocromia/train/winter/deep/29069.png,winter
+data/segmented_dataset/SeasonsModel/dark_winter_8.jpg,winter
+data/raw/DeepArmocromia/test/winter/cool/15526.png,winter
+data/raw/DeepArmocromia/test/autumn/soft/8472.png,autumn
+data/raw/DeepArmocromia/test/spring/light/3244.png,spring
+data/raw/DeepArmocromia/train/winter/cool/29505.png,winter
+data/raw/DeepArmocromia/train/summer/cool/24639.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/emma watson 6.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/26425.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/7484.png,autumn
+data/raw/DeepArmocromia/val/winter/deep/19250.png,winter
+data/raw/DeepArmocromia/train/spring/light/6814.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_2.jpg,autumn
+data/raw/DeepArmocromia/train/winter/deep/24773.png,winter
+data/raw/DeepArmocromia/test/winter/deep/25420.png,winter
+data/raw/DeepArmocromia/val/summer/light/images-49_1.png,summer
+data/raw/DeepArmocromia/train/summer/cool/images-92_0.png,summer
+data/segmented_dataset/SeasonsModel/true_autumn_65.jpg,autumn
+"data/raw/DeepArmocromia/train/autumn/soft/Robert Pattinson,8.png",autumn
+data/raw/DeepArmocromia/val/summer/light/5185.png,summer
+data/raw/DeepArmocromia/train/winter/deep/lizzo 4.png,winter
+data/raw/DeepArmocromia/train/spring/light/cameron diaz-primavera light.png,spring
+data/raw/DeepArmocromia/train/winter/deep/6164.png,winter
+data/raw/DeepArmocromia/train/winter/cool/14628.png,winter
+data/raw/DeepArmocromia/train/spring/light/3922.png,spring
+data/segmented_dataset/SeasonsModel/soft_summer_53.jpg,summer
+data/raw/DeepArmocromia/train/winter/deep/KEANU REEVES DEEP WINTER.png,winter
+data/segmented_dataset/SeasonsModel/bright_winter_10.jpg,winter
+data/raw/DeepArmocromia/train/spring/light/5618.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/6663.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/17717.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/23139.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/alexandria ocasio cortez 2.png,winter
+data/raw/DeepArmocromia/train/spring/warm/1362.png,spring
+data/raw/DeepArmocromia/test/autumn/soft/26514.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_37.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/deep/27758.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/ana de armas 1.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/766.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_96.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/soft/calista flockhart 2.png,autumn
+data/raw/DeepArmocromia/test/winter/bright/1370.png,winter
+data/raw/DeepArmocromia/train/spring/warm/Cristiana Capotondi1.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/Eliana Miglio 6.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/images-36_0.png,summer
+data/raw/DeepArmocromia/train/winter/deep/monica-bellucci 2.png,winter
+data/raw/DeepArmocromia/train/summer/light/221.png,summer
+data/raw/DeepArmocromia/val/summer/soft/12924.png,summer
+data/raw/DeepArmocromia/val/autumn/deep/6826.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/kim kardashian 7.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-15_1.png,summer
+data/segmented_dataset/SeasonsModel/light_summer_9.jpg,summer
+data/raw/DeepArmocromia/train/spring/warm/5483.png,spring
+data/raw/DeepArmocromia/train/winter/bright/paola turani25.png,winter
+data/raw/DeepArmocromia/val/autumn/deep/8862.png,autumn
+data/raw/DeepArmocromia/val/autumn/warm/9572.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/26334.png,summer
+data/raw/DeepArmocromia/val/winter/cool/anne hathaway21.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/evan-peters 1.png,autumn
+data/segmented_dataset/SeasonsModel/light_spring_2.jpg,spring
+data/raw/DeepArmocromia/train/autumn/deep/19908.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/Vanessa-Hudgens 1.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/27253.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/debra-messing 8.png,autumn
+data/segmented_dataset/SeasonsModel/light_spring_10.jpg,spring
+data/raw/DeepArmocromia/train/winter/cool/gwen stefani2.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Tyra Banks 6.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-41_2.png,summer
+data/raw/DeepArmocromia/train/summer/soft/4318.png,summer
+data/raw/DeepArmocromia/train/summer/light/21301.png,summer
+data/raw/DeepArmocromia/val/winter/deep/kendall jenner 2.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-51_2.png,summer
+data/raw/DeepArmocromia/test/winter/deep/28410.png,winter
+data/raw/DeepArmocromia/train/winter/cool/5869.png,winter
+data/raw/DeepArmocromia/train/winter/deep/levante 4.png,winter
+data/raw/DeepArmocromia/train/summer/light/Lili-Reinhart LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/test/spring/warm/2922.png,spring
+data/raw/DeepArmocromia/train/winter/cool/14275.png,winter
+data/raw/DeepArmocromia/train/spring/bright/26779.png,spring
+data/raw/DeepArmocromia/test/winter/cool/13513.png,winter
+data/raw/DeepArmocromia/train/spring/light/doutzen kroes15.png,spring
+data/raw/DeepArmocromia/train/spring/warm/jessica chastain15.png,spring
+data/raw/DeepArmocromia/val/spring/bright/Adriana Lima.png,spring
+data/raw/DeepArmocromia/train/spring/warm/6698.png,spring
+data/raw/DeepArmocromia/train/summer/light/24854.png,summer
+data/raw/DeepArmocromia/val/summer/soft/images-157.png,summer
+data/segmented_dataset/SeasonsModel/dark_autumn_48.jpg,autumn
+data/raw/DeepArmocromia/val/winter/deep/maria grazia cucinotta 1.png,winter
+data/raw/DeepArmocromia/train/spring/warm/emma corrin13.png,spring
+data/raw/DeepArmocromia/test/summer/light/11874.png,summer
+data/raw/DeepArmocromia/train/spring/light/Scarlett Johansson1.png,spring
+data/raw/DeepArmocromia/test/spring/bright/18310.png,spring
+data/raw/DeepArmocromia/val/spring/light/17957.png,spring
+data/raw/DeepArmocromia/train/winter/bright/21679.png,winter
+data/raw/DeepArmocromia/train/winter/deep/kylie genner 4.png,winter
+data/raw/DeepArmocromia/train/winter/cool/19090.png,winter
+data/raw/DeepArmocromia/val/winter/bright/28181.png,winter
+data/raw/DeepArmocromia/val/summer/light/26116.png,summer
+data/raw/DeepArmocromia/train/winter/cool/24431.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_52.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/deep/cindy crawford 3.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/24833.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-20_2.png,summer
+data/raw/DeepArmocromia/test/winter/cool/16160.png,winter
+data/raw/DeepArmocromia/train/winter/deep/sabrina-ferilli- 1.png,winter
+data/raw/DeepArmocromia/train/winter/deep/12132.png,winter
+data/segmented_dataset/SeasonsModel/bright_winter_4.jpg,winter
+data/raw/DeepArmocromia/train/summer/cool/images-57_0.png,summer
+data/raw/DeepArmocromia/test/autumn/warm/28955.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Natalie Portman1.png,winter
+data/raw/DeepArmocromia/val/spring/warm/Damian Lewis.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/serena rossi  4.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/6709.png,autumn
+data/raw/DeepArmocromia/train/spring/light/19139.png,spring
+data/raw/DeepArmocromia/train/spring/light/cate blanchett13.png,spring
+data/raw/DeepArmocromia/test/summer/soft/4679.png,summer
+data/raw/DeepArmocromia/test/spring/warm/9294.png,spring
+data/raw/DeepArmocromia/test/winter/bright/246.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_4.jpg,autumn
+data/raw/DeepArmocromia/train/summer/light/28411.png,summer
+data/raw/DeepArmocromia/train/summer/light/Eva Herzigova 3.png,summer
+data/raw/DeepArmocromia/test/winter/bright/22146.png,winter
+data/raw/DeepArmocromia/train/winter/cool/Anne Hathaway6.png,winter
+data/raw/DeepArmocromia/test/summer/light/3056.png,summer
+data/raw/DeepArmocromia/test/spring/warm/9555.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/2520.png,autumn
+data/segmented_dataset/SeasonsModel/soft_summer_1.jpg,summer
+data/raw/DeepArmocromia/train/winter/deep/lupita-nyong1.png,winter
+data/raw/DeepArmocromia/train/winter/bright/24457.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-49_2.png,summer
+data/segmented_dataset/SeasonsModel/bright_winter_36.jpg,winter
+data/raw/DeepArmocromia/train/winter/deep/6019.png,winter
+data/raw/DeepArmocromia/val/winter/deep/17718.png,winter
+data/raw/DeepArmocromia/train/winter/deep/penelope cruz 1_1.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_73.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/Emma Stone 3.png,spring
+data/raw/DeepArmocromia/val/winter/deep/FINN WOLFHARD DEEP WINTER.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/serena rossi  5.png,autumn
+data/segmented_dataset/SeasonsModel/true_autumn_22.jpg,autumn
+data/segmented_dataset/SeasonsModel/true_summer_17.jpg,summer
+data/segmented_dataset/SeasonsModel/soft_summer_37.jpg,summer
+data/raw/DeepArmocromia/test/winter/cool/29211.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/jessica alba 9.png,autumn
+data/segmented_dataset/SeasonsModel/true_winter_35.jpg,winter
+data/raw/DeepArmocromia/train/summer/cool/images-80_0.png,summer
+data/raw/DeepArmocromia/train/winter/bright/eva green-inverno bright.png,winter
+data/raw/DeepArmocromia/train/winter/deep/29839.png,winter
+data/raw/DeepArmocromia/val/summer/cool/17075.png,summer
+data/raw/DeepArmocromia/train/spring/bright/24398.png,spring
+data/raw/DeepArmocromia/test/winter/deep/10425.png,winter
+data/raw/DeepArmocromia/train/winter/deep/22593.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_13.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/LIV TYLER 1.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/19812.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/belen rodriguez  9.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/27945.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/natalie portman5.png,winter
+data/raw/DeepArmocromia/train/spring/warm/cristiana capotondi19.png,spring
+data/raw/DeepArmocromia/train/summer/light/19657.png,summer
+data/raw/DeepArmocromia/val/spring/warm/Miriam Leone 2.png,spring
+data/raw/DeepArmocromia/train/summer/cool/Harry Styles 1.png,summer
+data/raw/DeepArmocromia/test/winter/cool/20978.png,winter
+data/raw/DeepArmocromia/val/summer/soft/images-175.png,summer
+data/raw/DeepArmocromia/train/spring/light/21307.png,spring
+data/raw/DeepArmocromia/test/summer/soft/11482.png,summer
+data/raw/DeepArmocromia/train/winter/bright/liv tyler3.png,winter
+data/raw/DeepArmocromia/val/autumn/warm/1430.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/8230.png,autumn
+data/raw/DeepArmocromia/train/summer/light/Elle_Fanning-LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/train/winter/bright/20412.png,winter
+data/raw/DeepArmocromia/train/spring/warm/cristiana capotondi17.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_54.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/deep/14916.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_45.jpg,winter
+data/raw/DeepArmocromia/train/autumn/deep/6239.png,autumn
+data/raw/DeepArmocromia/val/summer/cool/8261.png,summer
+data/raw/DeepArmocromia/test/winter/deep/9102.png,winter
+data/raw/DeepArmocromia/test/spring/warm/27206.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_32.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/deep/elisabetta canalis 6.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/lizzo 7.png,winter
+data/segmented_dataset/SeasonsModel/dark_winter_72.jpg,winter
+data/raw/DeepArmocromia/train/spring/light/18083.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/29465.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/lizzo 2.png,winter
+data/raw/DeepArmocromia/test/spring/warm/22863.png,spring
+data/raw/DeepArmocromia/train/winter/deep/23010.png,winter
+data/raw/DeepArmocromia/train/winter/cool/14530.png,winter
+data/raw/DeepArmocromia/train/summer/cool/images-19_0.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/14374.png,autumn
+data/raw/DeepArmocromia/test/autumn/soft/17876.png,autumn
+data/raw/DeepArmocromia/train/summer/light/images-115_0.png,summer
+data/raw/DeepArmocromia/val/summer/light/6979.png,summer
+data/raw/DeepArmocromia/train/spring/bright/9630.png,spring
+data/raw/DeepArmocromia/train/winter/bright/jenniefer connelly-inverno bright.png,winter
+data/raw/DeepArmocromia/train/summer/light/Reese Witherspoon 2.png,summer
+data/segmented_dataset/SeasonsModel/dark_autumn_42.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/serena rossi 11.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/12561.png,winter
+data/raw/DeepArmocromia/train/winter/bright/jennifer connelly 1.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/Annalisa 3_0.png,autumn
+data/raw/DeepArmocromia/val/winter/bright/paola turani58.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Ashley Olsen 3_0.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/12382.png,winter
+data/raw/DeepArmocromia/test/spring/bright/28132.png,spring
+data/raw/DeepArmocromia/train/summer/soft/29719.png,summer
+data/raw/DeepArmocromia/train/spring/bright/alexa chung6.png,spring
+data/raw/DeepArmocromia/train/summer/light/images-106_0.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-55_2.png,summer
+data/raw/DeepArmocromia/train/winter/bright/paola turani24.png,winter
+data/raw/DeepArmocromia/train/spring/warm/Miriam Leone9.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_1.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/9375.png,summer
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie17.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/13531.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/5689.png,winter
+data/segmented_dataset/SeasonsModel/soft_summer_50.jpg,summer
+data/raw/DeepArmocromia/train/summer/soft/images-158.png,summer
+data/raw/DeepArmocromia/train/spring/bright/Adriana Lima 2.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/12386.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-156.png,summer
+data/raw/DeepArmocromia/val/spring/warm/6288.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/4608.png,autumn
+data/raw/DeepArmocromia/test/autumn/deep/21655.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-34_2.png,summer
+data/raw/DeepArmocromia/train/winter/deep/23606.png,winter
+data/raw/DeepArmocromia/test/winter/bright/19418.png,winter
+data/raw/DeepArmocromia/train/spring/light/15565.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/Annalisa 1.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_42.jpg,winter
+data/raw/DeepArmocromia/train/winter/cool/7724.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/13700.png,autumn
+data/raw/DeepArmocromia/val/spring/bright/21136.png,spring
+data/raw/DeepArmocromia/train/winter/deep/5484.png,winter
+data/raw/DeepArmocromia/train/winter/cool/Anna Valle3.png,winter
+data/raw/DeepArmocromia/train/spring/light/doutzen kroes.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/Veronica-Ferraro 3.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Audrey Hepburn.png,winter
+data/raw/DeepArmocromia/train/summer/light/5130.png,summer
+data/segmented_dataset/SeasonsModel/light_summer_41.jpg,summer
+data/raw/DeepArmocromia/test/autumn/deep/9223.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/8158.png,summer
+data/raw/DeepArmocromia/val/summer/cool/18586.png,summer
+data/raw/DeepArmocromia/test/spring/warm/20497.png,spring
+data/raw/DeepArmocromia/val/summer/soft/images-161.png,summer
+data/raw/DeepArmocromia/train/summer/cool/2144.png,summer
+data/segmented_dataset/SeasonsModel/dark_autumn_51.jpg,autumn
+data/raw/DeepArmocromia/val/autumn/deep/2957.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Maria De Filippi1.png,winter
+data/raw/DeepArmocromia/test/winter/bright/9034.png,winter
+data/raw/DeepArmocromia/test/spring/warm/14242.png,spring
+data/raw/DeepArmocromia/train/spring/light/gillian anderson11.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/Cindy Crawford1.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/18449.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/16579.png,spring
+data/segmented_dataset/SeasonsModel/dark_winter_10.jpg,winter
+data/raw/DeepArmocromia/train/summer/light/18253.png,summer
+data/raw/DeepArmocromia/train/spring/warm/22618.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/18566.png,autumn
+data/raw/DeepArmocromia/test/autumn/deep/19284.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/8755.png,spring
+data/raw/DeepArmocromia/test/spring/bright/25161.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/25289.png,autumn
+data/segmented_dataset/SeasonsModel/soft_autumn_73.png,autumn
+data/raw/DeepArmocromia/train/summer/light/images-99_0.png,summer
+data/raw/DeepArmocromia/val/spring/light/valentina ferragni14.png,spring
+data/raw/DeepArmocromia/train/winter/cool/13215.png,winter
+data/raw/DeepArmocromia/test/autumn/deep/14618.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/6478.png,winter
+data/raw/DeepArmocromia/train/spring/warm/23974.png,spring
+data/raw/DeepArmocromia/val/winter/bright/21128.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Drew Barrymore 3_0.png,autumn
+data/raw/DeepArmocromia/test/summer/light/8383.png,summer
+data/raw/DeepArmocromia/train/winter/cool/natalie portman8.png,winter
+data/raw/DeepArmocromia/val/autumn/deep/3462.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/16398.png,winter
+data/raw/DeepArmocromia/test/spring/light/6475.png,spring
+data/raw/DeepArmocromia/train/winter/cool/lily collins16.png,winter
+data/raw/DeepArmocromia/test/autumn/warm/9293.png,autumn
+data/raw/DeepArmocromia/train/summer/light/14176.png,summer
+data/raw/DeepArmocromia/train/winter/cool/natalie portman12.png,winter
+data/raw/DeepArmocromia/train/summer/light/1005.png,summer
+data/raw/DeepArmocromia/val/winter/deep/MONICA BELLUCCI 1.png,winter
+data/raw/DeepArmocromia/val/spring/bright/Charlotte Casiraghi6.png,spring
+data/raw/DeepArmocromia/val/winter/bright/heny golding-inverno bright.png,winter
+data/raw/DeepArmocromia/test/autumn/deep/24982.png,autumn
+data/raw/DeepArmocromia/train/spring/light/Scarlett Johansson 3.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/15685.png,autumn
+data/raw/DeepArmocromia/val/spring/light/16268.png,spring
+data/raw/DeepArmocromia/val/spring/warm/cristiana capotondi18.png,spring
+data/raw/DeepArmocromia/val/summer/soft/22996.png,summer
+data/raw/DeepArmocromia/val/winter/deep/27897.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/Vanessa Incontrada 3.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/22457.png,winter
+data/segmented_dataset/SeasonsModel/light_spring_15.jpg,spring
+data/raw/DeepArmocromia/train/winter/deep/demi moore 5.png,winter
+data/raw/DeepArmocromia/train/winter/deep/15761.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-104_1.png,summer
+data/segmented_dataset/SeasonsModel/true_winter_5.jpg,winter
+data/raw/DeepArmocromia/train/summer/light/18386.png,summer
+data/raw/DeepArmocromia/val/autumn/deep/4505.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/12559.png,summer
+data/raw/DeepArmocromia/val/spring/light/28068.png,spring
+data/raw/DeepArmocromia/test/summer/cool/8818.png,summer
+data/raw/DeepArmocromia/train/winter/bright/24556.png,winter
+data/raw/DeepArmocromia/val/spring/warm/20329.png,spring
+data/raw/DeepArmocromia/val/summer/soft/20720.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-115_1.png,summer
+data/raw/DeepArmocromia/train/summer/cool/images-89_0.png,summer
+data/raw/DeepArmocromia/train/winter/bright/17343.png,winter
+data/segmented_dataset/SeasonsModel/soft_summer_12.png,summer
+data/segmented_dataset/SeasonsModel/bright_spring_3.jpg,spring
+data/raw/DeepArmocromia/val/autumn/deep/Mila Kunis.png,autumn
+data/raw/DeepArmocromia/test/winter/cool/8283.png,winter
+data/segmented_dataset/SeasonsModel/true_autumn_40.jpg,autumn
+data/raw/DeepArmocromia/train/summer/cool/11781.png,summer
+data/raw/DeepArmocromia/val/autumn/deep/lorena cesarini 12.png,autumn
+data/segmented_dataset/SeasonsModel/soft_summer_41.jpg,summer
+data/raw/DeepArmocromia/train/spring/light/Margot Robbie.png,spring
+data/raw/DeepArmocromia/val/winter/deep/16053.png,winter
+data/raw/DeepArmocromia/train/spring/bright/6161.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/shay mitchell 8.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/14809.png,winter
+data/raw/DeepArmocromia/train/spring/bright/22420.png,spring
+data/raw/DeepArmocromia/test/summer/light/23602.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/28886.png,autumn
+data/segmented_dataset/SeasonsModel/soft_autumn_38.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/deep/zendaya 5.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/Rihanna SOFT SUMMER.png,summer
+data/raw/DeepArmocromia/train/winter/cool/natalie portman13.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-2_1.png,summer
+data/raw/DeepArmocromia/val/autumn/warm/Evan peters 3_1.png,autumn
+data/raw/DeepArmocromia/val/winter/deep/15872.png,winter
+data/raw/DeepArmocromia/train/spring/bright/1544.png,spring
+data/raw/DeepArmocromia/train/spring/light/22334.png,spring
+data/raw/DeepArmocromia/test/spring/warm/7270.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/Gabrielle Caunesil AUTUNNO WARM.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/14950.png,spring
+data/raw/DeepArmocromia/test/spring/warm/14117.png,spring
+data/raw/DeepArmocromia/test/summer/light/17646.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/debra messing 3.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/Vittoria Puccini1.png,spring
+data/raw/DeepArmocromia/train/spring/warm/19484.png,spring
+data/raw/DeepArmocromia/test/winter/deep/27039.png,winter
+data/raw/DeepArmocromia/test/winter/bright/5401.png,winter
+data/raw/DeepArmocromia/val/winter/cool/anne hathaway19.png,winter
+data/raw/DeepArmocromia/test/winter/deep/26663.png,winter
+data/segmented_dataset/SeasonsModel/bright_winter_31.jpg,winter
+data/raw/DeepArmocromia/train/autumn/soft/11107.png,autumn
+data/raw/DeepArmocromia/val/autumn/deep/7774.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/fotini peluso 2.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/18194.png,autumn
+data/raw/DeepArmocromia/val/autumn/deep/24859.png,autumn
+data/segmented_dataset/SeasonsModel/bright_spring_22.jpg,spring
+data/raw/DeepArmocromia/val/winter/cool/Lily Collins WINTER COOL.png,winter
+data/raw/DeepArmocromia/train/summer/cool/27383.png,summer
+data/raw/DeepArmocromia/train/summer/light/images-55_1.png,summer
+data/raw/DeepArmocromia/val/spring/bright/alexa chung15.png,spring
+data/raw/DeepArmocromia/train/summer/light/images-71_1.png,summer
+data/segmented_dataset/SeasonsModel/bright_spring_4.jpg,spring
+data/raw/DeepArmocromia/train/winter/cool/8663.png,winter
+data/raw/DeepArmocromia/train/summer/soft/7567.png,summer
+data/raw/DeepArmocromia/test/summer/soft/21475.png,summer
+data/raw/DeepArmocromia/train/winter/cool/11708.png,winter
+data/raw/DeepArmocromia/train/winter/cool/Irene Colzi WINTER COOL.png,winter
+data/raw/DeepArmocromia/val/spring/warm/10329.png,spring
+data/raw/DeepArmocromia/val/summer/soft/images-105_1.png,summer
+data/segmented_dataset/SeasonsModel/light_spring_32.jpg,spring
+data/segmented_dataset/SeasonsModel/soft_autumn_75.jpg,autumn
+data/raw/DeepArmocromia/train/winter/cool/5711.png,winter
+data/raw/DeepArmocromia/test/spring/bright/21486.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/16444.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_103.jpg,autumn
+data/raw/DeepArmocromia/train/winter/deep/9699.png,winter
+data/raw/DeepArmocromia/train/summer/soft/18165.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/16972.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/19467.png,winter
+data/raw/DeepArmocromia/test/winter/deep/27239.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-57_1.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/gabrielle caunesil 4.png,autumn
+data/raw/DeepArmocromia/val/spring/light/gillian anderson21.png,spring
+data/raw/DeepArmocromia/train/spring/bright/clio zammatteo1.png,spring
+data/raw/DeepArmocromia/test/summer/light/29580.png,summer
+data/raw/DeepArmocromia/test/autumn/deep/10962.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-179.png,summer
+data/raw/DeepArmocromia/test/winter/cool/718.png,winter
+data/raw/DeepArmocromia/test/summer/soft/8558.png,summer
+data/raw/DeepArmocromia/train/spring/bright/575.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/cindy crawford 4.png,autumn
+data/segmented_dataset/SeasonsModel/true_autumn_26.jpg,autumn
+data/raw/DeepArmocromia/train/winter/bright/9774.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_43.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/26143.png,autumn
+data/raw/DeepArmocromia/test/winter/cool/27182.png,winter
+data/raw/DeepArmocromia/train/spring/bright/24602.png,spring
+data/raw/DeepArmocromia/test/spring/bright/3829.png,spring
+data/raw/DeepArmocromia/test/autumn/soft/29879.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/jessica chastain13.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/kirby griffin 1.png,autumn
+data/segmented_dataset/SeasonsModel/true_autumn_8.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/jessica chastain11.png,spring
+data/raw/DeepArmocromia/test/autumn/warm/6892.png,autumn
+data/segmented_dataset/SeasonsModel/true_winter_20.jpg,winter
+data/raw/DeepArmocromia/test/autumn/soft/9063.png,autumn
+data/raw/DeepArmocromia/val/summer/cool/images-52_0.png,summer
+data/raw/DeepArmocromia/test/spring/warm/8048.png,spring
+data/raw/DeepArmocromia/val/winter/bright/Megan Fox__0.png,winter
+"data/raw/DeepArmocromia/train/winter/deep/Monica_Bellucci,_DEEP WINTER.png",winter
+data/raw/DeepArmocromia/train/spring/warm/Miriam Leone1.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_70.jpg,autumn
+data/raw/DeepArmocromia/val/winter/cool/8139.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-39_1.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/jessica alba 8.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/mariagrazia cucinotta  4.png,winter
+data/raw/DeepArmocromia/train/summer/cool/7247.png,summer
+data/raw/DeepArmocromia/train/winter/cool/lily collins27.png,winter
+data/raw/DeepArmocromia/train/summer/cool/14179.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/20349.png,autumn
+data/segmented_dataset/SeasonsModel/true_winter_29.jpg,winter
+data/raw/DeepArmocromia/val/summer/light/images-96_0.png,summer
+data/raw/DeepArmocromia/train/winter/cool/lily collins25.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Eliana Miglio 1.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/609.png,winter
+data/segmented_dataset/SeasonsModel/true_autumn_39.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/15113.png,spring
+data/raw/DeepArmocromia/train/spring/bright/alexa chung28.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/15270.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/9696.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/21332.png,autumn
+data/segmented_dataset/SeasonsModel/bright_winter_20.jpg,winter
+data/raw/DeepArmocromia/train/winter/cool/natalie portman3.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-107_0.png,summer
+data/raw/DeepArmocromia/test/autumn/deep/22389.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/8704.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/17814.png,winter
+data/raw/DeepArmocromia/train/spring/warm/8796.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/13349.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/15243.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/15579.png,winter
+data/raw/DeepArmocromia/test/autumn/soft/13716.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/shay mitchell 10.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/22662.png,autumn
+data/raw/DeepArmocromia/val/autumn/soft/23547.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/8413.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/2489.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/20936.png,winter
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie25.png,spring
+data/raw/DeepArmocromia/train/summer/light/23731.png,summer
+data/raw/DeepArmocromia/train/winter/cool/Anne Hathaway2.png,winter
+data/raw/DeepArmocromia/test/summer/cool/2550.png,summer
+data/raw/DeepArmocromia/train/winter/deep/12366.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/15102.png,autumn
+data/raw/DeepArmocromia/test/spring/warm/3373.png,spring
+data/raw/DeepArmocromia/train/winter/cool/elisa1.png,winter
+data/segmented_dataset/SeasonsModel/true_spring_10.jpg,spring
+data/raw/DeepArmocromia/val/winter/deep/9582.png,winter
+data/segmented_dataset/SeasonsModel/true_spring_25.jpg,spring
+data/raw/DeepArmocromia/train/autumn/deep/1692.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/16833.png,winter
+data/segmented_dataset/SeasonsModel/bright_spring_30.jpg,spring
+data/raw/DeepArmocromia/test/winter/cool/20224.png,winter
+data/raw/DeepArmocromia/train/summer/light/images.png,summer
+data/raw/DeepArmocromia/train/winter/cool/natalie portman7.png,winter
+data/raw/DeepArmocromia/test/winter/cool/21625.png,winter
+data/raw/DeepArmocromia/val/summer/soft/images-4_2.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/21905.png,autumn
+data/raw/DeepArmocromia/test/autumn/deep/8843.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/6741.png,spring
+data/raw/DeepArmocromia/test/summer/soft/13512.png,summer
+data/raw/DeepArmocromia/train/winter/bright/19275.png,winter
+data/raw/DeepArmocromia/test/summer/soft/29055.png,summer
+data/segmented_dataset/SeasonsModel/true_spring_37.jpg,spring
+data/raw/DeepArmocromia/train/winter/deep/victoria beckham2.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/David Beckham 1_1.png,autumn
+data/raw/DeepArmocromia/test/summer/light/26386.png,summer
+data/raw/DeepArmocromia/val/spring/light/Ilary Blasi4.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/14207.png,autumn
+data/raw/DeepArmocromia/test/summer/soft/1045.png,summer
+data/raw/DeepArmocromia/test/summer/light/29503.png,summer
+data/segmented_dataset/SeasonsModel/soft_summer_8.jpg,summer
+data/raw/DeepArmocromia/val/summer/soft/29236.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/Beyonce AUTUNNO WARM.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/5537.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_24.jpg,autumn
+data/segmented_dataset/SeasonsModel/true_summer_12.jpg,summer
+data/raw/DeepArmocromia/train/winter/deep/25484.png,winter
+data/raw/DeepArmocromia/train/spring/light/16180.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/10072.png,autumn
+data/raw/DeepArmocromia/test/autumn/deep/28576.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_51.jpg,winter
+data/raw/DeepArmocromia/test/summer/cool/27047.png,summer
+data/raw/DeepArmocromia/train/winter/cool/lily collins22.png,winter
+data/raw/DeepArmocromia/train/winter/bright/25946.png,winter
+data/raw/DeepArmocromia/train/spring/warm/Nicole Kidman12.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/1548.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/559.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/3260.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/1885.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/64.png,summer
+data/raw/DeepArmocromia/train/spring/warm/Lindsay Lohan.png,spring
+"data/raw/DeepArmocromia/train/autumn/soft/Ryan Gosling,  4.png",autumn
+data/raw/DeepArmocromia/train/winter/cool/24217.png,winter
+data/raw/DeepArmocromia/train/spring/bright/bradley cooper1.png,spring
+data/raw/DeepArmocromia/val/spring/light/gillian anderson43.png,spring
+data/raw/DeepArmocromia/val/winter/deep/sandra bullock 3.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-128.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/22848.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/25262.png,spring
+data/raw/DeepArmocromia/val/winter/deep/9786.png,winter
+data/raw/DeepArmocromia/test/winter/cool/20138.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/5259.png,autumn
+data/raw/DeepArmocromia/val/spring/warm/14973.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/Jennifer garner 7.png,autumn
+data/raw/DeepArmocromia/test/autumn/soft/22979.png,autumn
+data/raw/DeepArmocromia/test/summer/soft/23638.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-129.png,summer
+data/raw/DeepArmocromia/test/spring/warm/18865.png,spring
+data/segmented_dataset/SeasonsModel/dark_winter_39.jpg,winter
+data/raw/DeepArmocromia/train/winter/deep/sandra bullock1.png,winter
+data/raw/DeepArmocromia/train/spring/light/Cara Delevigne 3.png,spring
+data/raw/DeepArmocromia/val/spring/light/13249.png,spring
+data/raw/DeepArmocromia/train/winter/cool/1908.png,winter
+data/raw/DeepArmocromia/train/spring/light/14569.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/cindy crawford 7.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/Matt-Bomer 2.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Gigi Hadid 2_0.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/paola turani43.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/beyonce 4.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-137.png,summer
+data/raw/DeepArmocromia/test/summer/cool/8466.png,summer
+data/raw/DeepArmocromia/train/winter/cool/11403.png,winter
+data/raw/DeepArmocromia/test/autumn/soft/22788.png,autumn
+data/raw/DeepArmocromia/val/winter/bright/5377.png,winter
+data/raw/DeepArmocromia/train/spring/light/29846.png,spring
+data/raw/DeepArmocromia/train/spring/light/valentina ferragni13.png,spring
+data/raw/DeepArmocromia/val/winter/deep/EVA LONGORIA 1_1.png,winter
+data/raw/DeepArmocromia/val/spring/light/18623.png,spring
+data/raw/DeepArmocromia/train/summer/light/chiara-ferragni ESTATE LIGHT .png,summer
+data/raw/DeepArmocromia/train/summer/light/images-37_1.png,summer
+data/raw/DeepArmocromia/train/spring/warm/19048.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/7322.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/alexa chung24.png,spring
+data/raw/DeepArmocromia/train/spring/warm/1515.png,spring
+data/raw/DeepArmocromia/train/winter/cool/lily collins21.png,winter
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie26.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/Alessandra Ambrosio 3.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/Drew Barrymore 5.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/ornella muti.png,spring
+data/raw/DeepArmocromia/val/autumn/deep/Halle berry 3.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/Gal Gadot 3.png,autumn
+data/raw/DeepArmocromia/test/spring/light/2551.png,spring
+data/raw/DeepArmocromia/val/winter/cool/lily collins3.png,winter
+data/raw/DeepArmocromia/train/spring/light/Chiara Ferragni6.png,spring
+data/raw/DeepArmocromia/val/autumn/warm/julia roberts 8.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/21553.png,spring
+data/raw/DeepArmocromia/train/spring/light/15848.png,spring
+data/raw/DeepArmocromia/test/summer/light/1088.png,summer
+data/raw/DeepArmocromia/train/winter/deep/audrey coyne 1.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/12887.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/Miranda Kerr 1.png,spring
+data/raw/DeepArmocromia/test/summer/light/28913.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/Evan peters 4.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/16445.png,spring
+data/raw/DeepArmocromia/train/summer/soft/19289.png,summer
+data/raw/DeepArmocromia/train/winter/deep/3190.png,winter
+data/raw/DeepArmocromia/test/spring/warm/13263.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_56.jpg,autumn
+data/raw/DeepArmocromia/train/summer/light/Elle Fanning 1.png,summer
+data/segmented_dataset/SeasonsModel/dark_winter_55.jpg,winter
+data/segmented_dataset/SeasonsModel/bright_spring_50.jpg,spring
+data/raw/DeepArmocromia/val/summer/cool/28547.png,summer
+data/raw/DeepArmocromia/train/winter/deep/16572.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-81_2.png,summer
+data/raw/DeepArmocromia/val/summer/light/24957.png,summer
+data/raw/DeepArmocromia/train/spring/bright/alexa chung7.png,spring
+data/raw/DeepArmocromia/train/winter/bright/24429.png,winter
+data/raw/DeepArmocromia/test/spring/warm/2156.png,spring
+data/raw/DeepArmocromia/train/spring/bright/Angelina Jolie6.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/20455.png,autumn
+data/raw/DeepArmocromia/val/spring/light/gillian anderson39.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/Julia Roberts 2_1.png,autumn
+data/raw/DeepArmocromia/val/spring/warm/10556.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/3314.png,autumn
+data/raw/DeepArmocromia/train/spring/light/gillian anderson-primavera light.png,spring
+data/raw/DeepArmocromia/val/winter/bright/26956.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-93_2.png,summer
+data/raw/DeepArmocromia/train/summer/cool/Bella Hadid 2.png,summer
+data/raw/DeepArmocromia/test/autumn/soft/25270.png,autumn
+data/raw/DeepArmocromia/val/winter/bright/29290.png,winter
+data/raw/DeepArmocromia/test/winter/deep/7276.png,winter
+data/raw/DeepArmocromia/train/spring/warm/claudia camillo2.png,spring
+data/raw/DeepArmocromia/test/winter/bright/6162.png,winter
+data/segmented_dataset/SeasonsModel/light_summer_56.jpg,summer
+data/raw/DeepArmocromia/train/winter/deep/836.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_18.png,autumn
+data/raw/DeepArmocromia/test/summer/cool/25354.png,summer
+data/raw/DeepArmocromia/train/spring/bright/Charlotte Casiraghi4.png,spring
+data/raw/DeepArmocromia/test/winter/cool/22727.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_52.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/19058.png,spring
+data/raw/DeepArmocromia/train/summer/light/21424.png,summer
+data/raw/DeepArmocromia/val/winter/cool/SHAKIRA 1.png,winter
+data/raw/DeepArmocromia/train/spring/light/19030.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/julia roberts 6.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/7792.png,winter
+data/segmented_dataset/SeasonsModel/bright_winter_8.jpg,winter
+data/raw/DeepArmocromia/train/autumn/soft/Ana de Armas 12.png,autumn
+data/raw/DeepArmocromia/val/spring/light/cate blanchett9.png,spring
+data/raw/DeepArmocromia/train/spring/light/valentina ferragni4.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_29.jpg,autumn
+data/segmented_dataset/SeasonsModel/true_autumn_73.jpg,autumn
+data/raw/DeepArmocromia/train/winter/cool/elisa4.png,winter
+data/raw/DeepArmocromia/train/spring/bright/alexa chung14.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/24542.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/Ashley Olsen 6.png,autumn
+data/raw/DeepArmocromia/train/spring/light/21882.png,spring
+data/raw/DeepArmocromia/train/spring/light/irene grandi4.png,spring
+data/raw/DeepArmocromia/val/spring/light/8452.png,spring
+data/raw/DeepArmocromia/train/winter/cool/anne hathaway9.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-180.png,summer
+data/raw/DeepArmocromia/train/summer/soft/Lara Stone 1.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/14325.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/marion cotillard 1_1.png,winter
+data/raw/DeepArmocromia/train/spring/warm/Damian Lewis 2.png,spring
+data/segmented_dataset/SeasonsModel/soft_autumn_69.jpeg,autumn
+data/raw/DeepArmocromia/train/winter/cool/8290.png,winter
+data/raw/DeepArmocromia/val/summer/soft/Sarah Jessica Parker SOFT SUMMER.png,summer
+data/raw/DeepArmocromia/val/spring/warm/13515.png,spring
+data/raw/DeepArmocromia/train/spring/bright/Angelina Jolie4.png,spring
+data/raw/DeepArmocromia/train/summer/light/images-113_0.png,summer
+data/raw/DeepArmocromia/train/spring/bright/5626.png,spring
+data/raw/DeepArmocromia/train/winter/bright/drian brody.png,winter
+data/raw/DeepArmocromia/train/winter/bright/paola turani30.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/4759.png,autumn
+data/raw/DeepArmocromia/val/spring/warm/10427.png,spring
+data/raw/DeepArmocromia/train/summer/soft/images-124.png,summer
+data/raw/DeepArmocromia/train/summer/light/13042.png,summer
+data/segmented_dataset/SeasonsModel/light_summer_15.jpg,summer
+data/raw/DeepArmocromia/train/autumn/deep/761.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/26104.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_31.jpg,autumn
+data/segmented_dataset/SeasonsModel/true_autumn_63.jpg,autumn
+data/segmented_dataset/SeasonsModel/light_summer_50.jpg,summer
+data/raw/DeepArmocromia/train/autumn/warm/6507.png,autumn
+data/raw/DeepArmocromia/test/spring/bright/23166.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/21601.png,autumn
+data/raw/DeepArmocromia/train/spring/light/Chiara Ferragni8.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_95.jpg,autumn
+data/raw/DeepArmocromia/train/winter/bright/20270.png,winter
+data/raw/DeepArmocromia/train/winter/bright/29415.png,winter
+data/raw/DeepArmocromia/val/spring/light/gillian anderson22.png,spring
+data/raw/DeepArmocromia/test/spring/light/12481.png,spring
+data/raw/DeepArmocromia/test/summer/cool/26181.png,summer
+data/raw/DeepArmocromia/train/winter/bright/paola turani.png,winter
+data/raw/DeepArmocromia/train/winter/bright/MARION COTILLARD 2.png,winter
+data/raw/DeepArmocromia/test/winter/deep/27845.png,winter
+data/segmented_dataset/SeasonsModel/dark_winter_32.jpg,winter
+data/raw/DeepArmocromia/train/autumn/soft/Nicole Richie 4.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_31.jpg,winter
+data/raw/DeepArmocromia/train/summer/soft/images-60_2.png,summer
+data/raw/DeepArmocromia/test/spring/warm/13324.png,spring
+data/raw/DeepArmocromia/train/spring/light/14727.png,spring
+data/raw/DeepArmocromia/train/winter/cool/11927.png,winter
+data/raw/DeepArmocromia/test/winter/cool/2099.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-19_2.png,summer
+data/raw/DeepArmocromia/train/winter/bright/KATY PERRY 2.png,winter
+data/raw/DeepArmocromia/train/summer/light/15971.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/Belen Rodriguez AUTUNNO DEEP.png,autumn
+data/raw/DeepArmocromia/val/autumn/soft/1801.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/cristina-parodi 6.png,autumn
+data/raw/DeepArmocromia/val/summer/soft/1535.png,summer
+data/raw/DeepArmocromia/train/spring/light/gillian anderson12.png,spring
+data/segmented_dataset/SeasonsModel/true_summer_19.jpg,summer
+data/segmented_dataset/SeasonsModel/soft_summer_6.jpg,summer
+data/segmented_dataset/SeasonsModel/soft_summer_15.jpg,summer
+data/raw/DeepArmocromia/test/summer/soft/23397.png,summer
+data/raw/DeepArmocromia/val/autumn/soft/Eliana Miglio 3.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-16_2.png,summer
+data/raw/DeepArmocromia/train/summer/light/sharon-stone LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/train/spring/warm/emma stone- primavera warm.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_17.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/soft/3821.png,autumn
+data/raw/DeepArmocromia/val/summer/light/4848.png,summer
+data/raw/DeepArmocromia/test/spring/warm/16469.png,spring
+data/raw/DeepArmocromia/val/spring/warm/damian lewis6.png,spring
+data/raw/DeepArmocromia/val/spring/bright/Charlotte Casiraghi7.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_37.jpg,autumn
+data/raw/DeepArmocromia/train/summer/cool/Claire Foy1 COOL SUMMER.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-116_1.png,summer
+data/raw/DeepArmocromia/train/winter/cool/10731.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_23.jpg,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-144.png,summer
+data/raw/DeepArmocromia/train/spring/light/Simon Baker 1.png,spring
+data/raw/DeepArmocromia/train/winter/deep/23581.png,winter
+data/segmented_dataset/SeasonsModel/bright_spring_31.jpg,spring
+data/raw/DeepArmocromia/train/winter/deep/484.png,winter
+data/raw/DeepArmocromia/train/summer/light/images-70_1.png,summer
+data/raw/DeepArmocromia/train/winter/deep/martina tinarelli 2.png,winter
+data/raw/DeepArmocromia/test/winter/bright/9073.png,winter
+data/raw/DeepArmocromia/train/spring/bright/24657.png,spring
+data/raw/DeepArmocromia/train/winter/bright/26437.png,winter
+data/raw/DeepArmocromia/train/winter/deep/levante 2.png,winter
+data/raw/DeepArmocromia/test/summer/soft/26517.png,summer
+data/raw/DeepArmocromia/train/spring/warm/Emma Stone9.png,spring
+data/raw/DeepArmocromia/train/summer/light/Lea Seydoux LIGHT SUMMER.png,summer
+data/segmented_dataset/SeasonsModel/true_winter_21.jpg,winter
+data/raw/DeepArmocromia/train/spring/warm/cristiana capotondi20.png,spring
+data/raw/DeepArmocromia/train/spring/light/Cameron Diaz2.png,spring
+data/raw/DeepArmocromia/train/summer/light/Anderson-Cooper-LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/emily ratajkowski  4.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/16246.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/6962.png,winter
+data/raw/DeepArmocromia/test/autumn/deep/21563.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/9101.png,winter
+data/raw/DeepArmocromia/train/spring/bright/21205.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/6668.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/18567.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/2907.png,summer
+data/raw/DeepArmocromia/val/summer/cool/8684.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/2981.png,autumn
+data/raw/DeepArmocromia/val/autumn/deep/11113.png,autumn
+data/raw/DeepArmocromia/train/spring/light/17859.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/18103.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/Meghan Markle1.png,autumn
+data/raw/DeepArmocromia/train/spring/light/doutzen kroes16.png,spring
+data/raw/DeepArmocromia/train/winter/deep/10239.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/emily ratajkowski 10.png,autumn
+data/raw/DeepArmocromia/val/summer/soft/images-91_2.png,summer
+data/raw/DeepArmocromia/train/summer/soft/11264.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/Jennifer-Garner 2.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/20519.png,winter
+data/raw/DeepArmocromia/test/spring/warm/22870.png,spring
+data/raw/DeepArmocromia/train/winter/bright/10330.png,winter
+data/segmented_dataset/SeasonsModel/true_autumn_75.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/Vittoria Puccini4.png,spring
+data/raw/DeepArmocromia/val/winter/deep/mariagrazia cucinotta  3.png,winter
+data/segmented_dataset/SeasonsModel/light_spring_16.jpg,spring
+data/raw/DeepArmocromia/train/summer/cool/3524.png,summer
+data/raw/DeepArmocromia/train/summer/cool/15569.png,summer
+data/raw/DeepArmocromia/train/summer/light/12669.png,summer
+data/raw/DeepArmocromia/test/spring/light/3017.png,spring
+data/raw/DeepArmocromia/val/summer/cool/images-53_0.png,summer
+data/raw/DeepArmocromia/test/spring/light/13730.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/7331.png,autumn
+data/raw/DeepArmocromia/train/summer/light/images-30_1.png,summer
+data/raw/DeepArmocromia/train/winter/deep/21748.png,winter
+data/raw/DeepArmocromia/val/winter/bright/7037.png,winter
+data/raw/DeepArmocromia/test/autumn/warm/9305.png,autumn
+data/raw/DeepArmocromia/val/autumn/deep/3059.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/3492.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/2886.png,autumn
+data/raw/DeepArmocromia/test/autumn/soft/6673.png,autumn
+data/raw/DeepArmocromia/val/autumn/soft/11878.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/belen rodriguez  3.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/28761.png,summer
+data/segmented_dataset/SeasonsModel/bright_spring_17.jpg,spring
+data/raw/DeepArmocromia/train/autumn/soft/Ryan Gosling 1.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie29.png,spring
+data/segmented_dataset/SeasonsModel/light_summer_40.jpg,summer
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie11.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_92.jpg,autumn
+data/raw/DeepArmocromia/val/autumn/warm/14034.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/19028.png,summer
+data/raw/DeepArmocromia/test/winter/deep/16934.png,winter
+data/raw/DeepArmocromia/test/spring/warm/23328.png,spring
+data/raw/DeepArmocromia/test/spring/bright/29561.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/24384.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/5321.png,winter
+data/raw/DeepArmocromia/test/spring/bright/22961.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_31.jpg,autumn
+data/raw/DeepArmocromia/test/winter/cool/3817.png,winter
+data/raw/DeepArmocromia/val/summer/cool/2128.png,summer
+data/segmented_dataset/SeasonsModel/light_summer_5.png,summer
+data/raw/DeepArmocromia/train/winter/deep/sandra-bullock 4.png,winter
+data/raw/DeepArmocromia/val/winter/bright/Megan Fox__1.png,winter
+data/raw/DeepArmocromia/val/autumn/soft/16358.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/7445.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/shay mitchell  4.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_16.png,autumn
+data/raw/DeepArmocromia/test/autumn/warm/16936.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/7933.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/Angelina Jolie3.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_58.jpg,autumn
+data/raw/DeepArmocromia/train/winter/cool/13017.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/7165.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/25291.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_87.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/soft/13613.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/18544.png,summer
+data/raw/DeepArmocromia/train/spring/warm/Nicole Kidman17.png,spring
+data/raw/DeepArmocromia/train/winter/bright/paola turani47.png,winter
+data/segmented_dataset/SeasonsModel/light_spring_33.jpg,spring
+data/raw/DeepArmocromia/train/winter/bright/21888.png,winter
+data/segmented_dataset/SeasonsModel/true_autumn_84.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/16239.png,spring
+data/raw/DeepArmocromia/val/autumn/soft/27124.png,autumn
+data/raw/DeepArmocromia/val/spring/warm/Noemi4.png,spring
+data/raw/DeepArmocromia/val/summer/soft/images-123.png,summer
+data/raw/DeepArmocromia/test/spring/bright/23486.png,spring
+data/raw/DeepArmocromia/train/spring/light/28966.png,spring
+data/raw/DeepArmocromia/train/winter/bright/14003.png,winter
+data/raw/DeepArmocromia/val/summer/soft/images-163.png,summer
+data/raw/DeepArmocromia/val/autumn/warm/27430.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_38.jpg,winter
+data/raw/DeepArmocromia/train/winter/deep/22286.png,winter
+data/raw/DeepArmocromia/val/summer/soft/images-38_2.png,summer
+data/raw/DeepArmocromia/train/summer/cool/20581.png,summer
+data/raw/DeepArmocromia/val/summer/light/27146.png,summer
+data/raw/DeepArmocromia/train/spring/warm/25625.png,spring
+data/raw/DeepArmocromia/val/spring/light/gillian anderson17.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/Cristina Parodi AUTUNNO WARM.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/19576.png,spring
+data/raw/DeepArmocromia/val/winter/cool/17901.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_8.jpg,autumn
+data/raw/DeepArmocromia/train/summer/cool/10305.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/vanessa incontrada 6.png,autumn
+data/raw/DeepArmocromia/train/autumn/soft/Gigi Hadid 9.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/5040.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/Eliana Miglio Autunno Soft.png,autumn
+data/raw/DeepArmocromia/test/summer/light/29944.png,summer
+data/raw/DeepArmocromia/val/spring/bright/4184.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/20823.png,autumn
+"data/raw/DeepArmocromia/train/autumn/soft/Ryan Gosling, 6.png",autumn
+data/raw/DeepArmocromia/val/autumn/soft/Ana de Armas 4.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_33.jpg,autumn
+data/raw/DeepArmocromia/test/spring/light/6188.png,spring
+data/raw/DeepArmocromia/train/winter/deep/11656.png,winter
+data/raw/DeepArmocromia/test/winter/cool/21778.png,winter
+data/raw/DeepArmocromia/train/winter/cool/11634.png,winter
+data/raw/DeepArmocromia/test/summer/cool/23511.png,summer
+data/segmented_dataset/SeasonsModel/soft_autumn_56.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/5221.png,spring
+data/raw/DeepArmocromia/train/spring/bright/Adriana Lima4.png,spring
+data/raw/DeepArmocromia/test/winter/deep/27439.png,winter
+data/raw/DeepArmocromia/test/autumn/soft/10443.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/images-1_0.png,summer
+data/raw/DeepArmocromia/test/winter/deep/26986.png,winter
+data/raw/DeepArmocromia/train/spring/light/Cameron Diaz4.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/24993.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/17127.png,winter
+data/raw/DeepArmocromia/train/summer/cool/images-86_0.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/8345.png,autumn
+data/raw/DeepArmocromia/test/autumn/soft/25637.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/7591.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-75_2.png,summer
+data/segmented_dataset/SeasonsModel/dark_winter_67.jpg,winter
+data/raw/DeepArmocromia/train/spring/light/22567.png,spring
+data/raw/DeepArmocromia/train/spring/light/14218.png,spring
+data/raw/DeepArmocromia/train/spring/warm/Nicole Kidman5.png,spring
+data/raw/DeepArmocromia/train/spring/light/gillian anderson36.png,spring
+data/raw/DeepArmocromia/val/summer/cool/26159.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/20622.png,autumn
+data/raw/DeepArmocromia/val/summer/light/1619.png,summer
+data/raw/DeepArmocromia/val/spring/bright/Charlotte Casiraghi5.png,spring
+data/raw/DeepArmocromia/val/summer/light/images-118_0.png,summer
+data/raw/DeepArmocromia/train/winter/deep/17001.png,winter
+data/segmented_dataset/SeasonsModel/soft_autumn_32.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/soft/28747.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/18971.png,summer
+data/raw/DeepArmocromia/train/spring/bright/709.png,spring
+data/raw/DeepArmocromia/val/winter/bright/Liv_Tyler 1.png,winter
+data/raw/DeepArmocromia/train/winter/bright/12222.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-118_1.png,summer
+data/raw/DeepArmocromia/train/spring/warm/20117.png,spring
+data/segmented_dataset/SeasonsModel/true_spring_55.jpg,spring
+data/raw/DeepArmocromia/train/winter/deep/23168.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/Adele 7.png,autumn
+data/raw/DeepArmocromia/train/summer/light/13367.png,summer
+data/raw/DeepArmocromia/val/autumn/soft/27029.png,autumn
+data/segmented_dataset/SeasonsModel/true_spring_47.jpg,spring
+data/raw/DeepArmocromia/test/summer/light/27236.png,summer
+data/raw/DeepArmocromia/train/winter/cool/11595.png,winter
+data/raw/DeepArmocromia/train/winter/bright/19315.png,winter
+data/raw/DeepArmocromia/train/spring/warm/17376.png,spring
+data/raw/DeepArmocromia/test/summer/cool/26578.png,summer
+data/raw/DeepArmocromia/train/winter/bright/paola turani8.png,winter
+data/raw/DeepArmocromia/train/winter/deep/22349.png,winter
+data/raw/DeepArmocromia/test/spring/light/1246.png,spring
+data/raw/DeepArmocromia/train/spring/warm/4477.png,spring
+data/raw/DeepArmocromia/train/spring/warm/20791.png,spring
+data/raw/DeepArmocromia/train/winter/deep/4926.png,winter
+data/raw/DeepArmocromia/train/spring/light/10954.png,spring
+data/raw/DeepArmocromia/train/spring/bright/15068.png,spring
+data/raw/DeepArmocromia/val/summer/cool/Bianca Balti 2.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/11397.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/julianne moore 4.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/26733.png,winter
+data/raw/DeepArmocromia/train/winter/bright/giulia valentino 1.png,winter
+data/raw/DeepArmocromia/train/summer/soft/Michelle Hunziker SOFT SUMMER.png,summer
+data/raw/DeepArmocromia/test/autumn/soft/29129.png,autumn
+data/raw/DeepArmocromia/train/spring/light/29351.png,spring
+data/segmented_dataset/SeasonsModel/soft_summer_11.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/10340.png,autumn
+data/raw/DeepArmocromia/train/autumn/warm/julia roberts 5.png,autumn
+data/raw/DeepArmocromia/test/autumn/soft/20431.png,autumn
+data/raw/DeepArmocromia/val/summer/cool/12628.png,summer
+data/raw/DeepArmocromia/val/spring/light/valentina ferragni3.png,spring
+data/segmented_dataset/SeasonsModel/dark_winter_53.jpg,winter
+data/raw/DeepArmocromia/val/summer/light/images-87_1.png,summer
+data/raw/DeepArmocromia/test/autumn/warm/4712.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/18122.png,autumn
+data/raw/DeepArmocromia/test/summer/soft/4952.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/Kerry washington 3.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/23232.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/Angelina Jolie8.png,spring
+data/raw/DeepArmocromia/train/spring/light/valentina ferragni10.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/18061.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/12104.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/3544.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Lily Collins.png,winter
+data/raw/DeepArmocromia/train/summer/soft/26789.png,summer
+data/raw/DeepArmocromia/test/spring/bright/6464.png,spring
+data/raw/DeepArmocromia/test/spring/bright/6719.png,spring
+data/raw/DeepArmocromia/test/autumn/deep/6788.png,autumn
+data/raw/DeepArmocromia/train/summer/light/26889.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/1744.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/images-17_0.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/19308.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/3330.png,summer
+data/raw/DeepArmocromia/train/spring/light/16368.png,spring
+data/raw/DeepArmocromia/train/summer/cool/Kimberly Williams1 COOL SUMMER.png,summer
+data/raw/DeepArmocromia/train/winter/deep/10762.png,winter
+data/raw/DeepArmocromia/val/spring/warm/6581.png,spring
+data/segmented_dataset/SeasonsModel/dark_autumn_89.jpg,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-57_2.png,summer
+data/raw/DeepArmocromia/test/summer/soft/6308.png,summer
+data/segmented_dataset/SeasonsModel/true_spring_21.jpg,spring
+data/raw/DeepArmocromia/test/winter/bright/23533.png,winter
+data/raw/DeepArmocromia/train/spring/bright/Angelina Jolie1.png,spring
+data/raw/DeepArmocromia/test/summer/soft/22628.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/Ryan Gosling 2.png,autumn
+data/raw/DeepArmocromia/test/spring/bright/13925.png,spring
+data/raw/DeepArmocromia/train/winter/deep/chiara biasi 6.png,winter
+data/raw/DeepArmocromia/val/summer/soft/23704.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/29535.png,autumn
+data/raw/DeepArmocromia/val/autumn/warm/Julia Roberts 1_0.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_50.jpg,autumn
+data/raw/DeepArmocromia/train/winter/bright/paola turani62.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_94.jpg,autumn
+data/raw/DeepArmocromia/val/winter/cool/8428.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/20334.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/images-16_0.png,summer
+data/raw/DeepArmocromia/train/winter/cool/15251.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/298.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/bradley cooper3.png,spring
+data/raw/DeepArmocromia/train/winter/deep/2940.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/belen rodriguez  4.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/Matt Bomer COOL SUMMER.png,summer
+data/raw/DeepArmocromia/train/summer/light/images-3_1.png,summer
+data/raw/DeepArmocromia/train/spring/bright/3312.png,spring
+data/raw/DeepArmocromia/test/summer/light/21086.png,summer
+data/raw/DeepArmocromia/train/winter/cool/gwen stefani5.png,winter
+data/raw/DeepArmocromia/test/summer/cool/14439.png,summer
+data/raw/DeepArmocromia/test/spring/warm/3137.png,spring
+data/raw/DeepArmocromia/train/spring/light/laura dern- primavera light.png,spring
+data/segmented_dataset/SeasonsModel/true_autumn_57.jpg,autumn
+data/raw/DeepArmocromia/train/summer/light/11408.png,summer
+data/raw/DeepArmocromia/val/autumn/warm/16097.png,autumn
+data/raw/DeepArmocromia/val/summer/light/images-16_1.png,summer
+data/raw/DeepArmocromia/train/spring/light/gillian anderson9.png,spring
+data/segmented_dataset/SeasonsModel/dark_winter_47.jpg,winter
+data/raw/DeepArmocromia/train/summer/cool/images-5_0.png,summer
+data/raw/DeepArmocromia/train/winter/bright/20082.png,winter
+data/segmented_dataset/SeasonsModel/true_spring_19.png,spring
+data/raw/DeepArmocromia/val/autumn/warm/25079.png,autumn
+data/raw/DeepArmocromia/val/spring/bright/Charlotte Casiraghi9.png,spring
+data/raw/DeepArmocromia/train/spring/light/owen wilson-primavera light.png,spring
+data/segmented_dataset/SeasonsModel/light_spring_21.jpg,spring
+data/raw/DeepArmocromia/train/winter/deep/18947.png,winter
+data/raw/DeepArmocromia/test/autumn/soft/5989.png,autumn
+data/raw/DeepArmocromia/train/spring/bright/Miranda Kerr 3.png,spring
+data/segmented_dataset/SeasonsModel/soft_autumn_47.jpg,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-148.png,summer
+data/raw/DeepArmocromia/train/spring/light/Cara Delevigne10.png,spring
+data/raw/DeepArmocromia/train/autumn/soft/4260.png,autumn
+data/raw/DeepArmocromia/test/winter/cool/19248.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/cristina parodi 8.png,autumn
+data/raw/DeepArmocromia/test/spring/light/10123.png,spring
+data/raw/DeepArmocromia/val/autumn/soft/21672.png,autumn
+data/segmented_dataset/SeasonsModel/true_spring_28.jpg,spring
+data/raw/DeepArmocromia/test/summer/soft/19391.png,summer
+data/raw/DeepArmocromia/test/spring/bright/24973.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/Emily Ratajkowski1.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/lily collins5.png,winter
+data/raw/DeepArmocromia/val/spring/bright/clio zammatteo3.png,spring
+data/raw/DeepArmocromia/train/spring/light/28259.png,spring
+data/raw/DeepArmocromia/val/summer/cool/images-22_0.png,summer
+data/raw/DeepArmocromia/train/winter/deep/1941.png,winter
+data/raw/DeepArmocromia/train/spring/bright/angelina jolie13.png,spring
+data/raw/DeepArmocromia/train/spring/light/Charlize Theron5.png,spring
+data/raw/DeepArmocromia/train/summer/light/images-22_1.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/18777.png,autumn
+data/raw/DeepArmocromia/val/winter/cool/shakira8.png,winter
+data/raw/DeepArmocromia/train/winter/deep/SALMA HAYEK 2.png,winter
+data/raw/DeepArmocromia/train/winter/deep/20353.png,winter
+data/raw/DeepArmocromia/train/spring/light/2770.png,spring
+data/raw/DeepArmocromia/train/summer/cool/images-49_0.png,summer
+data/segmented_dataset/SeasonsModel/light_summer_46.jpg,summer
+data/segmented_dataset/SeasonsModel/light_spring_4.jpg,spring
+data/raw/DeepArmocromia/train/spring/light/gillian anderson14.png,spring
+data/raw/DeepArmocromia/val/spring/bright/18454.png,spring
+data/raw/DeepArmocromia/val/spring/bright/angelina jolie9.png,spring
+data/raw/DeepArmocromia/train/autumn/deep/981.png,autumn
+data/segmented_dataset/SeasonsModel/light_summer_3.jpg,summer
+data/raw/DeepArmocromia/train/autumn/deep/lorena-cesarini5.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/ELLIOT PAGE COOL WINTER.png,winter
+data/raw/DeepArmocromia/test/spring/warm/52.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/21021.png,autumn
+data/raw/DeepArmocromia/train/summer/light/Reese Witherspoon LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/train/summer/soft/images-138.png,summer
+data/raw/DeepArmocromia/val/summer/light/images-4_1.png,summer
+data/raw/DeepArmocromia/train/spring/warm/jessica chastain33.png,spring
+data/raw/DeepArmocromia/train/summer/cool/images-79_0.png,summer
+data/raw/DeepArmocromia/val/autumn/deep/26459.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/vanessa hudgens 4.png,winter
+data/raw/DeepArmocromia/train/autumn/warm/9462.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Anna Valle5.png,winter
+data/raw/DeepArmocromia/test/winter/cool/21917.png,winter
+data/raw/DeepArmocromia/train/autumn/soft/12848.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/images-40_0.png,summer
+data/raw/DeepArmocromia/test/spring/warm/20038.png,spring
+data/raw/DeepArmocromia/train/spring/warm/Noemi2.png,spring
+data/raw/DeepArmocromia/val/autumn/warm/Debra Messing 1.png,autumn
+data/segmented_dataset/SeasonsModel/true_summer_15.jpg,summer
+data/raw/DeepArmocromia/test/winter/cool/16706.png,winter
+data/raw/DeepArmocromia/train/autumn/deep/26689.png,autumn
+data/raw/DeepArmocromia/train/autumn/deep/Lorena Cesarini.png,autumn
+data/raw/DeepArmocromia/val/autumn/soft/Gigi Hadid 3.png,autumn
+data/raw/DeepArmocromia/train/winter/deep/martina tinarelli 1.png,winter
+data/raw/DeepArmocromia/train/spring/bright/Charlotte Casiraghi2.png,spring
+data/raw/DeepArmocromia/train/spring/light/gillian anderson29.png,spring
+data/raw/DeepArmocromia/train/winter/bright/eva green 2.png,winter
+data/raw/DeepArmocromia/train/winter/bright/6119.png,winter
+data/raw/DeepArmocromia/train/summer/light/ellen-pompeo LIGHT SUMMER.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/17760.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/8975.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/Calista Flockhart 5.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_53.jpg,autumn
+data/raw/DeepArmocromia/train/winter/deep/19855.png,winter
+data/raw/DeepArmocromia/test/winter/deep/13987.png,winter
+data/raw/DeepArmocromia/val/summer/soft/images-24_2.png,summer
+data/raw/DeepArmocromia/test/summer/light/14983.png,summer
+data/segmented_dataset/SeasonsModel/dark_autumn_45.jpg,autumn
+data/raw/DeepArmocromia/train/summer/cool/23438.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/lorena cesarini 3.png,autumn
+data/raw/DeepArmocromia/train/winter/bright/9580.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-36_2.png,summer
+data/raw/DeepArmocromia/train/summer/cool/images-91_0.png,summer
+data/raw/DeepArmocromia/train/autumn/soft/Gigi Hadid 8.png,autumn
+data/raw/DeepArmocromia/train/summer/cool/5953.png,summer
+data/raw/DeepArmocromia/train/autumn/warm/26155.png,autumn
+data/raw/DeepArmocromia/train/winter/cool/Shakira1.png,winter
+data/raw/DeepArmocromia/train/spring/warm/jessica chastain25.png,spring
+data/raw/DeepArmocromia/test/spring/light/24527.png,spring
+data/raw/DeepArmocromia/test/autumn/warm/26893.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/17464.png,spring
+data/raw/DeepArmocromia/train/winter/cool/shakira6.png,winter
+data/raw/DeepArmocromia/val/spring/bright/8667.png,spring
+data/raw/DeepArmocromia/train/summer/light/15925.png,summer
+data/segmented_dataset/SeasonsModel/true_winter_8.jpg,winter
+data/raw/DeepArmocromia/train/winter/bright/matt bomer 1.png,winter
+data/raw/DeepArmocromia/test/autumn/deep/26082.png,autumn
+data/segmented_dataset/SeasonsModel/dark_autumn_21.jpg,autumn
+data/raw/DeepArmocromia/train/winter/cool/Anne Hathaway7.png,winter
+data/raw/DeepArmocromia/train/spring/bright/18945.png,spring
+data/raw/DeepArmocromia/train/winter/deep/28546.png,winter
+data/segmented_dataset/SeasonsModel/true_spring_49.jpg,spring
+data/raw/DeepArmocromia/train/winter/cool/Audrey Hepburn1.png,winter
+data/raw/DeepArmocromia/test/summer/soft/23616.png,summer
+data/raw/DeepArmocromia/val/winter/cool/23312.png,winter
+data/raw/DeepArmocromia/train/summer/cool/8515.png,summer
+data/raw/DeepArmocromia/train/winter/deep/kylie-jenner 4.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_47.jpg,autumn
+data/raw/DeepArmocromia/train/autumn/warm/beyonce 3.png,autumn
+data/raw/DeepArmocromia/test/winter/deep/29634.png,winter
+data/raw/DeepArmocromia/test/autumn/deep/3636.png,autumn
+data/raw/DeepArmocromia/val/autumn/warm/julianne moore 11.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-149.png,summer
+data/raw/DeepArmocromia/test/winter/cool/21779.png,winter
+data/raw/DeepArmocromia/test/spring/bright/15301.png,spring
+data/raw/DeepArmocromia/val/winter/deep/28805.png,winter
+data/raw/DeepArmocromia/train/winter/cool/8978.png,winter
+data/raw/DeepArmocromia/train/summer/soft/images-83_2.png,summer
+data/raw/DeepArmocromia/train/winter/deep/eva longoria 8.png,winter
+data/segmented_dataset/SeasonsModel/dark_autumn_85.jpg,autumn
+data/raw/DeepArmocromia/train/spring/warm/charlie hunnam- primavera warm.png,spring
+data/raw/DeepArmocromia/train/autumn/warm/18551.png,autumn
+data/segmented_dataset/SeasonsModel/dark_winter_37.jpg,winter
+data/segmented_dataset/SeasonsModel/true_summer_21.jpg,summer
+data/segmented_dataset/SeasonsModel/light_summer_28.jpg,summer
+data/raw/DeepArmocromia/train/summer/light/9695.png,summer
+data/raw/DeepArmocromia/train/autumn/deep/28593.png,autumn
+data/raw/DeepArmocromia/train/summer/soft/images-126.png,summer
+data/raw/DeepArmocromia/val/autumn/warm/18226.png,autumn
+data/raw/DeepArmocromia/train/spring/warm/10447.png,spring
+data/raw/DeepArmocromia/test/spring/warm/20028.png,spring

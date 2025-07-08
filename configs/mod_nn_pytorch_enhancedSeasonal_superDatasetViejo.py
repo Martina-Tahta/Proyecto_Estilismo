@@ -19,7 +19,7 @@ model_params = {
     'classes_csv': CLASSES_CSV
 }
 
-DATASET = 'SuperDataset'
+DATASET = 'SuperDatasetViejo'
 TYPE_FEATURES = 'enhancedSeasonal'
 
 dataset_params = {

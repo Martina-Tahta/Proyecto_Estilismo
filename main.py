@@ -4,24 +4,16 @@ from src.utils.files import read_configs
 from src.pipeline import run_model, test_model
 
 # Como correrlo:
-#   python main.py --configs configs/mod_ensamble1.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_ensamble_mod_ensamble1.joblib
-#   python main.py --configs configs/mod_nn_pytorch1_enhancedSeasonal_DeepArmocromia.py --path_test data/processed/DeepArmocromia/enhancedSeasonal/test_DeepArmocromia_enhancedSeasonal.csv --path_model runs/model_NNpytorch_mod_nn_pytorch1_enhancedSeasonal_DeepArmocromia.pt
-#   python main.py --configs configs/mod_nn_pytorch_enhancedSeasonal_superDataset.py --path_test data/processed/SuperDataset/enhancedSeasonal/test_SuperDataset_enhancedSeasonal.csv --path_model runs/model_NNpytorch_mod_nn_pytorch_enhancedSeasonal_superDataset.pt
+# python main.py --configs configs/mod_resNeXt_weighted_avg_superDataset_balanced.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_superDataset_balanced.pt 
 
 
-#python main.py --configs configs/mod_resNeXt_weighted_avg_DeepArmocromia_only_season.py --path_test data/split_dataset/DeepArmocromia_season_only/test_DeepArmocromia_season_only.csv --path_model runs/model_mod_resNeXt_weighted_avg_DeepArmocromia_only_season.pt
-#python main.py --configs configs/mod_resNeXt_weighted_avg_DeepArmocromia2.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_mod_resNeXt_weighted_avg_DeepArmocromia2.pt
-# python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt
-# python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --seasons_only 
-# python main.py --configs configs/mod_resNeXt_weighted_avg_super2.py --path_test data/split_dataset/SuperDataset/val_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_super2.pt --topk 2
-# python main.py --configs configs/mod_resNeXt_ft_DeepArmocromia_paper.py
 
-# python main.py --configs configs/mod_farl16_ft_DeepArmocromia_paper.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_resNeXt_ft_mod_farl16_ft_DeepArmocromia_paper.pt
 '''
-el argumento de top3 permite tomar una prediccion como correcta si la etiqueta verdadera 
-esta entre las 3 etiquetas con mayor probabilidad predicha por el modelo.
+el argumento de --topk k permite tomar una prediccion como correcta si la etiqueta verdadera 
+esta entre las k etiquetas con mayor probabilidad predicha por el modelo.
+
+el argumento --seasons_only permite que el test se evalue sobre las 4 seasons en vez de las 12 categorias
 '''
-#python main.py --configs configs/mod_resNeXt_ft_DeepArmocromia.py --path_test data/split_dataset/DeepArmocromia/test_DeepArmocromia.csv --path_model runs/model_resNeXt_ft_mod_resNeXt_ft_DeepArmocromia.pt
 
 def main(args):
     check_args = read_configs(args)
@@ -41,7 +33,6 @@ def main(args):
         test_model(model, model_path, test_dataset_path, seasons_only=seasons_only, topk=topk)
         
         
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--configs", type=str, help="Should add path of the configs file", required=False)
@@ -49,6 +40,5 @@ if __name__ == "__main__":
     parser.add_argument("--path_model", type=str, help="Should add path to saved model", required=False)
     parser.add_argument("--seasons_only", action="store_true", help="If set, test only on seasons (not subcategories)")
     parser.add_argument("--topk", type=int, help="If set, mark prediction as true if the correct label is in the top k predicted probabilities")
-    #parser.add_argument("--device", type=str, help="Should add cuda or cpu", required=False)
     args = parser.parse_args()
     main(args)

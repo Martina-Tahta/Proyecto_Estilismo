@@ -360,42 +360,94 @@ class ResNeXt_FT(nn.Module):
         self.eval()
         print(f"Modelo cargado desde {weights_path}.")
 
-    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4):
+    def test_model(self, test_csv: str, batch_size: int = 32, num_workers: int = 4,
+               seasons_only: bool = False, topk: int = None):
         """
-        Evalúa el modelo sobre un CSV de test (debe incluir columnas: image_path, season).
+        Evalúa el modelo sobre un CSV de test.
 
         Args:
             test_csv (str): Ruta al CSV.
             batch_size (int): Batch size.
-            num_workers (int): Cantidad de workers del DataLoader.
+            num_workers (int): Workers para el DataLoader.
+            seasons_only (bool): Si es True, agrupa las 12 estaciones en 4.
+            topk (int): Si se especifica, evalúa top-k accuracy.
         """
         df = pd.read_csv(test_csv)
         if not hasattr(self, 'class2idx'):
             self.classes = sorted(df['season'].unique())
             self.class2idx = {c: i for i, c in enumerate(self.classes)}
-        test_loader = self.create_dataloader(self.classes, test_csv, batch_size=batch_size, shuffle=False, num_workers=num_workers, test=False)
+
+        test_loader = self.create_dataloader(self.classes, test_csv, batch_size=batch_size,
+                                            shuffle=False, num_workers=num_workers, test=False)
 
         self.eval()
         all_preds, all_labels = [], []
         with torch.no_grad():
             for images, labels in tqdm(test_loader, desc="Testing", unit="batch"):
-                images = images.to(self.device)
-                labels = labels.to(self.device)
-                preds = self(images).argmax(dim=1)
-                all_preds.extend(preds.cpu().tolist())
+                images, labels = images.to(self.device), labels.to(self.device)
+                outputs = self(images)
+
+                if topk:
+                    topk_preds = torch.topk(outputs, topk, dim=1).indices
+                    for i, label in enumerate(labels):
+                        if label in topk_preds[i]:
+                            all_preds.append(label.item())
+                        else:
+                            all_preds.append(topk_preds[i][0].item())
+                else:
+                    preds = outputs.argmax(dim=1)
+                    all_preds.extend(preds.cpu().tolist())
                 all_labels.extend(labels.cpu().tolist())
 
-        report = classification_report(all_labels, all_preds, target_names=self.classes)
-        print("\n--- TEST REPORT ---\n")
+        # Si no hay agrupamiento, mostrar reporte con 12 estaciones
+        if not seasons_only:
+            report = classification_report(all_labels, all_preds, target_names=self.classes)
+            print("\n--- TEST REPORT (12 categorías) ---\n")
+            print(report)
+
+            cm = confusion_matrix(all_labels, all_preds)
+            plt.figure(figsize=(10, 8))
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
+                        xticklabels=self.classes, yticklabels=self.classes)
+            plt.title('Matriz de Confusión (12 categorías)')
+            plt.ylabel('Etiqueta Verdadera')
+            plt.xlabel('Predicción')
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            plt.show()
+            return
+
+        # Agrupar a 4 estaciones
+        aggregated_classes = ['autumn', 'spring', 'summer', 'winter']
+        aggregated_class2idx = {c: idx for idx, c in enumerate(aggregated_classes)}
+        idx2class = {idx: cls_name for cls_name, idx in self.class2idx.items()}
+
+        def to_aggregated(name: str) -> str:
+            return name.split('_')[1]  # e.g., "bright_spring" → "spring"
+
+        agg_preds = []
+        agg_labels = []
+        for p in all_preds:
+            orig_name = idx2class[p]
+            agg_name = to_aggregated(orig_name)
+            agg_preds.append(aggregated_class2idx[agg_name])
+        for l in all_labels:
+            orig_name = idx2class[l]
+            agg_name = to_aggregated(orig_name)
+            agg_labels.append(aggregated_class2idx[agg_name])
+
+        report = classification_report(agg_labels, agg_preds, target_names=aggregated_classes)
+        print("\n--- TEST REPORT (4 estaciones) ---\n")
         print(report)
 
-        cm = confusion_matrix(all_labels, all_preds)
-        plt.figure(figsize=(10, 8))
+        cm = confusion_matrix(agg_labels, agg_preds)
+        plt.figure(figsize=(8, 6))
         sns.heatmap(cm, annot=True, fmt='d', cmap='Purples',
-                    xticklabels=self.classes, yticklabels=self.classes)
-        plt.title('Confusion Matrix')
-        plt.ylabel('True Label')
-        plt.xlabel('Predicted Label')
+                    xticklabels=aggregated_classes, yticklabels=aggregated_classes)
+        plt.title('Matriz de Confusión (4 estaciones)')
+        plt.ylabel('Etiqueta Verdadera')
+        plt.xlabel('Predicción')
         plt.xticks(rotation=45)
         plt.tight_layout()
         plt.show()
+
