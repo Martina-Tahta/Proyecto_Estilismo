@@ -12,6 +12,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# FPN, BiFPN, PANET
 
 class ImageCSVDataset(Dataset):
     """Dataset que lee un .csv con las columnas `image_path` y `season`."""
@@ -52,6 +53,7 @@ class ResNeXt_FT(nn.Module):
     def __init__(self,
                  num_classes: int = 12,
                  variant: str = "resnext50_32x4d",
+                 classifier = 0,
                  device: str = None):
         """
         Args:
@@ -72,36 +74,63 @@ class ResNeXt_FT(nn.Module):
         else:
             raise ValueError(f"Variant desconocida: {variant}")
 
-        # Cargamos el backbone completo con sus pesos ImageNet
+
         self.model = getattr(models, variant)(weights=weights)
 
-        # 2) Reemplazar la capa final (fc) por Dropout + Linear
-        #    Conservamos in_features original y lo mapeamos a num_classes.
+        
         in_feats = self.model.fc.in_features
-        # self.model.fc = nn.Sequential(
-        #     nn.Dropout(p=0.2),
-        #     nn.Linear(in_feats, self.num_classes)
-        # )
+        if classifier==0:
+            red_dim = in_feats//2
+            self.model.fc = nn.Sequential(
+                nn.Linear(in_feats, red_dim),
+                nn.ReLU(),
+                nn.Dropout(p=0.5),
+                nn.Linear(red_dim, self.num_classes)
+            )
+            # Inicializamos pesos de la última capa lineal igual que en train
+            nn.init.xavier_uniform_(self.model.fc[0].weight)
+            self.model.fc[0].bias.data.zero_()
+        
+        elif classifier==1:
+            self.model.fc = nn.Sequential(
+                nn.Dropout(p=0.2),
+                nn.Linear(in_feats, self.num_classes)
+            )
+            # Inicializamos pesos de la última capa lineal igual que en train
+            nn.init.xavier_uniform_(self.model.fc[1].weight)
+            self.model.fc[1].bias.data.zero_()
 
-        red_dim = in_feats//2
-        self.model.fc = nn.Sequential(
-            nn.Linear(in_feats, red_dim),
-            nn.ReLU(),
-            nn.Dropout(p=0.5),
-            nn.Linear(red_dim, self.num_classes)
-        )
-        # Inicializamos pesos de la última capa lineal igual que en train
-        nn.init.xavier_uniform_(self.model.fc[0].weight)
-        self.model.fc[0].bias.data.zero_()
 
         # 3) Definir transformaciones de train / test
         mean = [0.485, 0.456, 0.406]
         std  = [0.229, 0.224, 0.225]
 
+        # self.train_transform = transforms.Compose([
+        #     transforms.Resize((256, 256)),
+        #     transforms.RandomResizedCrop(224),
+        #     transforms.RandomHorizontalFlip(),
+        #     transforms.ToTensor(),
+        #     transforms.Normalize(mean, std),
+        # ])
         self.train_transform = transforms.Compose([
-            transforms.Resize((256, 256)),
-            transforms.RandomResizedCrop(224),
-            transforms.RandomHorizontalFlip(),
+            # 1. Resize manteniendo aspect ratio (lado menor → 256px)
+            transforms.Resize(256),
+            # 2. Random crop 224×224
+            transforms.RandomCrop(224),
+            # 3. Flip horizontal con probabilidad 0.5
+            transforms.RandomHorizontalFlip(p=0.5),
+            # 4. Color jittering: brillo, contraste y saturación
+            transforms.ColorJitter(
+                brightness=0.4,
+                contrast=0.2,
+                saturation=0.2
+            ),
+            # 5. Ajuste de nitidez aleatorio
+            transforms.RandomAdjustSharpness(
+                sharpness_factor=2,
+                p=0.2
+            ),
+            # 6. Pasa a tensor C×H×W y normaliza
             transforms.ToTensor(),
             transforms.Normalize(mean, std),
         ])
@@ -186,11 +215,17 @@ class ResNeXt_FT(nn.Module):
         opt_groups.append({"params": self.model.fc.parameters(), "lr": lr_fc})
 
         optimizer = torch.optim.AdamW(opt_groups, weight_decay=weight_decay)
-        criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,
-                                                                T_max=10,       # número de iteraciones para el primer “restart”
-                                                                eta_min=1e-5  # lr mínimo al final de cada ciclo
-                                                                )
+        criterion = nn.CrossEntropyLoss()
+        # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,
+        #                                                         T_max=10,       # número de iteraciones para el primer “restart”
+        #                                                         eta_min=1e-5  # lr mínimo al final de cada ciclo
+        #                                                         )
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
+            optimizer,
+            T_0=10,        # reinicio cada 10 iteraciones de mini-batch
+            T_mult=1,      # factor de multiplicación de ciclo (1 = ciclos de igual longitud)
+            eta_min=1e-5   # lr mínimo al final de cada ciclo
+        )
 
         scaler = torch.cuda.amp.GradScaler()
 
@@ -214,6 +249,8 @@ class ResNeXt_FT(nn.Module):
                 scaler.step(optimizer)
                 scaler.update()
 
+                scheduler.step()
+
                 running_loss += loss.item() * images.size(0)
                 preds = logits.argmax(dim=1)
                 total += labels.size(0)
@@ -222,7 +259,7 @@ class ResNeXt_FT(nn.Module):
                 # Liberar tensores temporales
                 del images, labels, logits, loss
 
-            scheduler.step()
+            #scheduler.step()
 
             train_loss = running_loss / len(train_loader.dataset)
             train_acc  = 100 * correct / total

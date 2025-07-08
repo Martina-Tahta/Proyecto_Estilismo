@@ -245,7 +245,7 @@ class ResNeXtWeightedClassifier(nn.Module):
             """
             self.classes = class_names
             self.class2idx = {c: i for i, c in enumerate(self.classes)}
-            self.dropout = nn.Dropout(p=0.2)  # Reasegura que exista para .forward()
+            self.dropout = nn.Dropout(p=0.2)
             self.load_state_dict(torch.load(weights_path, map_location=self.device))
             self.eval()
             print(f"Modelo cargado desde {weights_path}.")

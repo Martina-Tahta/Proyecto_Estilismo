@@ -3,7 +3,8 @@ from src.models import ensamble
 from src.models import NN_pytorch
 from src.models import resNeXt_ft
 from src.models import resNeXt_weighted_avg
-# from src.models import mcf_features_nn
+from src.models import farl16_ft
+
 import pandas as pd
 
 # from src.train_test.train import train
@@ -53,7 +54,7 @@ def load_model(model_params):
         model = NN_pytorch.NNSeasonalColorModel()
     
     elif model_name == 'resNeXt_ft':
-        model = resNeXt_ft.ResNeXt_FT(model_params['variant'])
+        model = resNeXt_ft.ResNeXt_FT(variant=model_params['variant'], classifier=model_params['classifier'])
 
     elif model_name == 'resNeXt_weighted_avg':
         if 'variant' in model_params:
@@ -61,6 +62,9 @@ def load_model(model_params):
         else:
             model = resNeXt_weighted_avg.ResNeXtWeightedClassifier(num_classes=len(names_classes))
 
+    elif model_name == 'farl16_ft':
+        model = farl16_ft.Farl16_FT(classifier=model_params['classifier'])
+    
     return model, names_classes
 
 

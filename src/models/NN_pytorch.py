@@ -53,64 +53,25 @@ class NNSeasonalColorModel:
         self.classes = None
         self.hidden_dims = None
         self.lr = None
-        self.batch_size = None
+        self.test_batch_size = 16
         self.feature_cols = None
 
-    # def preprocess_data(self, csv_path):
-    #     """Enhanced preprocessing with feature selection and robust scaling"""
-    #     # Separate majority and minority classes with SMOTE-like approach
-    #     df = pd.read_csv(csv_path)
-    #     classes = df['season'].value_counts()
-    #     majority_class = classes.index[0]
-    #     n_samples = int(classes[majority_class] * 1.5)  # Increase samples
-        
-    #     balanced_dfs = []
-    #     for season in classes.index:
-    #         season_df = df[df['season'] == season]
-    #         if len(season_df) < n_samples:
-    #             upsampled_df = resample(
-    #                 season_df,
-    #                 replace=True,
-    #                 n_samples=n_samples,
-    #                 random_state=42
-    #             )
-    #             balanced_dfs.append(upsampled_df)
-    #         else:
-    #             balanced_dfs.append(season_df)
-        
-    #     df = pd.concat(balanced_dfs)
-        
-    #     # Remove highly correlated features
-    #     feature_cols = [col for col in df.columns 
-    #                    if col not in ['image_file', 'season']]
-    #     correlation_matrix = df[feature_cols].corr().abs()
-    #     upper = correlation_matrix.where(
-    #         np.triu(np.ones(correlation_matrix.shape), k=1).astype(bool)
-    #     )
-    #     to_drop = [column for column in upper.columns 
-    #                if any(upper[column] > 0.95)]
-    #     df = df.drop(to_drop, axis=1)
-    #     self.feature_cols = [col for col in df.columns 
-    #                    if col not in ['image_file', 'season']]
-    #     return df
-
-
-    def train_model(self, train_path, val_path, model_params=None, hidden_dims=[128, 64, 32], 
-                    epochs=50, batch_size=32, lr=1e-3, weight_decay=1e-5, dropout=0, save_name=None):
+    def train_model(self, train_path, val_path, names, model_params=None, save_name=None):
 
         if model_params:
-            hidden_dims = model_params.get("hidden_dims", hidden_dims)
-            epochs = model_params.get("epochs", epochs)
-            batch_size = model_params.get("batch_size", batch_size)
-            lr = model_params.get("lr", lr)
-            weight_decay = model_params.get("weight_decay", weight_decay)
-            dropout = model_params.get("dropout", dropout)
+            hidden_dims = model_params.get("hidden_dims", [128, 64, 32])
+            epochs = model_params.get("epochs", 50)
+            batch_size = model_params.get("batch_size", 32)
+            lr = model_params.get("lr", 1e-3)
+            weight_decay = model_params.get("weight_decay", 1e-5)
+            dropout = model_params.get("dropout", 0)
+            patience = model_params.get("patience", 10)
 
         # Preprocess data
         #df = self.preprocess_data(train_path)
         df_train = pd.read_csv(train_path)
         #print(df_train.columns.tolist())
-        self.feature_cols = df_train.drop(['image_file', 'season'], axis=1).columns.tolist()
+        self.feature_cols = df_train.drop(['image_path', 'season'], axis=1).columns.tolist()
         X_train = df_train[self.feature_cols]
         y_train = df_train['season']
 
@@ -129,7 +90,7 @@ class NNSeasonalColorModel:
         y_val = df_val['season']
         y_val_encoded = self.classes.get_indexer(y_val)
         val_ds = TabularDataset(X_val_scaled, pd.Series(y_val_encoded))
-        val_loader = DataLoader(val_ds, batch_size=batch_size)
+        val_loader = DataLoader(val_ds, batch_size=self.test_batch_size)
 
 
         input_dim = X_train.shape[1]
@@ -143,7 +104,6 @@ class NNSeasonalColorModel:
         optimizer = optim.Adam(self.model.parameters(), lr=lr, weight_decay=weight_decay)
 
         best_val_loss = float('inf')
-        patience = 20
         counter = 0
         best_model_state = None
 
@@ -209,7 +169,7 @@ class NNSeasonalColorModel:
         y_encoded = self.classes.get_indexer(y_test)
 
         test_ds = TabularDataset(X_test_scaled, pd.Series(y_encoded))
-        test_loader = DataLoader(test_ds, batch_size=self.batch_size)
+        test_loader = DataLoader(test_ds, batch_size=self.test_batch_size)
 
         # Evaluación
         self.model.eval()
@@ -248,7 +208,7 @@ class NNSeasonalColorModel:
             with open(report_file_path, 'w') as f:
                 f.write(report)
 
-    def load_params_model(self, model_path): 
+    def load_params_model(self, model_path, names=None): 
         bundle = torch.load(model_path, weights_only=False)
 
         # Asignar atributos cargados
@@ -264,34 +224,80 @@ class NNSeasonalColorModel:
         self.model.load_state_dict(bundle['model_state_dict'])
         self.model.eval()
 
-    def predict_season(self, img_features):
-        if self.model is None or self.scaler is None or self.classes is None:
-            raise ValueError("El modelo no está entrenado o no se cargo.")
 
-        try:
-            if isinstance(img_features, dict):
-                img_features = pd.DataFrame([img_features]) 
-            else:
-                img_features = pd.DataFrame(img_features)
-            img_features = img_features[self.feature_cols]
+    def test_model(self, test_dataset_path, seasons_only=False, top3=None):
+        df = pd.read_csv(test_dataset_path)
+        X_test = df[self.feature_cols]
+        y_test = df['season']
 
-            X_scaled = self.scaler.transform(img_features)
-            X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
+        X_test_scaled = self.scaler.transform(X_test)
 
-            # Predicción
-            with torch.no_grad():
-                outputs = self.model(X_tensor)
-                probs = torch.softmax(outputs, dim=1).numpy()[0]
-                pred_idx = np.argmax(probs)
+        #y_encoded = [self.classes.tolist().index(label) for label in y_test]
+        y_encoded = self.classes.get_indexer(y_test)
 
-            return {
-                'predicted_season': self.classes[pred_idx],
-                'confidence_scores': {
-                    season: float(prob) for season, prob in zip(self.classes, probs)
-                }
-            }
+        test_ds = TabularDataset(X_test_scaled, pd.Series(y_encoded))
+        test_loader = DataLoader(test_ds, batch_size=self.test_batch_size)
 
-        except Exception as e:
-            return {'error': str(e)}
+        # Evaluación
+        self.model.eval()
+        all_preds, all_targets = [], []
+        with torch.no_grad():
+            for batch_X, batch_y in test_loader:
+                outputs = self.model(batch_X)
+                preds = torch.argmax(outputs, dim=1)
+                all_preds.extend(preds.tolist())
+                all_targets.extend(batch_y.tolist())
+
+        
+        # Plot confusion matrix
+        plt.figure(figsize=(15, 12))
+        cm = confusion_matrix(all_targets, all_preds)
+        sns.heatmap(
+            cm, 
+            annot=True, 
+            fmt='d', 
+            cmap='Blues',
+            xticklabels=np.unique(all_targets),
+            yticklabels=np.unique(all_targets)
+        )
+        plt.title('Confusion Matrix')
+        plt.ylabel('True Season')
+        plt.xlabel('Predicted Season')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+
+        report = classification_report(all_targets, all_preds, target_names=self.classes, zero_division=0)
+        print("\nClassification Report:\n", report)
+
+    # def predict_season(self, img_features):
+    #     if self.model is None or self.scaler is None or self.classes is None:
+    #         raise ValueError("El modelo no está entrenado o no se cargo.")
+
+    #     try:
+    #         if isinstance(img_features, dict):
+    #             img_features = pd.DataFrame([img_features]) 
+    #         else:
+    #             img_features = pd.DataFrame(img_features)
+    #         img_features = img_features[self.feature_cols]
+
+    #         X_scaled = self.scaler.transform(img_features)
+    #         X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
+
+    #         # Predicción
+    #         with torch.no_grad():
+    #             outputs = self.model(X_tensor)
+    #             probs = torch.softmax(outputs, dim=1).numpy()[0]
+    #             pred_idx = np.argmax(probs)
+
+    #         return {
+    #             'predicted_season': self.classes[pred_idx],
+    #             'confidence_scores': {
+    #                 season: float(prob) for season, prob in zip(self.classes, probs)
+    #             }
+    #         }
+
+    #     except Exception as e:
+    #         return {'error': str(e)}
     
     
