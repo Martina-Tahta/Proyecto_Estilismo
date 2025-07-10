@@ -190,7 +190,9 @@ class ResNeXt_FT(nn.Module):
         for layer_name in train_blocks:
             layer_module = getattr(self.model, layer_name)
             children = list(layer_module.children())
-            for idx in blocks[layer_name]:
+            indices = blocks.get(layer_name, list(range(len(children))))
+
+            for idx in indices:
                 real_idx = idx if idx >= 0 else len(children) + idx
                 block = children[real_idx]
                 for p in block.parameters():
