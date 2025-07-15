@@ -87,11 +87,11 @@ class Farl16_FT(nn.Module):
             self.classifier[0].bias.data.zero_()
         else:
             self.classifier = nn.Sequential(
-                nn.Dropout(p=0.2),
-                nn.Linear(embed_dim, self.num_classes)
-            )
-            nn.init.xavier_uniform_(self.classifier[1].weight)
-            self.classifier[1].bias.data.zero_()
+            nn.LayerNorm(embed_dim),                    # ayuda a estabilizar los valores
+            nn.Linear(embed_dim, self.num_classes)
+        )
+        nn.init.xavier_uniform_(self.classifier[1].weight)
+        self.classifier[1].bias.data.zero_()
 
         # 3) Transformaciones
         mean = [0.481, 0.457, 0.407]
@@ -179,7 +179,6 @@ class Farl16_FT(nn.Module):
         scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
             optimizer, T_0=10, T_mult=1, eta_min=1e-5
         )
-        scaler = torch.cuda.amp.GradScaler()
 
         best_val = -float("inf")
         patience = 0
@@ -187,29 +186,46 @@ class Farl16_FT(nn.Module):
         for epoch in range(1, epochs+1):
             self.train()
             running_loss = correct = total = 0
+
             for imgs, labels in tqdm(train_loader, disable=not verbose,
-                                     desc=f"Epoch {epoch}/{epochs} [Train]"):
+                                    desc=f"Epoch {epoch}/{epochs} [Train]"):
+
                 imgs, labels = imgs.to(self.device), labels.to(self.device)
+                imgs = imgs.float()  # 🔧 Asegurar que las imágenes estén en float32
+
+                # Verificación por si acaso
+                if torch.isnan(imgs).any() or torch.isinf(imgs).any():
+                    raise ValueError("🛑 Input contains NaNs or Infs")
+
                 optimizer.zero_grad()
-                with torch.cuda.amp.autocast():
-                    logits = self(imgs)
-                    loss   = criterion(logits, labels)
-                scaler.scale(loss).backward()
-                scaler.step(optimizer)
-                scaler.update()
+
+                logits = self(imgs)  # ↩️ No usar autocast por ahora
+
+                if torch.isnan(logits).any() or torch.isinf(logits).any():
+                    raise ValueError("🛑 Logits contain NaN or Inf")
+
+                loss = criterion(logits, labels)
+
+                if torch.isnan(loss) or torch.isinf(loss):
+                    raise ValueError(f"🛑 Loss is NaN/Inf. logits={logits}, labels={labels}")
+
+                loss.backward()
+                optimizer.step()
                 scheduler.step()
 
                 running_loss += loss.item() * imgs.size(0)
                 preds = logits.argmax(dim=1)
                 total += labels.size(0)
                 correct += (preds == labels).sum().item()
+
             train_loss = running_loss / len(train_loader.dataset)
             train_acc  = 100 * correct / total
             val_acc    = self._evaluate(val_loader)
 
             if verbose:
                 print(f"Epoch {epoch}/{epochs} | train loss: {train_loss:.4f} | "
-                      f"train acc: {train_acc:.2f}% | val acc: {val_acc:.2f}%")
+                    f"train acc: {train_acc:.2f}% | val acc: {val_acc:.2f}%")
+
 
             if val_acc > best_val:
                 best_val = val_acc
@@ -270,7 +286,7 @@ class Farl16_FT(nn.Module):
         self.eval()
         print(f"Modelo cargado desde {weights_path}.")
 
-    def test_model(self, test_csv, seasons_only=None, top3=None, batch_size = 32, num_workers = 4):
+    def test_model(self, test_csv, seasons_only=None, topk=None, batch_size = 32, num_workers = 4):
         df = pd.read_csv(test_csv)
         if not hasattr(self, 'class2idx'):
             self.classes = sorted(df['season'].unique())

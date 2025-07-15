@@ -22,14 +22,14 @@ model_params = {
     'classifier': 0
 }
 
-DATASET = 'DeepArmocromia'
+DATASET = 'DeepArmocromiaSeasonsModelGenerated'
 TYPE_FEATURES = 'farl16_ft'
 
 dataset_params = {
     'dataset_name' : DATASET,
     'type_features' : TYPE_FEATURES,
     
-    'data_train_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}_og/train_{DATASET}.csv'),
-    'data_val_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}_og/test_{DATASET}.csv'),
-    'data_test_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}_og/test_{DATASET}.csv'),
+    'data_train_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}/train_{DATASET}.csv'),
+    'data_val_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}/test_{DATASET}.csv'),
+    'data_test_path' : os.path.join(GENERAL_PATH, f'data/split_dataset/{DATASET}/test_{DATASET}.csv'),
 } 

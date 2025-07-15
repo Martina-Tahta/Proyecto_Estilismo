@@ -380,7 +380,7 @@ class ResNeXt_FT(nn.Module):
             self.class2idx = {c: i for i, c in enumerate(self.classes)}
 
         test_loader = self.create_dataloader(self.classes, test_csv, batch_size=batch_size,
-                                            shuffle=False, num_workers=num_workers, test=False)
+                                            shuffle=False, num_workers=num_workers, test=True)
 
         self.eval()
         all_preds, all_labels = [], []

@@ -277,8 +277,7 @@ def map_to_season(output_dir, name_dataset):
     val_df.to_csv(os.path.join(output_dir, f"val_{name_dataset}.csv"), index=False)
 
 
-def rebalanace_train_set(train_set_path, increase_rate=1.5):
-    # Separate majority and minority classes with SMOTE-like approach
+def rebalanace_train_set(train_set_path, save_path=None, increase_rate=1.5):
     df = pd.read_csv(train_set_path)
     classes = df['season'].value_counts()
     majority_class = classes.index[0]
@@ -299,7 +298,10 @@ def rebalanace_train_set(train_set_path, increase_rate=1.5):
             balanced_dfs.append(season_df)
     
     df = pd.concat(balanced_dfs)
-    df.to_csv(train_set_path, index=False)
+    if save_path is not None:
+        df.to_csv(save_path, index=False)
+    else:
+        df.to_csv(train_set_path, index=False)
 
 
 def create_csv(general_path, path_save):
@@ -359,12 +361,15 @@ def main():
     # map_to_season(output_dir, 'SuperDataset')
 
     # create_csv(GENERAL_PATH,'data/split_dataset/Generated/all_images_Generated.csv')
-    train = 'data/split_dataset/DeepArmocromiaSeasonsModel/train_DeepArmocromia.csv'
-    val = 'data/split_dataset/DeepArmocromiaSeasonsModel/val_DeepArmocromia.csv'
-    test = 'data/split_dataset/DeepArmocromiaSeasonsModel/test_DeepArmocromia.csv'
-    map_deepArm(os.path.join(GENERAL_PATH, train))
-    map_deepArm(os.path.join(GENERAL_PATH, val))
-    map_deepArm(os.path.join(GENERAL_PATH, test))
+    # train = 'data/split_dataset/DeepArmocromiaSeasonsModel/train_DeepArmocromia.csv'
+    # val = 'data/split_dataset/DeepArmocromiaSeasonsModel/val_DeepArmocromia.csv'
+    # test = 'data/split_dataset/DeepArmocromiaSeasonsModel/test_DeepArmocromia.csv'
+    # map_deepArm(os.path.join(GENERAL_PATH, train))
+    # map_deepArm(os.path.join(GENERAL_PATH, val))
+    # map_deepArm(os.path.join(GENERAL_PATH, test))
+
+    rebalanace_train_set(os.path.join(GENERAL_PATH, 'data/split_dataset/DeepArmocromiaSeasonsModelGenerated/train_DeepArmocromiaSeasonsModelGenerated.csv'),
+                         os.path.join(GENERAL_PATH, 'data/split_dataset/DeepArmocromiaSeasonsModelGenerated/train_balanced_DeepArmocromiaSeasonsModelGenerated.csv'), increase_rate=1)
 
 if __name__ == "__main__":
     main()
