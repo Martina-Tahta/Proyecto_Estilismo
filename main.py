@@ -5,7 +5,7 @@ from src.pipeline import run_model, test_model
 
 # Como correrlo:
 # python main.py --configs configs/mod_resNeXt_weighted_avg_superDataset_balanced.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs/model_mod_resNeXt_weighted_avg_superDataset_balanced.pt 
-# python main.py --configs configs\mod_resNeXt_ft_superDataset_balanced_layer3.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs\model_resNeXt_ft_mod_resNeXt_ft_superDataset_balanced_layer3.pt
+# python main.py --configs configs/mod_resNeXt_ft_superDataset_balanced_layer3.py --path_test data/split_dataset/SuperDataset/test_SuperDataset.csv --path_model runs\model_resNeXt_ft_mod_resNeXt_ft_superDataset_balanced_layer3.pt
 
 
 

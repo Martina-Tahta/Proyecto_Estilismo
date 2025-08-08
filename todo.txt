@@ -1,6 +1,0 @@
-
-1. Cambiar los nombres del configs name, hacerlo general
-2. Hacer el split inicial del raw dataset agregando rebalanceo para el train. Hacerlo generico por si tenemos otro dataset para rebalancear eso tambien.
-3. Sacar las funciones de rebalanceo de los preprocess. Repensar concepto de preprocess
-4. Dividir en carpetas los processed data. 
-5. Agregar el device para que este la opcion de cuda.

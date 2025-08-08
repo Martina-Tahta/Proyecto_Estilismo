@@ -3,6 +3,8 @@ from torchvision import transforms
 from PIL import Image
 import os
 import torch
+import pandas as pd
+
 
 # optional: auto-download with gdown if missing
 try:
@@ -128,3 +130,42 @@ def segment_images_in_directory(input_dir, output_dir, device="cpu"):
                 print(f"Error processing {input_path}: {e}")
         else:
             print(f"Skipping non-image file: {filename}")
+
+def segment_images_from_csv(general_path, csv_path, device="cpu"):
+    """
+    Segments all images listed in a CSV using `segment_face_hair` and saves the results
+    in the same location as the original images.
+
+    csv_path : str
+        Path to the CSV file containing image paths and their corresponding seasons.
+    device : str
+        Device to run the segmentation on ("cpu" or "cuda").
+    """
+    # Load the CSV
+    df = pd.read_csv(os.path.join(general_path, csv_path))
+
+    for idx, row in df.iterrows():
+        image_path = os.path.join(general_path, row['image_path'])
+
+
+        # Check if file exists and is an image
+        if isinstance(image_path, str) and os.path.isfile(image_path) and image_path.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+            try:
+                # Segment the image
+                segmented_image = segment_face_hair(image_path, device)
+
+                # Overwrite the original image
+                segmented_image.save(image_path)
+                print(f"Segmented and saved: {image_path}")
+            except Exception as e:
+                print(f"Error processing {image_path}: {e}")
+        else:
+            print(f"Skipping invalid or non-image file: {image_path}")
+
+def main():
+    general_path = os.getcwd()
+    path_csv = 'data/segmented_dataset/Paula/after/after_imgs.csv'
+    segment_images_from_csv(general_path, path_csv)
+
+if __name__ == "__main__":
+    main()
